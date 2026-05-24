@@ -211,13 +211,31 @@ class FFAppState extends ChangeNotifier {
   }
 
   void addToCarrinhoLocal(CatagolodigitalStruct value) {
-    carrinhoLocal.add(value);
+    final existingIndex =
+        carrinhoLocal.indexWhere((item) => item.id == value.id);
+    final quantidadeAdicionar = value.quantidade <= 0 ? 1 : value.quantidade;
+
+    if (existingIndex >= 0) {
+      carrinhoLocal[existingIndex].incrementQuantidade(quantidadeAdicionar);
+    } else {
+      final item = CatagolodigitalStruct.fromSerializableMap(
+        value.toSerializableMap(),
+      );
+      item.quantidade = quantidadeAdicionar;
+      carrinhoLocal.add(item);
+    }
     secureStorage.setStringList(
         'ff_carrinhoLocal', _carrinhoLocal.map((x) => x.serialize()).toList());
   }
 
   void removeFromCarrinhoLocal(CatagolodigitalStruct value) {
     carrinhoLocal.remove(value);
+    secureStorage.setStringList(
+        'ff_carrinhoLocal', _carrinhoLocal.map((x) => x.serialize()).toList());
+  }
+
+  void removeProdutoFromCarrinhoLocalById(int produtoId) {
+    carrinhoLocal.removeWhere((item) => item.id == produtoId);
     secureStorage.setStringList(
         'ff_carrinhoLocal', _carrinhoLocal.map((x) => x.serialize()).toList());
   }

@@ -380,18 +380,6 @@ class _VerProdutoWidgetState extends State<VerProdutoWidget> {
                                 _model.quantidade = _model.quantidade! + -1;
                                 safeSetState(() {});
                               }
-                              FFAppState().slcarrinhototal =
-                                  functions.slSomarTotalCarrinhoProfissional(
-                                      FFAppState().slcarrinhototal,
-                                      functions.slDoublePreferido(
-                                          widget.preco,
-                                          FFAppState()
-                                              .slProdutoSelecionadoPreco),
-                                      _model.quantidade)!;
-                              safeSetState(() {});
-                              FFAppState()
-                                  .removeFromCarrinhoLocal(widget.catalogoID!);
-                              safeSetState(() {});
                             },
                           ),
                         ),
@@ -400,7 +388,7 @@ class _VerProdutoWidgetState extends State<VerProdutoWidget> {
                               25.0, 0.0, 5.0, 0.0),
                           child: Text(
                             valueOrDefault<String>(
-                              FFAppState().carrinhoLocal.length.toString(),
+                              _model.quantidade?.toString(),
                               '1',
                             ),
                             style: FlutterFlowTheme.of(context)
@@ -438,22 +426,7 @@ class _VerProdutoWidgetState extends State<VerProdutoWidget> {
                               size: 24.0,
                             ),
                             onPressed: () async {
-                              if (functions
-                                  .slQuantidadeMaiorQueUm(_model.quantidade)!) {
-                                _model.quantidade = _model.quantidade! + 1;
-                                safeSetState(() {});
-                              }
-                              FFAppState().slcarrinhototal =
-                                  functions.slSomarTotalCarrinhoProfissional(
-                                      FFAppState().slcarrinhototal,
-                                      functions.slDoublePreferido(
-                                          widget.preco,
-                                          FFAppState()
-                                              .slProdutoSelecionadoPreco),
-                                      _model.quantidade)!;
-                              FFAppState().update(() {});
-                              FFAppState()
-                                  .addToCarrinhoLocal(widget.catalogoID!);
+                              _model.quantidade = (_model.quantidade ?? 1) + 1;
                               safeSetState(() {});
                             },
                           ),
@@ -466,6 +439,13 @@ class _VerProdutoWidgetState extends State<VerProdutoWidget> {
                         EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
+                        final produtoCarrinho =
+                            CatagolodigitalStruct.fromSerializableMap(
+                          widget.catalogoID!.toSerializableMap(),
+                        );
+                        produtoCarrinho.quantidade = _model.quantidade ?? 1;
+                        FFAppState().addToCarrinhoLocal(produtoCarrinho);
+                        safeSetState(() {});
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(

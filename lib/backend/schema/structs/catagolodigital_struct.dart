@@ -18,6 +18,7 @@ class CatagolodigitalStruct extends BaseStruct {
     bool? precisaProduzir,
     bool? disponivel,
     String? imagem,
+    int? quantidade,
   })  : _id = id,
         _createdAt = createdAt,
         _nome = nome,
@@ -28,7 +29,8 @@ class CatagolodigitalStruct extends BaseStruct {
         _qtdDisp = qtdDisp,
         _precisaProduzir = precisaProduzir,
         _disponivel = disponivel,
-        _imagem = imagem;
+        _imagem = imagem,
+        _quantidade = quantidade;
 
   // "id" field.
   int? _id;
@@ -115,6 +117,15 @@ class CatagolodigitalStruct extends BaseStruct {
 
   bool hasImagem() => _imagem != null;
 
+  // "quantidade" field.
+  int? _quantidade;
+  int get quantidade => _quantidade ?? 1;
+  set quantidade(int? val) => _quantidade = val;
+
+  void incrementQuantidade(int amount) => quantidade = quantidade + amount;
+
+  bool hasQuantidade() => _quantidade != null;
+
   static CatagolodigitalStruct fromMap(Map<String, dynamic> data) =>
       CatagolodigitalStruct(
         id: castToType<int>(data['id']),
@@ -128,6 +139,7 @@ class CatagolodigitalStruct extends BaseStruct {
         precisaProduzir: data['precisa_produzir'] as bool?,
         disponivel: data['disponivel'] as bool?,
         imagem: data['imagem'] as String?,
+        quantidade: castToType<int>(data['quantidade']),
       );
 
   static CatagolodigitalStruct? maybeFromMap(dynamic data) => data is Map
@@ -146,6 +158,7 @@ class CatagolodigitalStruct extends BaseStruct {
         'precisa_produzir': _precisaProduzir,
         'disponivel': _disponivel,
         'imagem': _imagem,
+        'quantidade': _quantidade,
       }.withoutNulls;
 
   @override
@@ -193,6 +206,10 @@ class CatagolodigitalStruct extends BaseStruct {
         'imagem': serializeParam(
           _imagem,
           ParamType.String,
+        ),
+        'quantidade': serializeParam(
+          _quantidade,
+          ParamType.int,
         ),
       }.withoutNulls;
 
@@ -253,6 +270,11 @@ class CatagolodigitalStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        quantidade: deserializeParam(
+          data['quantidade'],
+          ParamType.int,
+          false,
+        ),
       );
 
   @override
@@ -271,7 +293,8 @@ class CatagolodigitalStruct extends BaseStruct {
         qtdDisp == other.qtdDisp &&
         precisaProduzir == other.precisaProduzir &&
         disponivel == other.disponivel &&
-        imagem == other.imagem;
+        imagem == other.imagem &&
+        quantidade == other.quantidade;
   }
 
   @override
@@ -286,7 +309,8 @@ class CatagolodigitalStruct extends BaseStruct {
         qtdDisp,
         precisaProduzir,
         disponivel,
-        imagem
+        imagem,
+        quantidade
       ]);
 }
 
@@ -302,6 +326,7 @@ CatagolodigitalStruct createCatagolodigitalStruct({
   bool? precisaProduzir,
   bool? disponivel,
   String? imagem,
+  int? quantidade,
 }) =>
     CatagolodigitalStruct(
       id: id,
@@ -315,4 +340,5 @@ CatagolodigitalStruct createCatagolodigitalStruct({
       precisaProduzir: precisaProduzir,
       disponivel: disponivel,
       imagem: imagem,
+      quantidade: quantidade,
     );

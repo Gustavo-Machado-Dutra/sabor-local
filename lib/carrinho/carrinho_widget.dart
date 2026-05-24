@@ -285,7 +285,11 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
                     .carrinhoVazio(FFAppState().carrinhoLocal.toList())!)
                   Builder(
                     builder: (context) {
-                      final item = FFAppState().carrinhoLocal.toList();
+                      final item = functions
+                              .agruparItensCarrinho(
+                                  FFAppState().carrinhoLocal.toList())
+                              ?.toList() ??
+                          [];
 
                       return ListView.separated(
                         padding: EdgeInsets.zero,
@@ -374,7 +378,7 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                           Text(
-                                            itemItem.qtdDisp.toString(),
+                                            'Qtd: ${itemItem.quantidade.toString()}',
                                             maxLines: 1,
                                             style: FlutterFlowTheme.of(context)
                                                 .bodySmall
@@ -500,7 +504,8 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
                                       ),
                                       onPressed: () async {
                                         FFAppState()
-                                            .removeFromCarrinhoLocal(itemItem);
+                                            .removeProdutoFromCarrinhoLocalById(
+                                                itemItem.id);
                                         safeSetState(() {});
                                       },
                                     ),
