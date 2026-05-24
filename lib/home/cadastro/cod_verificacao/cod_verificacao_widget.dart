@@ -43,15 +43,16 @@ class _CodVerificacaoWidgetState extends State<CodVerificacaoWidget>
           milliseconds: 1000,
         ),
       );
-      _model.apiResultmq8 = await EnviarEmailCall.call();
+      _model.apiResultmq8 = await EnviarEmailCall.call(
+        email: FFAppState().email,
+      );
 
       if ((_model.apiResultmq8?.succeeded ?? true)) {
         await showDialog(
           context: context,
           builder: (alertDialogContext) {
             return AlertDialog(
-              title: Text('códgio '),
-              content: Text('códgio '),
+              title: Text('código enviado'),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(alertDialogContext),
@@ -148,8 +149,8 @@ class _CodVerificacaoWidgetState extends State<CodVerificacaoWidget>
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 70.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            0.0, 30.0, 0.0, 40.0),
                         child: FlutterFlowIconButton(
                           borderRadius: 200.0,
                           buttonSize: 40.0,
@@ -265,6 +266,7 @@ class _CodVerificacaoWidgetState extends State<CodVerificacaoWidget>
                                                   .labelMedium
                                                   .fontStyle,
                                         ),
+                                        color: Colors.black,
                                         letterSpacing: 0.0,
                                         fontWeight: FlutterFlowTheme.of(context)
                                             .labelMedium
@@ -321,6 +323,7 @@ class _CodVerificacaoWidgetState extends State<CodVerificacaoWidget>
                                             .bodyMedium
                                             .fontStyle,
                                       ),
+                                      color: Colors.black,
                                       letterSpacing: 0.0,
                                       fontWeight: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -448,12 +451,72 @@ class _CodVerificacaoWidgetState extends State<CodVerificacaoWidget>
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
-                                  'Reenviar código',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        font: GoogleFonts.inter(
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    _model.apiResultenvmail =
+                                        await EnviarEmailCall.call(
+                                      email: FFAppState().email,
+                                    );
+
+                                    if ((_model.apiResultenvmail?.succeeded ??
+                                        true)) {
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: Text('código enviado'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: Text('Ok'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    } else {
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: Text('ERRO'),
+                                            content: Text('Cógio não enviado'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: Text('Ok'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    }
+
+                                    safeSetState(() {});
+                                  },
+                                  child: Text(
+                                    'Reenviar código',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          font: GoogleFonts.inter(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                          color: Color(0xFFF56E0F),
+                                          letterSpacing: 0.0,
                                           fontWeight:
                                               FlutterFlowTheme.of(context)
                                                   .bodyMedium
@@ -462,17 +525,9 @@ class _CodVerificacaoWidgetState extends State<CodVerificacaoWidget>
                                               FlutterFlowTheme.of(context)
                                                   .bodyMedium
                                                   .fontStyle,
+                                          decoration: TextDecoration.underline,
                                         ),
-                                        color: Color(0xFFF56E0F),
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
-                                        decoration: TextDecoration.underline,
-                                      ),
+                                  ),
                                 ),
                               ],
                             ),

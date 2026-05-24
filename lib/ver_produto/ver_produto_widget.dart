@@ -1,13 +1,28 @@
-import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
+import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'ver_produto_model.dart';
 export 'ver_produto_model.dart';
 
 class VerProdutoWidget extends StatefulWidget {
-  const VerProdutoWidget({super.key});
+  const VerProdutoWidget({
+    super.key,
+    required this.catalogoID,
+    this.preco,
+  });
+
+  /// cu
+  final CatagolodigitalStruct? catalogoID;
+
+  final double? preco;
 
   static String routeName = 'VerProduto';
   static String routePath = '/verProduto';
@@ -25,6 +40,15 @@ class _VerProdutoWidgetState extends State<VerProdutoWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => VerProdutoModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.quantidade = 1;
+      safeSetState(() {});
+    });
+
+    _model.textController ??= TextEditingController();
+    _model.textFieldFocusNode ??= FocusNode();
   }
 
   @override
@@ -36,275 +60,461 @@ class _VerProdutoWidgetState extends State<VerProdutoWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        automaticallyImplyLeading: false,
-        leading: InkWell(
-          splashColor: Colors.transparent,
-          focusColor: Colors.transparent,
-          hoverColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          onTap: () async {
-            context.safePop();
-          },
-          child: Icon(
-            Icons.chevron_left_rounded,
-            color: FlutterFlowTheme.of(context).primaryText,
-            size: 32.0,
+      backgroundColor: Color(0xFFF4F0EE),
+      appBar: PreferredSize(
+        preferredSize:
+            Size.fromHeight(MediaQuery.sizeOf(context).height * 0.09),
+        child: AppBar(
+          backgroundColor: Color(0xFFF8B98C),
+          automaticallyImplyLeading: false,
+          leading: Align(
+            alignment: AlignmentDirectional(0.0, 1.0),
+            child: InkWell(
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () async {
+                context.safePop();
+              },
+              child: Icon(
+                Icons.chevron_left_rounded,
+                color: Color(0xFF151617),
+                size: 32.0,
+              ),
+            ),
           ),
+          title: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(10.0, 24.0, 0.0, 0.0),
+            child: Text(
+              'Descrição Do Produto',
+              style: FlutterFlowTheme.of(context).headlineMedium.override(
+                    font: GoogleFonts.interTight(
+                      fontWeight: FlutterFlowTheme.of(context)
+                          .headlineMedium
+                          .fontWeight,
+                      fontStyle:
+                          FlutterFlowTheme.of(context).headlineMedium.fontStyle,
+                    ),
+                    color: Color(0xFF18191A),
+                    fontSize: 24.0,
+                    letterSpacing: 0.0,
+                    fontWeight:
+                        FlutterFlowTheme.of(context).headlineMedium.fontWeight,
+                    fontStyle:
+                        FlutterFlowTheme.of(context).headlineMedium.fontStyle,
+                  ),
+            ),
+          ),
+          actions: [],
+          centerTitle: false,
+          elevation: 0.0,
         ),
-        title: Text(
-          'Descrição Do Produto',
-          style: FlutterFlowTheme.of(context).headlineMedium.override(
-                font: GoogleFonts.interTight(
-                  fontWeight:
-                      FlutterFlowTheme.of(context).headlineMedium.fontWeight,
-                  fontStyle:
-                      FlutterFlowTheme.of(context).headlineMedium.fontStyle,
-                ),
-                fontSize: 24.0,
-                letterSpacing: 0.0,
-                fontWeight:
-                    FlutterFlowTheme.of(context).headlineMedium.fontWeight,
-                fontStyle:
-                    FlutterFlowTheme.of(context).headlineMedium.fontStyle,
-              ),
-        ),
-        actions: [],
-        centerTitle: false,
-        elevation: 0.0,
       ),
-      body: FutureBuilder<ApiCallResponse>(
-        future: CatalogoDigitalCall.call(),
-        builder: (context, snapshot) {
-          // Customize what your widget looks like when it's loading.
-          if (!snapshot.hasData) {
-            return Center(
-              child: SizedBox(
-                width: 50.0,
-                height: 50.0,
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    FlutterFlowTheme.of(context).primary,
-                  ),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.all(16.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12.0),
+                child: Image.network(
+                  getJsonField(
+                    widget.catalogoID!.toMap(),
+                    r'''$.imagem''',
+                  ).toString(),
+                  width: MediaQuery.sizeOf(context).width * 1.0,
+                  height: 230.0,
+                  fit: BoxFit.cover,
                 ),
               ),
-            );
-          }
-          final columnMainContentCatalogoDigitalResponse = snapshot.data!;
-
-          return SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: FutureBuilder<ApiCallResponse>(
-                    future: CatalogoDigitalCall.call(),
-                    builder: (context, snapshot) {
-                      // Customize what your widget looks like when it's loading.
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: SizedBox(
-                            width: 50.0,
-                            height: 50.0,
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                FlutterFlowTheme.of(context).primary,
-                              ),
-                            ),
-                          ),
-                        );
-                      }
-                      final imageCatalogoDigitalResponse = snapshot.data!;
-
-                      return ClipRRect(
-                        borderRadius: BorderRadius.circular(12.0),
-                        child: Image.network(
-                          valueOrDefault<String>(
-                            getJsonField(
-                              columnMainContentCatalogoDigitalResponse.jsonBody,
-                              r'''$.imagem.url''',
-                            )?.toString(),
-                            'https://th.bing.com/th/id/OIP.WAifvNHsavzRSECO6oG5bAAAAA?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3',
-                          ),
-                          width: MediaQuery.sizeOf(context).width * 1.0,
-                          height: 230.0,
-                          fit: BoxFit.cover,
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      FutureBuilder<ApiCallResponse>(
-                        future: CatalogoDigitalCall.call(),
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 50.0,
-                                height: 50.0,
-                                child: CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    FlutterFlowTheme.of(context).primary,
-                                  ),
-                                ),
-                              ),
-                            );
-                          }
-                          final titleTextCatalogoDigitalResponse =
-                              snapshot.data!;
-
-                          return Text(
-                            getJsonField(
-                              columnMainContentCatalogoDigitalResponse.jsonBody,
-                              r'''$.nome''',
-                            ).toString(),
-                            style: FlutterFlowTheme.of(context)
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.catalogoID!.nome,
+                    maxLines: 2,
+                    style: FlutterFlowTheme.of(context).headlineMedium.override(
+                          font: GoogleFonts.interTight(
+                            fontWeight: FlutterFlowTheme.of(context)
                                 .headlineMedium
-                                .override(
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .headlineMedium
+                                .fontStyle,
+                          ),
+                          color: Colors.black,
+                          letterSpacing: 0.0,
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .headlineMedium
+                              .fontWeight,
+                          fontStyle: FlutterFlowTheme.of(context)
+                              .headlineMedium
+                              .fontStyle,
+                        ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text(
+                        'R\$',
+                        style:
+                            FlutterFlowTheme.of(context).titleMedium.override(
                                   font: GoogleFonts.interTight(
                                     fontWeight: FlutterFlowTheme.of(context)
-                                        .headlineMedium
+                                        .titleMedium
                                         .fontWeight,
                                     fontStyle: FlutterFlowTheme.of(context)
-                                        .headlineMedium
+                                        .titleMedium
                                         .fontStyle,
                                   ),
+                                  color: FlutterFlowTheme.of(context).tertiary,
                                   letterSpacing: 0.0,
                                   fontWeight: FlutterFlowTheme.of(context)
-                                      .headlineMedium
+                                      .titleMedium
                                       .fontWeight,
                                   fontStyle: FlutterFlowTheme.of(context)
-                                      .headlineMedium
+                                      .titleMedium
                                       .fontStyle,
                                 ),
-                          );
-                        },
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 8.0),
-                        child: FutureBuilder<ApiCallResponse>(
-                          future: CatalogoDigitalCall.call(),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50.0,
-                                  height: 50.0,
-                                  child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                      FlutterFlowTheme.of(context).primary,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }
-                            final timestampTextCatalogoDigitalResponse =
-                                snapshot.data!;
-
-                            return Text(
-                              getJsonField(
-                                columnMainContentCatalogoDigitalResponse
-                                    .jsonBody,
-                                r'''$.preco''',
-                              ).toString(),
-                              style: FlutterFlowTheme.of(context)
-                                  .titleMedium
-                                  .override(
-                                    font: GoogleFonts.interTight(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .titleMedium
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .titleMedium
-                                          .fontStyle,
-                                    ),
-                                    color: Color(0xFF181819),
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .titleMedium
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .titleMedium
-                                        .fontStyle,
-                                  ),
-                            );
-                          },
-                        ),
-                      ),
-                      FutureBuilder<ApiCallResponse>(
-                        future: CatalogoDigitalCall.call(),
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 50.0,
-                                height: 50.0,
-                                child: CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    FlutterFlowTheme.of(context).primary,
-                                  ),
-                                ),
-                              ),
-                            );
-                          }
-                          final decriptionTextCatalogoDigitalResponse =
-                              snapshot.data!;
-
-                          return Text(
-                            getJsonField(
-                              columnMainContentCatalogoDigitalResponse.jsonBody,
-                              r'''$.descricao''',
-                            ).toString(),
-                            style: FlutterFlowTheme.of(context)
-                                .labelLarge
-                                .override(
-                                  font: GoogleFonts.inter(
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .labelLarge
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .labelLarge
-                                        .fontStyle,
-                                  ),
-                                  letterSpacing: 0.0,
+                            EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                        child: Text(
+                          valueOrDefault<String>(
+                            widget.catalogoID?.preco.toString(),
+                            'preco',
+                          ),
+                          style: FlutterFlowTheme.of(context)
+                              .titleMedium
+                              .override(
+                                font: GoogleFonts.interTight(
                                   fontWeight: FlutterFlowTheme.of(context)
-                                      .labelLarge
+                                      .titleMedium
                                       .fontWeight,
                                   fontStyle: FlutterFlowTheme.of(context)
-                                      .labelLarge
+                                      .titleMedium
                                       .fontStyle,
                                 ),
-                          );
-                        },
-                      ),
-                      Divider(
-                        height: 32.0,
-                        thickness: 1.0,
-                        color: FlutterFlowTheme.of(context).alternate,
+                                color: FlutterFlowTheme.of(context).tertiary,
+                                letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .titleMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .titleMedium
+                                    .fontStyle,
+                              ),
+                        ),
                       ),
                     ],
                   ),
-                ),
-              ],
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                    child: Text(
+                      widget.catalogoID!.descricao,
+                      maxLines: 6,
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            font: GoogleFonts.inter(
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
+                            ),
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            letterSpacing: 0.0,
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontStyle,
+                          ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 0.0, 0.0),
+                    child: TextFormField(
+                      controller: _model.textController,
+                      focusNode: _model.textFieldFocusNode,
+                      onFieldSubmitted: (_) async {
+                        context.pushNamed(CarrinhoWidget.routeName);
+                      },
+                      autofocus: false,
+                      enabled: true,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        isDense: true,
+                        labelStyle:
+                            FlutterFlowTheme.of(context).labelMedium.override(
+                                  font: GoogleFonts.inter(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .fontStyle,
+                                  ),
+                                  color: Color(0xFFECD9D6),
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontStyle,
+                                ),
+                        hintText: 'Observação do produto ',
+                        hintStyle:
+                            FlutterFlowTheme.of(context).labelMedium.override(
+                                  font: GoogleFonts.inter(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .fontStyle,
+                                  ),
+                                  color: Color(0xFF202122),
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontStyle,
+                                ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0x00000000),
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0x00000000),
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        filled: true,
+                        fillColor: Color(0xFFF6EDE9),
+                      ),
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            font: GoogleFonts.inter(
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
+                            ),
+                            color: Color(0xFF18191A),
+                            letterSpacing: 1.0,
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontStyle,
+                          ),
+                      cursorColor: FlutterFlowTheme.of(context).primaryText,
+                      enableInteractiveSelection: true,
+                      validator:
+                          _model.textControllerValidator.asValidator(context),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              115.0, 0.0, 0.0, 0.0),
+                          child: FlutterFlowIconButton(
+                            borderRadius: 8.0,
+                            buttonSize: 40.0,
+                            fillColor: FlutterFlowTheme.of(context).tertiary,
+                            icon: Icon(
+                              Icons.remove,
+                              color: Color(0xFFFBEDED),
+                              size: 24.0,
+                            ),
+                            onPressed: () async {
+                              if (functions
+                                  .slQuantidadeMaiorQueUm(_model.quantidade)!) {
+                                _model.quantidade = _model.quantidade! + -1;
+                                safeSetState(() {});
+                              }
+                              FFAppState().slcarrinhototal =
+                                  functions.slSomarTotalCarrinhoProfissional(
+                                      FFAppState().slcarrinhototal,
+                                      functions.slDoublePreferido(
+                                          widget.preco,
+                                          FFAppState()
+                                              .slProdutoSelecionadoPreco),
+                                      _model.quantidade)!;
+                              safeSetState(() {});
+                              FFAppState()
+                                  .removeFromCarrinhoLocal(widget.catalogoID!);
+                              safeSetState(() {});
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              25.0, 0.0, 5.0, 0.0),
+                          child: Text(
+                            valueOrDefault<String>(
+                              FFAppState().carrinhoLocal.length.toString(),
+                              '1',
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .titleMedium
+                                .override(
+                                  font: GoogleFonts.interTight(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .fontStyle,
+                                  ),
+                                  color: Color(0xFF1F2022),
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .fontStyle,
+                                ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              20.0, 0.0, 0.0, 0.0),
+                          child: FlutterFlowIconButton(
+                            borderRadius: 8.0,
+                            buttonSize: 40.0,
+                            fillColor: FlutterFlowTheme.of(context).tertiary,
+                            icon: Icon(
+                              Icons.add,
+                              color: Color(0xFFFBEDED),
+                              size: 24.0,
+                            ),
+                            onPressed: () async {
+                              if (functions
+                                  .slQuantidadeMaiorQueUm(_model.quantidade)!) {
+                                _model.quantidade = _model.quantidade! + 1;
+                                safeSetState(() {});
+                              }
+                              FFAppState().slcarrinhototal =
+                                  functions.slSomarTotalCarrinhoProfissional(
+                                      FFAppState().slcarrinhototal,
+                                      functions.slDoublePreferido(
+                                          widget.preco,
+                                          FFAppState()
+                                              .slProdutoSelecionadoPreco),
+                                      _model.quantidade)!;
+                              FFAppState().update(() {});
+                              FFAppState()
+                                  .addToCarrinhoLocal(widget.catalogoID!);
+                              safeSetState(() {});
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 0.0, 0.0),
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Produto adicionado ao carrinho',
+                              style: TextStyle(
+                                color: Color(0x00000000),
+                              ),
+                            ),
+                            duration: Duration(milliseconds: 4000),
+                          ),
+                        );
+
+                        context.pushNamed(CarrinhoWidget.routeName);
+                      },
+                      text: 'ADICIONAR AO CARRINHO',
+                      icon: Icon(
+                        Icons.shopping_cart,
+                        size: 20.0,
+                      ),
+                      options: FFButtonOptions(
+                        width: double.infinity,
+                        height: 48.0,
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        iconPadding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        iconColor: Color(0xFF1E1E20),
+                        color: FlutterFlowTheme.of(context).tertiary,
+                        textStyle: TextStyle(
+                          color: Color(0xFF1E1E22),
+                        ),
+                        elevation: 11.0,
+                        borderSide: BorderSide(
+                          color: Color(0xFF080707),
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                  ),
+                  Divider(
+                    height: 32.0,
+                    thickness: 1.0,
+                    color: Color(0xFF161617),
+                  ),
+                ],
+              ),
             ),
-          );
-        },
+          ],
+        ),
       ),
     );
   }

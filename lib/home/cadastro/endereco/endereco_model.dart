@@ -1,4 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
+import '/components/volta_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'endereco_widget.dart' show EnderecoWidget;
@@ -7,6 +8,8 @@ import 'package:flutter/material.dart';
 class EnderecoModel extends FlutterFlowModel<EnderecoWidget> {
   ///  State fields for stateful widgets in this page.
 
+  // Model for volta component.
+  late VoltaModel voltaModel;
   // State field(s) for BairroAdress widget.
   FocusNode? bairroAdressFocusNode;
   TextEditingController? bairroAdressTextController;
@@ -17,8 +20,6 @@ class EnderecoModel extends FlutterFlowModel<EnderecoWidget> {
   String? Function(BuildContext, String?)? cEPAdressTextControllerValidator;
   // Stores action output result for [Backend Call - API (CadastrarEndereco)] action in Buttonlogin widget.
   ApiCallResponse? apiResulEndereco;
-  // Stores action output result for [Backend Call - API (Signup and retrieve an authentication token)] action in Buttonlogin widget.
-  ApiCallResponse? apiResultCadastro;
   // State field(s) for NumeroAdress widget.
   FocusNode? numeroAdressFocusNode;
   TextEditingController? numeroAdressTextController;
@@ -42,10 +43,13 @@ class EnderecoModel extends FlutterFlowModel<EnderecoWidget> {
       referenciaAdressTextControllerValidator;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    voltaModel = createModel(context, () => VoltaModel());
+  }
 
   @override
   void dispose() {
+    voltaModel.dispose();
     bairroAdressFocusNode?.dispose();
     bairroAdressTextController?.dispose();
 

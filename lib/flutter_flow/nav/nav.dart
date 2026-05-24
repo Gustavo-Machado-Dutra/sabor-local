@@ -7,6 +7,7 @@ import '/backend/schema/structs/index.dart';
 
 import '/auth/custom_auth/custom_auth_user_provider.dart';
 
+import '/main.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 import '/index.dart';
@@ -77,14 +78,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? CatalogodigitalWidget() : LoginWidget(),
+          appStateNotifier.loggedIn ? NavBarPage() : CatalogodigitalWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
-              ? CatalogodigitalWidget()
-              : LoginWidget(),
+              ? NavBarPage()
+              : CatalogodigitalWidget(),
         ),
         FFRoute(
           name: TelaDeAberturaWidget.routeName,
@@ -129,12 +130,82 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: CatalogodigitalWidget.routeName,
           path: CatalogodigitalWidget.routePath,
-          builder: (context, params) => CatalogodigitalWidget(),
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'Catalogodigital')
+              : CatalogodigitalWidget(),
         ),
         FFRoute(
           name: VerProdutoWidget.routeName,
           path: VerProdutoWidget.routePath,
-          builder: (context, params) => VerProdutoWidget(),
+          builder: (context, params) => VerProdutoWidget(
+            catalogoID: params.getParam(
+              'catalogoID',
+              ParamType.DataStruct,
+              isList: false,
+              structBuilder: CatagolodigitalStruct.fromSerializableMap,
+            ),
+            preco: params.getParam(
+              'preco',
+              ParamType.double,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: Categoria1Widget.routeName,
+          path: Categoria1Widget.routePath,
+          builder: (context, params) => Categoria1Widget(),
+        ),
+        FFRoute(
+          name: EnderecoCopyWidget.routeName,
+          path: EnderecoCopyWidget.routePath,
+          builder: (context, params) => EnderecoCopyWidget(),
+        ),
+        FFRoute(
+          name: Categoria2Widget.routeName,
+          path: Categoria2Widget.routePath,
+          builder: (context, params) => Categoria2Widget(),
+        ),
+        FFRoute(
+          name: Categoria3Widget.routeName,
+          path: Categoria3Widget.routePath,
+          builder: (context, params) => Categoria3Widget(),
+        ),
+        FFRoute(
+          name: Categoria4Widget.routeName,
+          path: Categoria4Widget.routePath,
+          builder: (context, params) => Categoria4Widget(),
+        ),
+        FFRoute(
+          name: CarrinhoWidget.routeName,
+          path: CarrinhoWidget.routePath,
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'carrinho')
+              : CarrinhoWidget(),
+        ),
+        FFRoute(
+          name: SucessologinWidget.routeName,
+          path: SucessologinWidget.routePath,
+          builder: (context, params) => SucessologinWidget(),
+        ),
+        FFRoute(
+          name: CardapioWidget.routeName,
+          path: CardapioWidget.routePath,
+          builder: (context, params) => CardapioWidget(),
+        ),
+        FFRoute(
+          name: SucessoPagamentoWidget.routeName,
+          path: SucessoPagamentoWidget.routePath,
+          builder: (context, params) => SucessoPagamentoWidget(),
+        ),
+        FFRoute(
+          name: PagamentoWidget.routeName,
+          path: PagamentoWidget.routePath,
+          builder: (context, params) => PagamentoWidget(),
+        ),
+        FFRoute(
+          name: PagamentoPendenteWidget.routeName,
+          path: PagamentoPendenteWidget.routePath,
+          builder: (context, params) => PagamentoPendenteWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -305,7 +376,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/login';
+            return '/catalogodigital';
           }
           return null;
         },

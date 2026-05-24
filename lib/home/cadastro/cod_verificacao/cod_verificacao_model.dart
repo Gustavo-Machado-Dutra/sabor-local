@@ -15,6 +15,8 @@ class CodVerificacaoModel extends FlutterFlowModel<CodVerificacaoWidget> {
   String? Function(BuildContext, String?)? codigoAdressTextControllerValidator;
   // Stores action output result for [Backend Call - API (ValidarOTP)] action in Button widget.
   ApiCallResponse? apiResultValidarOTP;
+  // Stores action output result for [Backend Call - API (EnviarEmail)] action in Text widget.
+  ApiCallResponse? apiResultenvmail;
 
   @override
   void initState(BuildContext context) {}

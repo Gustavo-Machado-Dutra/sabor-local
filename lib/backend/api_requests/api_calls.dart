@@ -144,6 +144,135 @@ class SignupAndRetrieveAnAuthenticationTokenCall {
 
 /// End Authentication Group Code
 
+/// Start CheckoutXano Group Code
+
+class CheckoutXanoGroup {
+  static String getBaseUrl() =>
+      'https://x8ki-letl-twmt.n7.xano.io/api:YkYaWxLt';
+  static Map<String, String> headers = {
+    'Content-Type': 'application/json',
+  };
+  static CriarPagamentoAsaasXanoCall criarPagamentoAsaasXanoCall =
+      CriarPagamentoAsaasXanoCall();
+  static ConsultarStatusPagamentoXanoCall consultarStatusPagamentoXanoCall =
+      ConsultarStatusPagamentoXanoCall();
+}
+
+class CriarPagamentoAsaasXanoCall {
+  Future<ApiCallResponse> call({
+    int? idUsuario,
+    int? idPedido,
+    String? nome = '',
+    String? email = '',
+    String? cpfCnpj = '',
+    String? telefone = '',
+    double? valorTotal,
+    String? formaPagamento = '',
+  }) async {
+    final baseUrl = CheckoutXanoGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{"id_usuario":${idUsuario},"id_pedido":${idPedido},"nome":"${nome}","email":"${email}","cpfCnpj":"${cpfCnpj}","telefone":"${telefone}","valor_total":${valorTotal},"forma_pagamento":"${formaPagamento}"}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'criar_pagamento_asaas_xano',
+      apiUrl: '${baseUrl}/checkout/criar-pagamento',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ConsultarStatusPagamentoXanoCall {
+  Future<ApiCallResponse> call({
+    String? idPagamentoAsaas = '',
+  }) async {
+    final baseUrl = CheckoutXanoGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{"id_pagamento_asaas":"${idPagamentoAsaas}"}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'consultar_status_pagamento_xano',
+      apiUrl: '${baseUrl}/checkout/status-pagamento',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+/// End CheckoutXano Group Code
+
+/// Start CheckoutXanoFluxoCorrigido Group Code
+
+class CheckoutXanoFluxoCorrigidoGroup {
+  static String getBaseUrl() =>
+      'https://x8ki-letl-twmt.n7.xano.io/api:YkYaWxLt';
+  static Map<String, String> headers = {
+    'Content-Type': 'application/json',
+  };
+  static CriarPagamentoAsaasFluxoCorrigidoXanoCall
+      criarPagamentoAsaasFluxoCorrigidoXanoCall =
+      CriarPagamentoAsaasFluxoCorrigidoXanoCall();
+}
+
+class CriarPagamentoAsaasFluxoCorrigidoXanoCall {
+  Future<ApiCallResponse> call({
+    int? idUsuario,
+    int? idPedido,
+    String? nome = '',
+    String? email = '',
+    String? cpfCnpj = '',
+    String? telefone = '',
+    double? valorTotal,
+    String? formaPagamento = '',
+  }) async {
+    final baseUrl = CheckoutXanoFluxoCorrigidoGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{"id_usuario":${idUsuario},"id_pedido":${idPedido},"nome":"${nome}","email":"${email}","cpfCnpj":"${cpfCnpj}","telefone":"${telefone}","valor_total":${valorTotal},"forma_pagamento":"${formaPagamento}"}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'criar_pagamento_asaas_fluxo_corrigido_xano',
+      apiUrl: '${baseUrl}/checkout/criar-pagamento',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+/// End CheckoutXanoFluxoCorrigido Group Code
+
 class BuscarCepCall {
   static Future<ApiCallResponse> call({
     String? cep = '',
@@ -218,24 +347,6 @@ class CadastrarEnderecoCall {
   }
 }
 
-class CatalogoDigitalCall {
-  static Future<ApiCallResponse> call() async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Catalogo Digital',
-      apiUrl: 'https://x8ki-letl-twmt.n7.xano.io/api:YkYaWxLt/produto',
-      callType: ApiCallType.GET,
-      headers: {},
-      params: {},
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      isStreamingApi: false,
-      alwaysAllowBody: false,
-    );
-  }
-}
-
 class EnviarEmailCall {
   static Future<ApiCallResponse> call({
     String? email = '',
@@ -288,6 +399,325 @@ class ValidarOTPCall {
       alwaysAllowBody: false,
     );
   }
+}
+
+class PratosCatalogoCall {
+  static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'PratosCatalogo',
+      apiUrl: 'https://x8ki-letl-twmt.n7.xano.io/api:YkYaWxLt/bebidas',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static String? nome(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].nome''',
+      ));
+  static String? descricao(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].descricao''',
+      ));
+  static double? preco(dynamic response) => castToType<double>(getJsonField(
+        response,
+        r'''$[:].preco''',
+      ));
+  static String? imagem(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].imagem''',
+      ));
+}
+
+class CategoriadoisCall {
+  static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'categoriadois',
+      apiUrl: 'https://x8ki-letl-twmt.n7.xano.io/api:YkYaWxLt/pratos',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static List<String>? nome(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].nome''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? descricao(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].descricao''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? preco(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].preco''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? imagem(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].imagem.url''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+}
+
+class CategoriaquatroCall {
+  static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'categoriaquatro',
+      apiUrl: 'https://x8ki-letl-twmt.n7.xano.io/api:YkYaWxLt/acompanhamento',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static List<String>? nome(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].nome''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? descricao(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].descricao''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? preco(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].preco''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? imagem(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].imagem.url''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+}
+
+class CategoriatresCall {
+  static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'categoriatres',
+      apiUrl: 'https://x8ki-letl-twmt.n7.xano.io/api:YkYaWxLt/sobremesa',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static List<String>? nome(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].nome''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? descricao(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].descricao''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? preco(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].preco''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? imagem(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].imagem''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+}
+
+class PesquisaProdutoCall {
+  static Future<ApiCallResponse> call({
+    String? query = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'PesquisaProduto',
+      apiUrl:
+          'https://x8ki-letl-twmt.n7.xano.io/api:7rbSqmOR/Pesquisa_Produtos',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {
+        'query': query,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class PedidosCarrinhoCall {
+  static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Pedidos carrinho ',
+      apiUrl: 'https://x8ki-letl-twmt.n7.xano.io/api:YkYaWxLt/pedido',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class MandarpedidosCall {
+  static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'mandarpedidos',
+      apiUrl: 'https://x8ki-letl-twmt.n7.xano.io/api:YkYaWxLt/pedido',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class CatalogodigitalCall {
+  static Future<ApiCallResponse> call({
+    List<String>? catalogoItemList,
+  }) async {
+    final catalogoItem = _serializeList(catalogoItemList);
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'catalogodigital',
+      apiUrl: 'https://x8ki-letl-twmt.n7.xano.io/api:YkYaWxLt/produto',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static List<String>? nome(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].nome''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? descricao(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].descricao''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<double>? preco(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].preco''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<double>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? imagem(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].imagem''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
 }
 
 class ApiPagingParams {

@@ -87,10 +87,11 @@ class _NameCpfWidgetState extends State<NameCpfWidget>
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color(0xFFFFF1E9),
+        backgroundColor: Color(0xFFF4F0EE),
         body: SafeArea(
           top: true,
           child: Container(
+            width: double.infinity,
             decoration: BoxDecoration(
               color: Color(0xFFFFF1E9),
             ),
@@ -104,8 +105,8 @@ class _NameCpfWidgetState extends State<NameCpfWidget>
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 60.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            0.0, 30.0, 0.0, 30.0),
                         child: FlutterFlowIconButton(
                           borderRadius: 200.0,
                           buttonSize: 40.0,
@@ -194,6 +195,7 @@ class _NameCpfWidgetState extends State<NameCpfWidget>
                                                   .labelMedium
                                                   .fontStyle,
                                         ),
+                                        color: Colors.black,
                                         letterSpacing: 0.0,
                                         fontWeight: FlutterFlowTheme.of(context)
                                             .labelMedium
@@ -250,6 +252,7 @@ class _NameCpfWidgetState extends State<NameCpfWidget>
                                             .bodyMedium
                                             .fontStyle,
                                       ),
+                                      color: Colors.black,
                                       letterSpacing: 0.0,
                                       fontWeight: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -291,6 +294,7 @@ class _NameCpfWidgetState extends State<NameCpfWidget>
                                                   .labelMedium
                                                   .fontStyle,
                                         ),
+                                        color: Colors.black,
                                         letterSpacing: 0.0,
                                         fontWeight: FlutterFlowTheme.of(context)
                                             .labelMedium
@@ -348,6 +352,7 @@ class _NameCpfWidgetState extends State<NameCpfWidget>
                                             .bodyMedium
                                             .fontStyle,
                                       ),
+                                      color: Colors.black,
                                       letterSpacing: 0.0,
                                       fontWeight: FlutterFlowTheme.of(context)
                                           .bodyMedium

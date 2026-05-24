@@ -36,8 +36,8 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
     _model.emailAdressTextController ??= TextEditingController();
     _model.emailAdressFocusNode ??= FocusNode();
 
-    _model.telefoneAdressTextController ??= TextEditingController();
-    _model.telefoneAdressFocusNode ??= FocusNode();
+    _model.telefoneTextController ??= TextEditingController();
+    _model.telefoneFocusNode ??= FocusNode();
 
     animationsMap.addAll({
       'columnOnPageLoadAnimation': AnimationInfo(
@@ -85,7 +85,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color(0xFFFFF1E9),
+        backgroundColor: Color(0xFFF4F0EE),
         body: SafeArea(
           top: true,
           child: Container(
@@ -102,8 +102,8 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 60.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            0.0, 30.0, 0.0, 30.0),
                         child: FlutterFlowIconButton(
                           borderRadius: 200.0,
                           buttonSize: 40.0,
@@ -192,6 +192,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                                   .labelMedium
                                                   .fontStyle,
                                         ),
+                                        color: Colors.black,
                                         letterSpacing: 0.0,
                                         fontWeight: FlutterFlowTheme.of(context)
                                             .labelMedium
@@ -248,6 +249,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                             .bodyMedium
                                             .fontStyle,
                                       ),
+                                      color: Colors.black,
                                       letterSpacing: 0.0,
                                       fontWeight: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -269,8 +271,8 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                             child: Container(
                               width: double.infinity,
                               child: TextFormField(
-                                controller: _model.telefoneAdressTextController,
-                                focusNode: _model.telefoneAdressFocusNode,
+                                controller: _model.telefoneTextController,
+                                focusNode: _model.telefoneFocusNode,
                                 autofocus: false,
                                 autofillHints: [AutofillHints.telephoneNumber],
                                 obscureText: false,
@@ -289,6 +291,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                                   .labelMedium
                                                   .fontStyle,
                                         ),
+                                        color: Colors.black,
                                         letterSpacing: 0.0,
                                         fontWeight: FlutterFlowTheme.of(context)
                                             .labelMedium
@@ -330,7 +333,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                   fillColor: Color(0xFFFFF1E9),
                                   contentPadding: EdgeInsets.all(24.0),
                                   prefixIcon: Icon(
-                                    Icons.phone_sharp,
+                                    Icons.phone,
                                     color: Color(0xFF6B6B6B),
                                     size: 24.0,
                                   ),
@@ -346,6 +349,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                             .bodyMedium
                                             .fontStyle,
                                       ),
+                                      color: Color(0xFF0D0D0D),
                                       letterSpacing: 0.0,
                                       fontWeight: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -355,7 +359,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                           .fontStyle,
                                     ),
                                 validator: _model
-                                    .telefoneAdressTextControllerValidator
+                                    .telefoneTextControllerValidator
                                     .asValidator(context),
                               ),
                             ),
@@ -398,8 +402,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                   if ((_model.emailAdressTextController
                                                   .text ==
                                               '') &&
-                                      (_model.telefoneAdressTextController
-                                                  .text ==
+                                      (_model.telefoneTextController.text ==
                                               '')) {
                                     await showDialog(
                                       context: context,
@@ -421,8 +424,8 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                   } else {
                                     FFAppState().email =
                                         _model.emailAdressTextController.text;
-                                    FFAppState().telefone = _model
-                                        .telefoneAdressTextController.text;
+                                    FFAppState().telefone =
+                                        _model.telefoneTextController.text;
                                     safeSetState(() {});
 
                                     context.pushNamed(SenhaWidget.routeName);

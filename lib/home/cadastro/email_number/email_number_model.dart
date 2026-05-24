@@ -10,11 +10,10 @@ class EmailNumberModel extends FlutterFlowModel<EmailNumberWidget> {
   FocusNode? emailAdressFocusNode;
   TextEditingController? emailAdressTextController;
   String? Function(BuildContext, String?)? emailAdressTextControllerValidator;
-  // State field(s) for TelefoneAdress widget.
-  FocusNode? telefoneAdressFocusNode;
-  TextEditingController? telefoneAdressTextController;
-  String? Function(BuildContext, String?)?
-      telefoneAdressTextControllerValidator;
+  // State field(s) for Telefone widget.
+  FocusNode? telefoneFocusNode;
+  TextEditingController? telefoneTextController;
+  String? Function(BuildContext, String?)? telefoneTextControllerValidator;
 
   @override
   void initState(BuildContext context) {}
@@ -24,7 +23,7 @@ class EmailNumberModel extends FlutterFlowModel<EmailNumberWidget> {
     emailAdressFocusNode?.dispose();
     emailAdressTextController?.dispose();
 
-    telefoneAdressFocusNode?.dispose();
-    telefoneAdressTextController?.dispose();
+    telefoneFocusNode?.dispose();
+    telefoneTextController?.dispose();
   }
 }

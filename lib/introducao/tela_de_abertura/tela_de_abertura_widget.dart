@@ -2,6 +2,7 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'tela_de_abertura_model.dart';
 export 'tela_de_abertura_model.dart';
@@ -28,6 +29,28 @@ class _TelaDeAberturaWidgetState extends State<TelaDeAberturaWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => TelaDeAberturaModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await Future.delayed(
+        Duration(
+          milliseconds: 1800,
+        ),
+      );
+      if (Navigator.of(context).canPop()) {
+        context.pop();
+      }
+      context.pushNamed(
+        LoginWidget.routeName,
+        extra: <String, dynamic>{
+          '__transition_info__': TransitionInfo(
+            hasTransition: true,
+            transitionType: PageTransitionType.fade,
+            duration: Duration(milliseconds: 260),
+          ),
+        },
+      );
+    });
 
     animationsMap.addAll({
       'imageOnPageLoadAnimation1': AnimationInfo(
@@ -126,6 +149,18 @@ class _TelaDeAberturaWidgetState extends State<TelaDeAberturaWidget>
           ),
         ],
       ),
+      'imageOnPageLoadAnimation9': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 50.0.ms,
+            duration: 2000.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
     });
   }
 
@@ -160,7 +195,7 @@ class _TelaDeAberturaWidgetState extends State<TelaDeAberturaWidget>
                   '__transition_info__': TransitionInfo(
                     hasTransition: true,
                     transitionType: PageTransitionType.topToBottom,
-                    duration: Duration(milliseconds: 10000),
+                    duration: Duration(milliseconds: 5000),
                   ),
                 },
               );
@@ -270,6 +305,19 @@ class _TelaDeAberturaWidgetState extends State<TelaDeAberturaWidget>
                     ),
                   ).animateOnPageLoad(
                       animationsMap['imageOnPageLoadAnimation8']!),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(0.0, -0.23),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: Image.asset(
+                      'assets/images/0f8abb6e-d674-4427-b550-dc8968deb550.png',
+                      width: 334.1,
+                      height: 170.0,
+                      fit: BoxFit.cover,
+                    ),
+                  ).animateOnPageLoad(
+                      animationsMap['imageOnPageLoadAnimation9']!),
                 ),
               ],
             ),
