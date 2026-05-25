@@ -1,10 +1,11 @@
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
-import 'catalogodigital_widget.dart' show CatalogodigitalWidget;
+import 'catalogodigital_tablet_widget.dart' show CatalogodigitalTabletWidget;
 import 'package:flutter/material.dart';
 
-class CatalogodigitalModel extends FlutterFlowModel<CatalogodigitalWidget> {
+class CatalogodigitalTabletModel
+    extends FlutterFlowModel<CatalogodigitalTabletWidget> {
   ///  Local state fields for this page.
 
   String searchQuery = '\"\"';
@@ -26,7 +27,7 @@ class CatalogodigitalModel extends FlutterFlowModel<CatalogodigitalWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Custom Action - buscarCatalogoCarrinhoSeguro] action in Catalogodigital widget.
+  // Stores action output result for [Custom Action - buscarCatalogoCarrinhoSeguro] action in CatalogodigitalTablet widget.
   List<CatagolodigitalStruct>? catalogoSeguroResult;
   // State field(s) for Buscarprodutos widget.
   FocusNode? buscarprodutosFocusNode;

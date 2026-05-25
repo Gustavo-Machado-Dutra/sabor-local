@@ -3,22 +3,23 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'sucessologin_model.dart';
-export 'sucessologin_model.dart';
+import 'sucessologin_tablet_model.dart';
+export 'sucessologin_tablet_model.dart';
 
-class SucessologinWidget extends StatefulWidget {
-  const SucessologinWidget({super.key});
+class SucessologinTabletWidget extends StatefulWidget {
+  const SucessologinTabletWidget({super.key});
 
-  static String routeName = 'Sucessologin';
-  static String routePath = '/sucessologin';
+  static String routeName = 'SucessologinTablet';
+  static String routePath = '/sucessologinTablet';
 
   @override
-  State<SucessologinWidget> createState() => _SucessologinWidgetState();
+  State<SucessologinTabletWidget> createState() =>
+      _SucessologinTabletWidgetState();
 }
 
-class _SucessologinWidgetState extends State<SucessologinWidget>
+class _SucessologinTabletWidgetState extends State<SucessologinTabletWidget>
     with TickerProviderStateMixin {
-  late SucessologinModel _model;
+  late SucessologinTabletModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -27,7 +28,7 @@ class _SucessologinWidgetState extends State<SucessologinWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => SucessologinModel());
+    _model = createModel(context, () => SucessologinTabletModel());
 
     animationsMap.addAll({
       'circleImageOnPageLoadAnimation': AnimationInfo(
@@ -163,9 +164,7 @@ class _SucessologinWidgetState extends State<SucessologinWidget>
           child: Visibility(
             visible: responsiveVisibility(
               context: context,
-              tablet: false,
-              tabletLandscape: false,
-              desktop: false,
+              phone: false,
             ),
             child: Stack(
               children: [

@@ -426,11 +426,8 @@ class _VerProdutoWidgetState extends State<VerProdutoWidget> {
                               size: 24.0,
                             ),
                             onPressed: () async {
-                              if (functions
-                                  .slQuantidadeMaiorQueUm(_model.quantidade)!) {
-                                _model.quantidade = _model.quantidade! + 1;
-                                safeSetState(() {});
-                              }
+                              _model.quantidade = _model.quantidade! + 1;
+                              safeSetState(() {});
                             },
                           ),
                         ),

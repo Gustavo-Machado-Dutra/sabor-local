@@ -6,22 +6,23 @@ import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'sucesso_pagamento_model.dart';
-export 'sucesso_pagamento_model.dart';
+import 'sucesso_pagamento_tablet_model.dart';
+export 'sucesso_pagamento_tablet_model.dart';
 
-class SucessoPagamentoWidget extends StatefulWidget {
-  const SucessoPagamentoWidget({super.key});
+class SucessoPagamentoTabletWidget extends StatefulWidget {
+  const SucessoPagamentoTabletWidget({super.key});
 
-  static String routeName = 'SucessoPagamento';
-  static String routePath = '/sucessoPagamento';
+  static String routeName = 'SucessoPagamentoTablet';
+  static String routePath = '/sucessoPagamentoTablet';
 
   @override
-  State<SucessoPagamentoWidget> createState() => _SucessoPagamentoWidgetState();
+  State<SucessoPagamentoTabletWidget> createState() =>
+      _SucessoPagamentoTabletWidgetState();
 }
 
-class _SucessoPagamentoWidgetState extends State<SucessoPagamentoWidget>
-    with TickerProviderStateMixin {
-  late SucessoPagamentoModel _model;
+class _SucessoPagamentoTabletWidgetState
+    extends State<SucessoPagamentoTabletWidget> with TickerProviderStateMixin {
+  late SucessoPagamentoTabletModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -30,7 +31,7 @@ class _SucessoPagamentoWidgetState extends State<SucessoPagamentoWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => SucessoPagamentoModel());
+    _model = createModel(context, () => SucessoPagamentoTabletModel());
 
     animationsMap.addAll({
       'circleImageOnPageLoadAnimation': AnimationInfo(
@@ -214,9 +215,7 @@ class _SucessoPagamentoWidgetState extends State<SucessoPagamentoWidget>
           child: Visibility(
             visible: responsiveVisibility(
               context: context,
-              tablet: false,
-              tabletLandscape: false,
-              desktop: false,
+              phone: false,
             ),
             child: Stack(
               children: [
@@ -347,7 +346,7 @@ class _SucessoPagamentoWidgetState extends State<SucessoPagamentoWidget>
                       animationsMap['iconOnPageLoadAnimation1']!),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0.31, 0.11),
+                  alignment: AlignmentDirectional(0.09, 0.1),
                   child: Icon(
                     Icons.circle_sharp,
                     color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -355,7 +354,7 @@ class _SucessoPagamentoWidgetState extends State<SucessoPagamentoWidget>
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-0.21, 0.24),
+                  alignment: AlignmentDirectional(-0.14, 0.18),
                   child: Icon(
                     Icons.circle_sharp,
                     color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -364,7 +363,7 @@ class _SucessoPagamentoWidgetState extends State<SucessoPagamentoWidget>
                       animationsMap['iconOnPageLoadAnimation2']!),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-0.29, -0.02),
+                  alignment: AlignmentDirectional(-0.15, 0.05),
                   child: Icon(
                     Icons.circle_sharp,
                     color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -373,7 +372,7 @@ class _SucessoPagamentoWidgetState extends State<SucessoPagamentoWidget>
                       animationsMap['iconOnPageLoadAnimation3']!),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-0.32, 0.1),
+                  alignment: AlignmentDirectional(0.05, 0.2),
                   child: Icon(
                     Icons.circle_sharp,
                     color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -382,22 +381,31 @@ class _SucessoPagamentoWidgetState extends State<SucessoPagamentoWidget>
                       animationsMap['iconOnPageLoadAnimation4']!),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0.62, 0.33),
+                  alignment: AlignmentDirectional(0.0, 0.0),
                   child: Icon(
                     Icons.circle_sharp,
                     color: Color(0xFFFF9300),
-                    size: 15.0,
+                    size: 10.0,
                   ).animateOnPageLoad(
                       animationsMap['iconOnPageLoadAnimation5']!),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-0.6, 0.35),
+                  alignment: AlignmentDirectional(0.64, 0.25),
                   child: Icon(
                     Icons.circle_sharp,
                     color: Color(0xFFFF9300),
                     size: 15.0,
                   ).animateOnPageLoad(
                       animationsMap['iconOnPageLoadAnimation6']!),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(-0.59, 0.33),
+                  child: Icon(
+                    Icons.circle_sharp,
+                    color: Color(0xFFFF9300),
+                    size: 15.0,
+                  ).animateOnPageLoad(
+                      animationsMap['iconOnPageLoadAnimation7']!),
                 ),
                 Align(
                   alignment: AlignmentDirectional(0.11, 0.51),
@@ -518,7 +526,7 @@ class _SucessoPagamentoWidgetState extends State<SucessoPagamentoWidget>
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0.17, -0.07),
+                  alignment: AlignmentDirectional(0.0, 0.0),
                   child: Icon(
                     Icons.circle_sharp,
                     color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -532,16 +540,16 @@ class _SucessoPagamentoWidgetState extends State<SucessoPagamentoWidget>
                     color: Color(0xFFFF9300),
                     size: 10.0,
                   ).animateOnPageLoad(
-                      animationsMap['iconOnPageLoadAnimation7']!),
+                      animationsMap['iconOnPageLoadAnimation8']!),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0.8, 0.1),
+                  alignment: AlignmentDirectional(0.0, 0.45),
                   child: Icon(
                     Icons.circle_sharp,
                     color: Color(0xFFFF9300),
                     size: 10.0,
                   ).animateOnPageLoad(
-                      animationsMap['iconOnPageLoadAnimation8']!),
+                      animationsMap['iconOnPageLoadAnimation9']!),
                 ),
                 Align(
                   alignment: AlignmentDirectional(0.64, -0.11),
@@ -550,32 +558,23 @@ class _SucessoPagamentoWidgetState extends State<SucessoPagamentoWidget>
                     color: Color(0xFFFF9300),
                     size: 15.0,
                   ).animateOnPageLoad(
-                      animationsMap['iconOnPageLoadAnimation9']!),
+                      animationsMap['iconOnPageLoadAnimation10']!),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-0.6, -0.13),
+                  alignment: AlignmentDirectional(-0.53, -0.15),
                   child: Icon(
                     Icons.circle_sharp,
                     color: Color(0xFFFF9300),
                     size: 20.0,
                   ).animateOnPageLoad(
-                      animationsMap['iconOnPageLoadAnimation10']!),
-                ),
-                Align(
-                  alignment: AlignmentDirectional(-0.04, -0.07),
-                  child: Icon(
-                    Icons.circle_sharp,
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                    size: 5.0,
-                  ).animateOnPageLoad(
                       animationsMap['iconOnPageLoadAnimation11']!),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0.16, 0.24),
+                  alignment: AlignmentDirectional(0.43, 0.36),
                   child: Icon(
                     Icons.circle_sharp,
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                    size: 5.0,
+                    color: Color(0xFFFF9300),
+                    size: 10.0,
                   ).animateOnPageLoad(
                       animationsMap['iconOnPageLoadAnimation12']!),
                 ),

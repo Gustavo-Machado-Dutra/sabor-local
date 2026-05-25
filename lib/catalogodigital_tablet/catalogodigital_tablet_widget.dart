@@ -9,28 +9,30 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'catalogodigital_model.dart';
-export 'catalogodigital_model.dart';
+import 'catalogodigital_tablet_model.dart';
+export 'catalogodigital_tablet_model.dart';
 
-class CatalogodigitalWidget extends StatefulWidget {
-  const CatalogodigitalWidget({super.key});
+class CatalogodigitalTabletWidget extends StatefulWidget {
+  const CatalogodigitalTabletWidget({super.key});
 
-  static String routeName = 'Catalogodigital';
-  static String routePath = '/catalogodigital';
+  static String routeName = 'CatalogodigitalTablet';
+  static String routePath = '/catalogodigitalTablet';
 
   @override
-  State<CatalogodigitalWidget> createState() => _CatalogodigitalWidgetState();
+  State<CatalogodigitalTabletWidget> createState() =>
+      _CatalogodigitalTabletWidgetState();
 }
 
-class _CatalogodigitalWidgetState extends State<CatalogodigitalWidget> {
-  late CatalogodigitalModel _model;
+class _CatalogodigitalTabletWidgetState
+    extends State<CatalogodigitalTabletWidget> {
+  late CatalogodigitalTabletModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => CatalogodigitalModel());
+    _model = createModel(context, () => CatalogodigitalTabletModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -151,7 +153,7 @@ class _CatalogodigitalWidgetState extends State<CatalogodigitalWidget> {
                         padding:
                             EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                         child: Text(
-                          'Adicionar conta',
+                          'Alterar conta',
                           style:
                               FlutterFlowTheme.of(context).bodyLarge.override(
                                     font: GoogleFonts.inter(
@@ -197,9 +199,7 @@ class _CatalogodigitalWidgetState extends State<CatalogodigitalWidget> {
                   child: Visibility(
                     visible: responsiveVisibility(
                       context: context,
-                      tablet: false,
-                      tabletLandscape: false,
-                      desktop: false,
+                      phone: false,
                     ),
                     child: Container(
                       height: double.infinity,
@@ -331,19 +331,33 @@ class _CatalogodigitalWidgetState extends State<CatalogodigitalWidget> {
                                         imageUrl:
                                             'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/sabor-local-n56292/assets/lwiq9ploe6ls/Captura_de_tela_2026-03-30_210104.png',
                                         width: double.infinity,
-                                        height: 178.0,
                                         fit: BoxFit.cover,
                                       ),
                                     ),
                                   ),
                                 ],
                               ),
-                              Text(
-                                'Categoria',
-                                style: FlutterFlowTheme.of(context)
-                                    .titleLarge
-                                    .override(
-                                      font: GoogleFonts.interTight(
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 20.0, 0.0, 20.0),
+                                child: Text(
+                                  'Categoria',
+                                  style: FlutterFlowTheme.of(context)
+                                      .titleLarge
+                                      .override(
+                                        font: GoogleFonts.interTight(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleLarge
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleLarge
+                                                  .fontStyle,
+                                        ),
+                                        color: Colors.black,
+                                        fontSize: 30.0,
+                                        letterSpacing: 0.0,
                                         fontWeight: FlutterFlowTheme.of(context)
                                             .titleLarge
                                             .fontWeight,
@@ -351,15 +365,7 @@ class _CatalogodigitalWidgetState extends State<CatalogodigitalWidget> {
                                             .titleLarge
                                             .fontStyle,
                                       ),
-                                      color: Colors.black,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .titleLarge
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .titleLarge
-                                          .fontStyle,
-                                    ),
+                                ),
                               ),
                               Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -625,6 +631,7 @@ class _CatalogodigitalWidgetState extends State<CatalogodigitalWidget> {
                                                       .fontStyle,
                                             ),
                                             color: Colors.black,
+                                            fontSize: 15.0,
                                             letterSpacing: 0.0,
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
@@ -639,7 +646,7 @@ class _CatalogodigitalWidgetState extends State<CatalogodigitalWidget> {
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        15.0, 0.0, 0.0, 0.0),
+                                        200.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       'Acompanhamento',
                                       textAlign: TextAlign.center,
@@ -657,7 +664,7 @@ class _CatalogodigitalWidgetState extends State<CatalogodigitalWidget> {
                                                       .fontStyle,
                                             ),
                                             color: Colors.black,
-                                            fontSize: 12.0,
+                                            fontSize: 15.0,
                                             letterSpacing: 0.0,
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
@@ -672,7 +679,7 @@ class _CatalogodigitalWidgetState extends State<CatalogodigitalWidget> {
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        15.0, 0.0, 0.0, 0.0),
+                                        205.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       'Pratos',
                                       textAlign: TextAlign.center,
@@ -691,6 +698,7 @@ class _CatalogodigitalWidgetState extends State<CatalogodigitalWidget> {
                                                       .fontStyle,
                                             ),
                                             color: Colors.black,
+                                            fontSize: 15.0,
                                             letterSpacing: 0.0,
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
@@ -705,7 +713,7 @@ class _CatalogodigitalWidgetState extends State<CatalogodigitalWidget> {
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        30.0, 0.0, 0.0, 0.0),
+                                        230.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       'Sobremesa',
                                       textAlign: TextAlign.center,
@@ -724,6 +732,7 @@ class _CatalogodigitalWidgetState extends State<CatalogodigitalWidget> {
                                                       .fontStyle,
                                             ),
                                             color: Colors.black,
+                                            fontSize: 15.0,
                                             letterSpacing: 0.0,
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
@@ -818,7 +827,10 @@ class _CatalogodigitalWidgetState extends State<CatalogodigitalWidget> {
                                                           milliseconds: 0),
                                                       imageUrl: itemItem.imagem,
                                                       width: double.infinity,
-                                                      height: 104.0,
+                                                      height: MediaQuery.sizeOf(
+                                                                  context)
+                                                              .height *
+                                                          0.3,
                                                       fit: BoxFit.cover,
                                                     ),
                                                   ),
@@ -843,6 +855,7 @@ class _CatalogodigitalWidgetState extends State<CatalogodigitalWidget> {
                                                                     .fontStyle,
                                                           ),
                                                           color: Colors.black,
+                                                          fontSize: 20.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FlutterFlowTheme.of(
@@ -888,6 +901,8 @@ class _CatalogodigitalWidgetState extends State<CatalogodigitalWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .tertiary,
+                                                                  fontSize:
+                                                                      20.0,
                                                                   letterSpacing:
                                                                       0.0,
                                                                   fontWeight: FlutterFlowTheme.of(
@@ -925,6 +940,7 @@ class _CatalogodigitalWidgetState extends State<CatalogodigitalWidget> {
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .secondaryText,
+                                                          fontSize: 15.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FlutterFlowTheme.of(

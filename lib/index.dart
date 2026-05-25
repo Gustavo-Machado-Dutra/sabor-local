@@ -28,3 +28,25 @@ export '/sucesso_pagamento/sucesso_pagamento_widget.dart'
 export '/pagamento/pagamento_widget.dart' show PagamentoWidget;
 export '/pagamento_pendente/pagamento_pendente_widget.dart'
     show PagamentoPendenteWidget;
+export '/introducao/tela_de_abertura_copy/tela_de_abertura_copy_widget.dart'
+    show TelaDeAberturaCopyWidget;
+export '/home/cadastro/cod_verificacaotablet/cod_verificacaotablet_widget.dart'
+    show CodVerificacaotabletWidget;
+export '/home/cadastro/email_number_tablet/email_number_tablet_widget.dart'
+    show EmailNumberTabletWidget;
+export '/home/cadastro/endereco_tablet/endereco_tablet_widget.dart'
+    show EnderecoTabletWidget;
+export '/home/cadastro/sucesso_tablet/sucesso_tablet_widget.dart'
+    show SucessoTabletWidget;
+export '/home/cadastro/sucessologin_tablet/sucessologin_tablet_widget.dart'
+    show SucessologinTabletWidget;
+export '/home/login_tablet/login_tablet_widget.dart' show LoginTabletWidget;
+export '/home/name_cpf_tablet/name_cpf_tablet_widget.dart'
+    show NameCpfTabletWidget;
+export '/home/senha_tablet/senha_tablet_widget.dart' show SenhaTabletWidget;
+export '/sucesso_pagamento_tablet/sucesso_pagamento_tablet_widget.dart'
+    show SucessoPagamentoTabletWidget;
+export '/catalogodigital_tablet/catalogodigital_tablet_widget.dart'
+    show CatalogodigitalTabletWidget;
+export '/ver_produto_tablet/ver_produto_tablet_widget.dart'
+    show VerProdutoTabletWidget;

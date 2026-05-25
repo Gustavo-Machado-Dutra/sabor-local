@@ -3,26 +3,28 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'email_number_model.dart';
-export 'email_number_model.dart';
+import 'package:provider/provider.dart';
+import 'senha_tablet_model.dart';
+export 'senha_tablet_model.dart';
 
-class EmailNumberWidget extends StatefulWidget {
-  const EmailNumberWidget({super.key});
+class SenhaTabletWidget extends StatefulWidget {
+  const SenhaTabletWidget({super.key});
 
-  static String routeName = 'EmailNumber';
-  static String routePath = '/emailNumber';
+  static String routeName = 'SenhaTablet';
+  static String routePath = '/senhaTablet';
 
   @override
-  State<EmailNumberWidget> createState() => _EmailNumberWidgetState();
+  State<SenhaTabletWidget> createState() => _SenhaTabletWidgetState();
 }
 
-class _EmailNumberWidgetState extends State<EmailNumberWidget>
+class _SenhaTabletWidgetState extends State<SenhaTabletWidget>
     with TickerProviderStateMixin {
-  late EmailNumberModel _model;
+  late SenhaTabletModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -31,13 +33,13 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => EmailNumberModel());
+    _model = createModel(context, () => SenhaTabletModel());
 
-    _model.emailAdressTextController ??= TextEditingController();
-    _model.emailAdressFocusNode ??= FocusNode();
+    _model.senhaAdressTextController ??= TextEditingController();
+    _model.senhaAdressFocusNode ??= FocusNode();
 
-    _model.telefoneTextController ??= TextEditingController();
-    _model.telefoneFocusNode ??= FocusNode();
+    _model.confirmarSenhaAdressTextController ??= TextEditingController();
+    _model.confirmarSenhaAdressFocusNode ??= FocusNode();
 
     animationsMap.addAll({
       'columnOnPageLoadAnimation': AnimationInfo(
@@ -78,6 +80,8 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -95,9 +99,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
             child: Visibility(
               visible: responsiveVisibility(
                 context: context,
-                tablet: false,
-                tabletLandscape: false,
-                desktop: false,
+                phone: false,
               ),
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
@@ -110,7 +112,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                       children: [
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              10.0, 30.0, 0.0, 30.0),
+                              0.0, 30.0, 0.0, 30.0),
                           child: FlutterFlowIconButton(
                             borderRadius: 200.0,
                             buttonSize: 40.0,
@@ -127,25 +129,20 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                         ),
                       ],
                     ),
-                    Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.network(
-                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/sabor-local-n56292/assets/abf4sk9v8elb/Captura_de_tela_2026-03-25_203346-removebg-preview.png',
-                            fit: BoxFit.fitWidth,
-                          ),
-                        ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image.network(
+                        'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/sabor-local-n56292/assets/abf4sk9v8elb/Captura_de_tela_2026-03-25_203346-removebg-preview.png',
+                        width: 340.0,
+                        height: 214.4,
+                        fit: BoxFit.fitWidth,
                       ),
                     ),
                     Align(
                       alignment: AlignmentDirectional(0.0, 0.0),
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 40.0, 16.0, 16.0),
+                            16.0, 0.0, 16.0, 16.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -184,13 +181,13 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                               child: Container(
                                 width: double.infinity,
                                 child: TextFormField(
-                                  controller: _model.emailAdressTextController,
-                                  focusNode: _model.emailAdressFocusNode,
+                                  controller: _model.senhaAdressTextController,
+                                  focusNode: _model.senhaAdressFocusNode,
                                   autofocus: true,
                                   autofillHints: [AutofillHints.email],
-                                  obscureText: false,
+                                  obscureText: !_model.senhaAdressVisibility,
                                   decoration: InputDecoration(
-                                    labelText: 'Email',
+                                    labelText: 'Senha',
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .labelMedium
                                         .override(
@@ -254,8 +251,23 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                     fillColor: Color(0xFFFFF1E9),
                                     contentPadding: EdgeInsets.all(24.0),
                                     prefixIcon: Icon(
-                                      Icons.email_outlined,
+                                      Icons.lock_outline_sharp,
                                       color: Color(0xFF6B6B6B),
+                                    ),
+                                    suffixIcon: InkWell(
+                                      onTap: () async {
+                                        safeSetState(() =>
+                                            _model.senhaAdressVisibility =
+                                                !_model.senhaAdressVisibility);
+                                      },
+                                      focusNode: FocusNode(skipTraversal: true),
+                                      child: Icon(
+                                        _model.senhaAdressVisibility
+                                            ? Icons.visibility_outlined
+                                            : Icons.visibility_off_outlined,
+                                        color: Color(0xFF757575),
+                                        size: 22.0,
+                                      ),
                                     ),
                                   ),
                                   style: FlutterFlowTheme.of(context)
@@ -282,7 +294,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                       ),
                                   keyboardType: TextInputType.emailAddress,
                                   validator: _model
-                                      .emailAdressTextControllerValidator
+                                      .senhaAdressTextControllerValidator
                                       .asValidator(context),
                                 ),
                               ),
@@ -293,15 +305,18 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                               child: Container(
                                 width: double.infinity,
                                 child: TextFormField(
-                                  controller: _model.telefoneTextController,
-                                  focusNode: _model.telefoneFocusNode,
+                                  controller:
+                                      _model.confirmarSenhaAdressTextController,
+                                  focusNode:
+                                      _model.confirmarSenhaAdressFocusNode,
                                   autofocus: false,
                                   autofillHints: [
                                     AutofillHints.telephoneNumber
                                   ],
-                                  obscureText: false,
+                                  obscureText:
+                                      !_model.confirmarSenhaAdressVisibility,
                                   decoration: InputDecoration(
-                                    labelText: 'Telefone',
+                                    labelText: 'Confirmar senha',
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .labelMedium
                                         .override(
@@ -365,9 +380,26 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                     fillColor: Color(0xFFFFF1E9),
                                     contentPadding: EdgeInsets.all(24.0),
                                     prefixIcon: Icon(
-                                      Icons.phone,
+                                      Icons.lock_outline_sharp,
                                       color: Color(0xFF6B6B6B),
                                       size: 24.0,
+                                    ),
+                                    suffixIcon: InkWell(
+                                      onTap: () async {
+                                        safeSetState(() => _model
+                                                .confirmarSenhaAdressVisibility =
+                                            !_model
+                                                .confirmarSenhaAdressVisibility);
+                                      },
+                                      focusNode: FocusNode(skipTraversal: true),
+                                      child: Icon(
+                                        _model.confirmarSenhaAdressVisibility
+                                            ? Icons.visibility_outlined
+                                            : Icons.visibility_off_outlined,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 24.0,
+                                      ),
                                     ),
                                   ),
                                   style: FlutterFlowTheme.of(context)
@@ -383,7 +415,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                                   .bodyMedium
                                                   .fontStyle,
                                         ),
-                                        color: Color(0xFF0D0D0D),
+                                        color: Colors.black,
                                         letterSpacing: 0.0,
                                         fontWeight: FlutterFlowTheme.of(context)
                                             .bodyMedium
@@ -392,8 +424,9 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                             .bodyMedium
                                             .fontStyle,
                                       ),
+                                  textAlign: TextAlign.start,
                                   validator: _model
-                                      .telefoneTextControllerValidator
+                                      .confirmarSenhaAdressTextControllerValidator
                                       .asValidator(context),
                                 ),
                               ),
@@ -435,43 +468,38 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                     0.0, 0.0, 0.0, 16.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    if ((_model.emailAdressTextController
-                                                    .text ==
-                                                '') &&
-                                        (_model.telefoneTextController
-                                                    .text ==
-                                                '')) {
-                                      await showDialog(
-                                        context: context,
-                                        builder: (alertDialogContext) {
-                                          return AlertDialog(
-                                            title: Text(
-                                                'Preencha todos os campos'),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext),
-                                                child: Text('Ok'),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                      return;
+                                    _model.cadastroXanoSalvo =
+                                        await actions.cadastrarUsuarioXano(
+                                      FFAppState().name,
+                                      FFAppState().email,
+                                      FFAppState().CPF,
+                                      FFAppState().telefone,
+                                      _model.senhaAdressTextController.text,
+                                      _model.confirmarSenhaAdressTextController
+                                          .text,
+                                    );
+                                    if (_model.cadastroXanoSalvo == true) {
+                                      context.pushNamed(
+                                          CodVerificacaoWidget.routeName);
                                     } else {
-                                      FFAppState().email =
-                                          _model.emailAdressTextController.text;
-                                      FFAppState().telefone =
-                                          _model.telefoneTextController.text;
-                                      safeSetState(() {});
-
-                                      context.pushNamed(SenhaWidget.routeName);
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'Nao foi possivel criar sua conta. Verifique os dados e tente novamente.',
+                                            style: TextStyle(),
+                                          ),
+                                          duration:
+                                              Duration(milliseconds: 4000),
+                                        ),
+                                      );
                                     }
+
+                                    safeSetState(() {});
                                   },
                                   text: 'Próximo',
                                   options: FFButtonOptions(
-                                    width:
-                                        MediaQuery.sizeOf(context).width * 0.9,
+                                    width: 357.6,
                                     height: 52.0,
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
@@ -502,7 +530,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                                   .titleSmall
                                                   .fontStyle,
                                         ),
-                                    elevation: 3.0,
+                                    elevation: 11.0,
                                     borderSide: BorderSide(
                                       color: Colors.transparent,
                                       width: 1.0,

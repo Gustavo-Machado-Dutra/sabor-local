@@ -1,9 +1,9 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import '/index.dart';
-import 'sucesso_widget.dart' show SucessoWidget;
+import 'sucessologin_tablet_widget.dart' show SucessologinTabletWidget;
 import 'package:flutter/material.dart';
 
-class SucessoModel extends FlutterFlowModel<SucessoWidget> {
+class SucessologinTabletModel
+    extends FlutterFlowModel<SucessologinTabletWidget> {
   @override
   void initState(BuildContext context) {}
 

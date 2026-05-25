@@ -134,20 +134,23 @@ class _EnderecoCopyWidgetState extends State<EnderecoCopyWidget>
                         ),
                       ],
                     ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.network(
-                        'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/sabor-local-n56292/assets/abf4sk9v8elb/Captura_de_tela_2026-03-25_203346-removebg-preview.png',
-                        width: 340.0,
-                        height: 214.4,
-                        fit: BoxFit.fitWidth,
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Image.network(
+                          'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/sabor-local-n56292/assets/abf4sk9v8elb/Captura_de_tela_2026-03-25_203346-removebg-preview.png',
+                          height: MediaQuery.sizeOf(context).height * 0.2,
+                          fit: BoxFit.fitWidth,
+                        ),
                       ),
                     ),
                     Align(
                       alignment: AlignmentDirectional(0.0, 0.0),
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 0.0, 16.0, 16.0),
+                            16.0, 70.0, 16.0, 16.0),
                         child: SingleChildScrollView(
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
@@ -172,7 +175,7 @@ class _EnderecoCopyWidgetState extends State<EnderecoCopyWidget>
                                                   .fontStyle,
                                         ),
                                         color: Colors.black,
-                                        fontSize: 25.0,
+                                        fontSize: 30.0,
                                         letterSpacing: 0.0,
                                         fontWeight: FlutterFlowTheme.of(context)
                                             .titleMedium
@@ -938,61 +941,81 @@ class _EnderecoCopyWidgetState extends State<EnderecoCopyWidget>
                               ),
                               Align(
                                 alignment: AlignmentDirectional(0.0, 0.0),
-                                child: FFButtonWidget(
-                                  onPressed: () async {
-                                    _model.apiResulEndereco =
-                                        await CadastrarEnderecoCall.call(
-                                      logradouro: _model
-                                          .logradouroAdressTextController.text,
-                                      numero: _model
-                                          .numeroAdressTextController.text,
-                                      complemento: _model
-                                          .complementoAdressTextController.text,
-                                      bairro: _model
-                                          .bairroAdressTextController.text,
-                                      referencia: _model
-                                          .referenciaAdressTextController.text,
-                                      padrao: true,
-                                    );
-
-                                    if ((_model.apiResulEndereco?.succeeded ??
-                                        true)) {
-                                      context.pushNamed(
-                                          CatalogodigitalWidget.routeName);
-                                    } else {
-                                      await showDialog(
-                                        context: context,
-                                        builder: (alertDialogContext) {
-                                          return AlertDialog(
-                                            title: Text('ERRO'),
-                                            content: Text(
-                                                'informações de endereço inválidas'),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext),
-                                                child: Text('Ok'),
-                                              ),
-                                            ],
-                                          );
-                                        },
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 70.0, 0.0, 0.0),
+                                  child: FFButtonWidget(
+                                    onPressed: () async {
+                                      _model.apiResulEndereco =
+                                          await CadastrarEnderecoCall.call(
+                                        logradouro: _model
+                                            .logradouroAdressTextController
+                                            .text,
+                                        numero: _model
+                                            .numeroAdressTextController.text,
+                                        complemento: _model
+                                            .complementoAdressTextController
+                                            .text,
+                                        bairro: _model
+                                            .bairroAdressTextController.text,
+                                        referencia: _model
+                                            .referenciaAdressTextController
+                                            .text,
+                                        padrao: true,
                                       );
-                                    }
 
-                                    safeSetState(() {});
-                                  },
-                                  text: 'Próximo',
-                                  options: FFButtonOptions(
-                                    width: 357.6,
-                                    height: 40.0,
-                                    padding: EdgeInsets.all(20.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: Color(0xFFF56E0F),
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          font: GoogleFonts.interTight(
+                                      if ((_model.apiResulEndereco?.succeeded ??
+                                          true)) {
+                                        context.pushNamed(
+                                            CatalogodigitalWidget.routeName);
+                                      } else {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text('ERRO'),
+                                              content: Text(
+                                                  'informações de endereço inválidas'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('Ok'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      }
+
+                                      safeSetState(() {});
+                                    },
+                                    text: 'Próximo',
+                                    options: FFButtonOptions(
+                                      width: MediaQuery.sizeOf(context).width *
+                                          0.98,
+                                      height: 40.0,
+                                      padding: EdgeInsets.all(20.0),
+                                      iconPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
+                                      color: Color(0xFFF56E0F),
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .override(
+                                            font: GoogleFonts.interTight(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .fontStyle,
+                                            ),
+                                            color: Colors.white,
+                                            letterSpacing: 0.0,
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
                                                     .titleSmall
@@ -1002,23 +1025,14 @@ class _EnderecoCopyWidgetState extends State<EnderecoCopyWidget>
                                                     .titleSmall
                                                     .fontStyle,
                                           ),
-                                          color: Colors.white,
-                                          letterSpacing: 0.0,
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .fontStyle,
-                                        ),
-                                    elevation: 3.0,
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1.0,
+                                      elevation: 3.0,
+                                      borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius:
+                                          BorderRadius.circular(200.0),
                                     ),
-                                    borderRadius: BorderRadius.circular(200.0),
                                   ),
                                 ),
                               ),

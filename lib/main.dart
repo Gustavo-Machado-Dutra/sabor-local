@@ -138,6 +138,7 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'Catalogodigital': CatalogodigitalWidget(),
       'carrinho': CarrinhoWidget(),
+      'CatalogodigitalTablet': CatalogodigitalTabletWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -168,6 +169,14 @@ class _NavBarPageState extends State<NavBarPage> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.shopping_cart_rounded,
+              size: 24.0,
+            ),
+            label: 'Home',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home_outlined,
               size: 24.0,
             ),
             label: 'Home',

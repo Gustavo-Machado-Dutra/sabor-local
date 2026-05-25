@@ -78,14 +78,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? NavBarPage() : CatalogodigitalWidget(),
+          appStateNotifier.loggedIn ? NavBarPage() : TelaDeAberturaWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => appStateNotifier.loggedIn
-              ? NavBarPage()
-              : CatalogodigitalWidget(),
+          builder: (context, _) =>
+              appStateNotifier.loggedIn ? NavBarPage() : TelaDeAberturaWidget(),
         ),
         FFRoute(
           name: TelaDeAberturaWidget.routeName,
@@ -130,6 +129,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: CatalogodigitalWidget.routeName,
           path: CatalogodigitalWidget.routePath,
+          requireAuth: true,
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'Catalogodigital')
               : CatalogodigitalWidget(),
@@ -137,6 +137,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: VerProdutoWidget.routeName,
           path: VerProdutoWidget.routePath,
+          requireAuth: true,
           builder: (context, params) => VerProdutoWidget(
             catalogoID: params.getParam(
               'catalogoID',
@@ -178,6 +179,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: CarrinhoWidget.routeName,
           path: CarrinhoWidget.routePath,
+          requireAuth: true,
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'carrinho')
               : CarrinhoWidget(),
@@ -195,17 +197,96 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: SucessoPagamentoWidget.routeName,
           path: SucessoPagamentoWidget.routePath,
+          requireAuth: true,
           builder: (context, params) => SucessoPagamentoWidget(),
         ),
         FFRoute(
           name: PagamentoWidget.routeName,
           path: PagamentoWidget.routePath,
+          requireAuth: true,
           builder: (context, params) => PagamentoWidget(),
         ),
         FFRoute(
           name: PagamentoPendenteWidget.routeName,
           path: PagamentoPendenteWidget.routePath,
+          requireAuth: true,
           builder: (context, params) => PagamentoPendenteWidget(),
+        ),
+        FFRoute(
+          name: TelaDeAberturaCopyWidget.routeName,
+          path: TelaDeAberturaCopyWidget.routePath,
+          builder: (context, params) => TelaDeAberturaCopyWidget(),
+        ),
+        FFRoute(
+          name: CodVerificacaotabletWidget.routeName,
+          path: CodVerificacaotabletWidget.routePath,
+          builder: (context, params) => CodVerificacaotabletWidget(),
+        ),
+        FFRoute(
+          name: EmailNumberTabletWidget.routeName,
+          path: EmailNumberTabletWidget.routePath,
+          builder: (context, params) => EmailNumberTabletWidget(),
+        ),
+        FFRoute(
+          name: EnderecoTabletWidget.routeName,
+          path: EnderecoTabletWidget.routePath,
+          builder: (context, params) => EnderecoTabletWidget(),
+        ),
+        FFRoute(
+          name: SucessoTabletWidget.routeName,
+          path: SucessoTabletWidget.routePath,
+          builder: (context, params) => SucessoTabletWidget(),
+        ),
+        FFRoute(
+          name: SucessologinTabletWidget.routeName,
+          path: SucessologinTabletWidget.routePath,
+          builder: (context, params) => SucessologinTabletWidget(),
+        ),
+        FFRoute(
+          name: LoginTabletWidget.routeName,
+          path: LoginTabletWidget.routePath,
+          builder: (context, params) => LoginTabletWidget(),
+        ),
+        FFRoute(
+          name: NameCpfTabletWidget.routeName,
+          path: NameCpfTabletWidget.routePath,
+          builder: (context, params) => NameCpfTabletWidget(),
+        ),
+        FFRoute(
+          name: SenhaTabletWidget.routeName,
+          path: SenhaTabletWidget.routePath,
+          builder: (context, params) => SenhaTabletWidget(),
+        ),
+        FFRoute(
+          name: SucessoPagamentoTabletWidget.routeName,
+          path: SucessoPagamentoTabletWidget.routePath,
+          requireAuth: true,
+          builder: (context, params) => SucessoPagamentoTabletWidget(),
+        ),
+        FFRoute(
+          name: CatalogodigitalTabletWidget.routeName,
+          path: CatalogodigitalTabletWidget.routePath,
+          requireAuth: true,
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'CatalogodigitalTablet')
+              : CatalogodigitalTabletWidget(),
+        ),
+        FFRoute(
+          name: VerProdutoTabletWidget.routeName,
+          path: VerProdutoTabletWidget.routePath,
+          requireAuth: true,
+          builder: (context, params) => VerProdutoTabletWidget(
+            catalogoID: params.getParam(
+              'catalogoID',
+              ParamType.DataStruct,
+              isList: false,
+              structBuilder: CatagolodigitalStruct.fromSerializableMap,
+            ),
+            preco: params.getParam(
+              'preco',
+              ParamType.double,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -376,7 +457,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/catalogodigital';
+            return '/telaDeAbertura';
           }
           return null;
         },

@@ -1,9 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import '/index.dart';
-import 'sucesso_widget.dart' show SucessoWidget;
+import 'paodequeijo_widget.dart' show PaodequeijoWidget;
 import 'package:flutter/material.dart';
 
-class SucessoModel extends FlutterFlowModel<SucessoWidget> {
+class PaodequeijoModel extends FlutterFlowModel<PaodequeijoWidget> {
   @override
   void initState(BuildContext context) {}
 

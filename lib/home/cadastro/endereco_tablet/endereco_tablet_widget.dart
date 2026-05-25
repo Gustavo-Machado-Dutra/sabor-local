@@ -6,28 +6,28 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'endereco_model.dart';
-export 'endereco_model.dart';
+import 'endereco_tablet_model.dart';
+export 'endereco_tablet_model.dart';
 
-class EnderecoWidget extends StatefulWidget {
-  const EnderecoWidget({super.key});
+class EnderecoTabletWidget extends StatefulWidget {
+  const EnderecoTabletWidget({super.key});
 
-  static String routeName = 'Endereco';
-  static String routePath = '/endereco';
+  static String routeName = 'EnderecoTablet';
+  static String routePath = '/enderecoTablet';
 
   @override
-  State<EnderecoWidget> createState() => _EnderecoWidgetState();
+  State<EnderecoTabletWidget> createState() => _EnderecoTabletWidgetState();
 }
 
-class _EnderecoWidgetState extends State<EnderecoWidget> {
-  late EnderecoModel _model;
+class _EnderecoTabletWidgetState extends State<EnderecoTabletWidget> {
+  late EnderecoTabletModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => EnderecoModel());
+    _model = createModel(context, () => EnderecoTabletModel());
 
     _model.bairroAdressTextController ??= TextEditingController();
     _model.bairroAdressFocusNode ??= FocusNode();
@@ -69,29 +69,20 @@ class _EnderecoWidgetState extends State<EnderecoWidget> {
           top: true,
           child: Stack(
             children: [
-              if (responsiveVisibility(
-                context: context,
-                tablet: false,
-                tabletLandscape: false,
-                desktop: false,
-              ))
-                Align(
-                  alignment: AlignmentDirectional(-1.0, -1.0),
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
-                    child: wrapWithModel(
-                      model: _model.voltaModel,
-                      updateCallback: () => safeSetState(() {}),
-                      child: VoltaWidget(),
-                    ),
+              Align(
+                alignment: AlignmentDirectional(-1.0, -1.0),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                  child: wrapWithModel(
+                    model: _model.voltaModel,
+                    updateCallback: () => safeSetState(() {}),
+                    child: VoltaWidget(),
                   ),
                 ),
+              ),
               if (responsiveVisibility(
                 context: context,
-                tablet: false,
-                tabletLandscape: false,
-                desktop: false,
+                phone: false,
               ))
                 Align(
                   alignment: AlignmentDirectional(0.0, 0.0),
@@ -102,12 +93,17 @@ class _EnderecoWidgetState extends State<EnderecoWidget> {
                       children: [
                         Align(
                           alignment: AlignmentDirectional(0.0, -1.0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: Image.asset(
-                              'assets/images/0f8abb6e-d674-4427-b550-dc8968deb550.png',
-                              height: MediaQuery.sizeOf(context).height * 0.18,
-                              fit: BoxFit.cover,
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 40.0, 0.0, 0.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.asset(
+                                'assets/images/0f8abb6e-d674-4427-b550-dc8968deb550.png',
+                                height:
+                                    MediaQuery.sizeOf(context).height * 0.18,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
@@ -172,7 +168,7 @@ class _EnderecoWidgetState extends State<EnderecoWidget> {
                           ),
                         ),
                         Align(
-                          alignment: AlignmentDirectional(0.0, -0.5),
+                          alignment: AlignmentDirectional(-0.01, -0.48),
                           child: Text(
                             'Cadastro de endereço',
                             style: FlutterFlowTheme.of(context)
@@ -505,7 +501,8 @@ class _EnderecoWidgetState extends State<EnderecoWidget> {
 
                                 if ((_model.apiResulEndereco?.succeeded ??
                                     true)) {
-                                  context.pushNamed(SucessoWidget.routeName);
+                                  context.pushNamed(
+                                      CatalogodigitalWidget.routeName);
                                 } else {
                                   await showDialog(
                                     context: context,
@@ -530,7 +527,7 @@ class _EnderecoWidgetState extends State<EnderecoWidget> {
                               },
                               text: 'Cadastrar',
                               options: FFButtonOptions(
-                                width: MediaQuery.sizeOf(context).width * 0.8,
+                                width: MediaQuery.sizeOf(context).width * 0.93,
                                 height: 40.0,
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     40.0, 0.0, 45.0, 0.0),
@@ -977,7 +974,7 @@ class _EnderecoWidgetState extends State<EnderecoWidget> {
                           ),
                         ),
                         Align(
-                          alignment: AlignmentDirectional(0.74, -0.24),
+                          alignment: AlignmentDirectional(0.94, -0.27),
                           child: FFButtonWidget(
                             onPressed: () async {
                               _model.apiResultadoCep = await BuscarCepCall.call(

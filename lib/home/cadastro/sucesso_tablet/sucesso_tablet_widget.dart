@@ -3,22 +3,22 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'sucessologin_model.dart';
-export 'sucessologin_model.dart';
+import 'sucesso_tablet_model.dart';
+export 'sucesso_tablet_model.dart';
 
-class SucessologinWidget extends StatefulWidget {
-  const SucessologinWidget({super.key});
+class SucessoTabletWidget extends StatefulWidget {
+  const SucessoTabletWidget({super.key});
 
-  static String routeName = 'Sucessologin';
-  static String routePath = '/sucessologin';
+  static String routeName = 'SucessoTablet';
+  static String routePath = '/sucessoTablet';
 
   @override
-  State<SucessologinWidget> createState() => _SucessologinWidgetState();
+  State<SucessoTabletWidget> createState() => _SucessoTabletWidgetState();
 }
 
-class _SucessologinWidgetState extends State<SucessologinWidget>
+class _SucessoTabletWidgetState extends State<SucessoTabletWidget>
     with TickerProviderStateMixin {
-  late SucessologinModel _model;
+  late SucessoTabletModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -27,7 +27,7 @@ class _SucessologinWidgetState extends State<SucessologinWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => SucessologinModel());
+    _model = createModel(context, () => SucessoTabletModel());
 
     animationsMap.addAll({
       'circleImageOnPageLoadAnimation': AnimationInfo(
@@ -138,6 +138,162 @@ class _SucessologinWidgetState extends State<SucessologinWidget>
           ),
         ],
       ),
+      'iconOnPageLoadAnimation9': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 50.0.ms,
+            duration: 2000.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'iconOnPageLoadAnimation10': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 50.0.ms,
+            duration: 2000.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'iconOnPageLoadAnimation11': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 50.0.ms,
+            duration: 2000.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'iconOnPageLoadAnimation12': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 50.0.ms,
+            duration: 2000.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'iconOnPageLoadAnimation13': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 50.0.ms,
+            duration: 2000.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'iconOnPageLoadAnimation14': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 50.0.ms,
+            duration: 2000.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'iconOnPageLoadAnimation15': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 50.0.ms,
+            duration: 2000.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'iconOnPageLoadAnimation16': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 50.0.ms,
+            duration: 2000.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'iconOnPageLoadAnimation17': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 50.0.ms,
+            duration: 2000.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'iconOnPageLoadAnimation18': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 50.0.ms,
+            duration: 2000.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'iconOnPageLoadAnimation19': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 50.0.ms,
+            duration: 2000.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'iconOnPageLoadAnimation20': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 50.0.ms,
+            duration: 2000.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'iconOnPageLoadAnimation21': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 50.0.ms,
+            duration: 2000.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
     });
   }
 
@@ -163,20 +319,17 @@ class _SucessologinWidgetState extends State<SucessologinWidget>
           child: Visibility(
             visible: responsiveVisibility(
               context: context,
-              tablet: false,
-              tabletLandscape: false,
-              desktop: false,
+              phone: false,
             ),
             child: Stack(
               children: [
                 Align(
-                  alignment: AlignmentDirectional(0.54, -0.76),
+                  alignment: AlignmentDirectional(0.02, -0.8),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.asset(
                       'assets/images/0f8abb6e-d674-4427-b550-dc8968deb550.png',
-                      width: 386.8,
-                      height: 170.0,
+                      height: MediaQuery.sizeOf(context).height * 0.2,
                       fit: BoxFit.scaleDown,
                     ),
                   ),
@@ -268,8 +421,8 @@ class _SucessologinWidgetState extends State<SucessologinWidget>
                 Align(
                   alignment: AlignmentDirectional(-0.03, 0.11),
                   child: Container(
-                    width: 200.0,
-                    height: 200.0,
+                    width: 300.0,
+                    height: 300.0,
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
@@ -282,16 +435,16 @@ class _SucessologinWidgetState extends State<SucessologinWidget>
                       animationsMap['circleImageOnPageLoadAnimation']!),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-0.04, 0.07),
+                  alignment: AlignmentDirectional(-0.03, 0.09),
                   child: Icon(
                     Icons.check,
                     color: FlutterFlowTheme.of(context).secondaryBackground,
-                    size: 60.0,
+                    size: 80.0,
                   ).animateOnPageLoad(
                       animationsMap['iconOnPageLoadAnimation1']!),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0.26, -0.01),
+                  alignment: AlignmentDirectional(-0.04, 0.25),
                   child: Icon(
                     Icons.circle_sharp,
                     color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -308,7 +461,7 @@ class _SucessologinWidgetState extends State<SucessologinWidget>
                       animationsMap['iconOnPageLoadAnimation2']!),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-0.26, -0.06),
+                  alignment: AlignmentDirectional(-0.18, -0.03),
                   child: Icon(
                     Icons.circle_sharp,
                     color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -317,7 +470,7 @@ class _SucessologinWidgetState extends State<SucessologinWidget>
                       animationsMap['iconOnPageLoadAnimation3']!),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0.12, 0.2),
+                  alignment: AlignmentDirectional(0.08, 0.17),
                   child: Icon(
                     Icons.circle_sharp,
                     color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -326,7 +479,7 @@ class _SucessologinWidgetState extends State<SucessologinWidget>
                       animationsMap['iconOnPageLoadAnimation4']!),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0.43, 0.36),
+                  alignment: AlignmentDirectional(0.39, 0.17),
                   child: Icon(
                     Icons.circle_sharp,
                     color: Color(0xFFFF9300),
@@ -335,7 +488,7 @@ class _SucessologinWidgetState extends State<SucessologinWidget>
                       animationsMap['iconOnPageLoadAnimation5']!),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0.64, -0.11),
+                  alignment: AlignmentDirectional(0.14, -0.23),
                   child: Icon(
                     Icons.circle_sharp,
                     color: Color(0xFFFF9300),
@@ -344,7 +497,7 @@ class _SucessologinWidgetState extends State<SucessologinWidget>
                       animationsMap['iconOnPageLoadAnimation6']!),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-0.53, -0.15),
+                  alignment: AlignmentDirectional(-0.13, 0.48),
                   child: Icon(
                     Icons.circle_sharp,
                     color: Color(0xFFFF9300),
@@ -360,6 +513,131 @@ class _SucessologinWidgetState extends State<SucessologinWidget>
                     size: 15.0,
                   ).animateOnPageLoad(
                       animationsMap['iconOnPageLoadAnimation8']!),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(-0.02, -0.01),
+                  child: Icon(
+                    Icons.circle_sharp,
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    size: 5.0,
+                  ).animateOnPageLoad(
+                      animationsMap['iconOnPageLoadAnimation9']!),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(-0.15, 0.12),
+                  child: Icon(
+                    Icons.circle_sharp,
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    size: 5.0,
+                  ).animateOnPageLoad(
+                      animationsMap['iconOnPageLoadAnimation10']!),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(0.15, -0.01),
+                  child: Icon(
+                    Icons.circle_sharp,
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    size: 11.0,
+                  ),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(-0.53, -0.15),
+                  child: Icon(
+                    Icons.circle_sharp,
+                    color: Color(0xFFFF9300),
+                    size: 20.0,
+                  ).animateOnPageLoad(
+                      animationsMap['iconOnPageLoadAnimation11']!),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(0.73, 0.58),
+                  child: Icon(
+                    Icons.circle_sharp,
+                    color: Color(0xFFFF9300),
+                    size: 15.0,
+                  ).animateOnPageLoad(
+                      animationsMap['iconOnPageLoadAnimation12']!),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(0.6, -0.11),
+                  child: Icon(
+                    Icons.circle_sharp,
+                    color: Color(0xFFFF9300),
+                    size: 15.0,
+                  ).animateOnPageLoad(
+                      animationsMap['iconOnPageLoadAnimation13']!),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(0.24, 0.58),
+                  child: Icon(
+                    Icons.circle_sharp,
+                    color: Color(0xFFFF9300),
+                    size: 10.0,
+                  ).animateOnPageLoad(
+                      animationsMap['iconOnPageLoadAnimation14']!),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(0.46, -0.33),
+                  child: Icon(
+                    Icons.circle_sharp,
+                    color: Color(0xFFFF9300),
+                    size: 10.0,
+                  ).animateOnPageLoad(
+                      animationsMap['iconOnPageLoadAnimation15']!),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(-0.46, 0.13),
+                  child: Icon(
+                    Icons.circle_sharp,
+                    color: Color(0xFFFF9300),
+                    size: 10.0,
+                  ).animateOnPageLoad(
+                      animationsMap['iconOnPageLoadAnimation16']!),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(-0.33, -0.39),
+                  child: Icon(
+                    Icons.circle_sharp,
+                    color: Color(0xFFFF9300),
+                    size: 10.0,
+                  ).animateOnPageLoad(
+                      animationsMap['iconOnPageLoadAnimation17']!),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(-0.45, 0.57),
+                  child: Icon(
+                    Icons.circle_sharp,
+                    color: Color(0xFFFF9300),
+                    size: 10.0,
+                  ).animateOnPageLoad(
+                      animationsMap['iconOnPageLoadAnimation18']!),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(-0.83, 0.04),
+                  child: Icon(
+                    Icons.circle_sharp,
+                    color: Color(0xFFFF9300),
+                    size: 10.0,
+                  ).animateOnPageLoad(
+                      animationsMap['iconOnPageLoadAnimation19']!),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(0.69, 0.14),
+                  child: Icon(
+                    Icons.circle_sharp,
+                    color: Color(0xFFFF9300),
+                    size: 10.0,
+                  ).animateOnPageLoad(
+                      animationsMap['iconOnPageLoadAnimation20']!),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(0.4, 0.38),
+                  child: Icon(
+                    Icons.circle_sharp,
+                    color: Color(0xFFFF9300),
+                    size: 15.0,
+                  ).animateOnPageLoad(
+                      animationsMap['iconOnPageLoadAnimation21']!),
                 ),
               ],
             ),

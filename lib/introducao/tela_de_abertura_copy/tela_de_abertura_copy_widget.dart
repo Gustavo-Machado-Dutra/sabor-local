@@ -1,25 +1,27 @@
+import '/components/paodequeijo_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'tela_de_abertura_model.dart';
-export 'tela_de_abertura_model.dart';
+import 'tela_de_abertura_copy_model.dart';
+export 'tela_de_abertura_copy_model.dart';
 
-class TelaDeAberturaWidget extends StatefulWidget {
-  const TelaDeAberturaWidget({super.key});
+class TelaDeAberturaCopyWidget extends StatefulWidget {
+  const TelaDeAberturaCopyWidget({super.key});
 
-  static String routeName = 'TelaDeAbertura';
-  static String routePath = '/telaDeAbertura';
+  static String routeName = 'TelaDeAberturaCopy';
+  static String routePath = '/telaDeAberturaCopy';
 
   @override
-  State<TelaDeAberturaWidget> createState() => _TelaDeAberturaWidgetState();
+  State<TelaDeAberturaCopyWidget> createState() =>
+      _TelaDeAberturaCopyWidgetState();
 }
 
-class _TelaDeAberturaWidgetState extends State<TelaDeAberturaWidget>
+class _TelaDeAberturaCopyWidgetState extends State<TelaDeAberturaCopyWidget>
     with TickerProviderStateMixin {
-  late TelaDeAberturaModel _model;
+  late TelaDeAberturaCopyModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -28,17 +30,25 @@ class _TelaDeAberturaWidgetState extends State<TelaDeAberturaWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => TelaDeAberturaModel());
+    _model = createModel(context, () => TelaDeAberturaCopyModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await Future.delayed(
+        Duration(
+          milliseconds: 1800,
+        ),
+      );
+      if (Navigator.of(context).canPop()) {
+        context.pop();
+      }
       context.pushNamed(
         LoginWidget.routeName,
         extra: <String, dynamic>{
           '__transition_info__': TransitionInfo(
             hasTransition: true,
-            transitionType: PageTransitionType.topToBottom,
-            duration: Duration(milliseconds: 5000),
+            transitionType: PageTransitionType.fade,
+            duration: Duration(milliseconds: 260),
           ),
         },
       );
@@ -98,7 +108,7 @@ class _TelaDeAberturaWidgetState extends State<TelaDeAberturaWidget>
         effectsBuilder: () => [
           FadeEffect(
             curve: Curves.easeInOut,
-            delay: 50.0.ms,
+            delay: 500.0.ms,
             duration: 2000.0.ms,
             begin: 0.0,
             end: 1.0,
@@ -122,7 +132,7 @@ class _TelaDeAberturaWidgetState extends State<TelaDeAberturaWidget>
         effectsBuilder: () => [
           FadeEffect(
             curve: Curves.easeInOut,
-            delay: 500.0.ms,
+            delay: 50.0.ms,
             duration: 2000.0.ms,
             begin: 0.0,
             end: 1.0,
@@ -142,6 +152,30 @@ class _TelaDeAberturaWidgetState extends State<TelaDeAberturaWidget>
         ],
       ),
       'imageOnPageLoadAnimation9': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 50.0.ms,
+            duration: 2000.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'imageOnPageLoadAnimation10': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 50.0.ms,
+            duration: 2000.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'imageOnPageLoadAnimation11': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           FadeEffect(
@@ -178,9 +212,7 @@ class _TelaDeAberturaWidgetState extends State<TelaDeAberturaWidget>
           child: Visibility(
             visible: responsiveVisibility(
               context: context,
-              tablet: false,
-              tabletLandscape: false,
-              desktop: false,
+              phone: false,
             ),
             child: InkWell(
               splashColor: Colors.transparent,
@@ -202,43 +234,25 @@ class _TelaDeAberturaWidgetState extends State<TelaDeAberturaWidget>
               child: Stack(
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(0.0, -0.23),
+                    alignment: AlignmentDirectional(1.32, -1.15),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.asset(
-                        'assets/images/0f8abb6e-d674-4427-b550-dc8968deb550.png',
-                        width: 334.1,
-                        height: 170.0,
+                        'assets/images/599c4f3a-9035-4cc7-a849-8d7a20bd8877.png',
+                        width: MediaQuery.sizeOf(context).width * 0.3,
+                        height: MediaQuery.sizeOf(context).height * 0.24,
                         fit: BoxFit.cover,
                       ),
                     ).animateOnPageLoad(
                         animationsMap['imageOnPageLoadAnimation1']!),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(-1.87, -1.01),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.asset(
-                        'assets/images/599c4f3a-9035-4cc7-a849-8d7a20bd8877.png',
-                        width: 200.0,
-                        height: 200.0,
-                        fit: BoxFit.cover,
-                      ),
-                    ).animateOnPageLoad(
-                        animationsMap['imageOnPageLoadAnimation2']!),
-                  ),
-                  Align(
-                    alignment: AlignmentDirectional(2.0, 1.04),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.asset(
-                        'assets/images/599c4f3a-9035-4cc7-a849-8d7a20bd8877.png',
-                        width: 200.0,
-                        height: 200.0,
-                        fit: BoxFit.cover,
-                      ),
-                    ).animateOnPageLoad(
-                        animationsMap['imageOnPageLoadAnimation3']!),
+                    alignment: AlignmentDirectional(-1.32, -0.03),
+                    child: wrapWithModel(
+                      model: _model.paodequeijoModel,
+                      updateCallback: () => safeSetState(() {}),
+                      child: PaodequeijoWidget(),
+                    ),
                   ),
                   Align(
                     alignment: AlignmentDirectional(1.57, 0.28),
@@ -251,20 +265,20 @@ class _TelaDeAberturaWidgetState extends State<TelaDeAberturaWidget>
                         fit: BoxFit.cover,
                       ),
                     ).animateOnPageLoad(
-                        animationsMap['imageOnPageLoadAnimation4']!),
+                        animationsMap['imageOnPageLoadAnimation2']!),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(-1.28, 0.39),
+                    alignment: AlignmentDirectional(-0.76, 1.17),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.asset(
                         'assets/images/599c4f3a-9035-4cc7-a849-8d7a20bd8877.png',
-                        width: 143.5,
-                        height: 100.0,
+                        width: MediaQuery.sizeOf(context).width * 0.3,
+                        height: MediaQuery.sizeOf(context).height * 0.2,
                         fit: BoxFit.cover,
                       ),
                     ).animateOnPageLoad(
-                        animationsMap['imageOnPageLoadAnimation5']!),
+                        animationsMap['imageOnPageLoadAnimation3']!),
                   ),
                   Align(
                     alignment: AlignmentDirectional(1.53, -1.04),
@@ -277,46 +291,98 @@ class _TelaDeAberturaWidgetState extends State<TelaDeAberturaWidget>
                         fit: BoxFit.cover,
                       ),
                     ).animateOnPageLoad(
-                        animationsMap['imageOnPageLoadAnimation6']!),
+                        animationsMap['imageOnPageLoadAnimation4']!),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(0.07, -1.14),
+                    alignment: AlignmentDirectional(-0.63, -1.21),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.asset(
                         'assets/images/599c4f3a-9035-4cc7-a849-8d7a20bd8877.png',
-                        width: 143.5,
-                        height: 100.0,
+                        width: MediaQuery.sizeOf(context).width * 0.2,
+                        height: MediaQuery.sizeOf(context).height * 0.2,
+                        fit: BoxFit.cover,
+                      ),
+                    ).animateOnPageLoad(
+                        animationsMap['imageOnPageLoadAnimation5']!),
+                  ),
+                  Align(
+                    alignment: AlignmentDirectional(1.2, 0.52),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image.asset(
+                        'assets/images/599c4f3a-9035-4cc7-a849-8d7a20bd8877.png',
+                        width: MediaQuery.sizeOf(context).width * 0.2,
+                        height: MediaQuery.sizeOf(context).height * 0.2,
+                        fit: BoxFit.cover,
+                      ),
+                    ).animateOnPageLoad(
+                        animationsMap['imageOnPageLoadAnimation6']!),
+                  ),
+                  Align(
+                    alignment: AlignmentDirectional(0.06, -0.06),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image.asset(
+                        'assets/images/0f8abb6e-d674-4427-b550-dc8968deb550.png',
+                        width: MediaQuery.sizeOf(context).width * 0.5,
+                        height: MediaQuery.sizeOf(context).height * 0.2,
                         fit: BoxFit.cover,
                       ),
                     ).animateOnPageLoad(
                         animationsMap['imageOnPageLoadAnimation7']!),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(-1.72, 1.3),
+                    alignment: AlignmentDirectional(0.47, -0.77),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.asset(
                         'assets/images/599c4f3a-9035-4cc7-a849-8d7a20bd8877.png',
-                        width: 200.0,
-                        height: 200.0,
+                        width: MediaQuery.sizeOf(context).width * 0.1,
+                        height: MediaQuery.sizeOf(context).height * 0.1,
                         fit: BoxFit.cover,
                       ),
                     ).animateOnPageLoad(
                         animationsMap['imageOnPageLoadAnimation8']!),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(0.0, -0.23),
+                    alignment: AlignmentDirectional(-0.59, 0.44),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.asset(
-                        'assets/images/0f8abb6e-d674-4427-b550-dc8968deb550.png',
-                        width: 334.1,
-                        height: 170.0,
+                        'assets/images/599c4f3a-9035-4cc7-a849-8d7a20bd8877.png',
+                        width: MediaQuery.sizeOf(context).width * 0.1,
+                        height: MediaQuery.sizeOf(context).height * 0.1,
                         fit: BoxFit.cover,
                       ),
                     ).animateOnPageLoad(
                         animationsMap['imageOnPageLoadAnimation9']!),
+                  ),
+                  Align(
+                    alignment: AlignmentDirectional(0.61, 1.08),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image.asset(
+                        'assets/images/599c4f3a-9035-4cc7-a849-8d7a20bd8877.png',
+                        width: MediaQuery.sizeOf(context).width * 0.1,
+                        height: MediaQuery.sizeOf(context).height * 0.1,
+                        fit: BoxFit.cover,
+                      ),
+                    ).animateOnPageLoad(
+                        animationsMap['imageOnPageLoadAnimation10']!),
+                  ),
+                  Align(
+                    alignment: AlignmentDirectional(-1.03, -0.56),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image.asset(
+                        'assets/images/599c4f3a-9035-4cc7-a849-8d7a20bd8877.png',
+                        width: MediaQuery.sizeOf(context).width * 0.1,
+                        height: MediaQuery.sizeOf(context).height * 0.1,
+                        fit: BoxFit.cover,
+                      ),
+                    ).animateOnPageLoad(
+                        animationsMap['imageOnPageLoadAnimation11']!),
                   ),
                 ],
               ),

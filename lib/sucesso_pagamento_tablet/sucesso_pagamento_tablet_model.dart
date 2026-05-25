@@ -1,9 +1,10 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
-import 'sucesso_widget.dart' show SucessoWidget;
+import 'sucesso_pagamento_tablet_widget.dart' show SucessoPagamentoTabletWidget;
 import 'package:flutter/material.dart';
 
-class SucessoModel extends FlutterFlowModel<SucessoWidget> {
+class SucessoPagamentoTabletModel
+    extends FlutterFlowModel<SucessoPagamentoTabletWidget> {
   @override
   void initState(BuildContext context) {}
 

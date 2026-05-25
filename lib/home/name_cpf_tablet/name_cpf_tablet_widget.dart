@@ -3,26 +3,28 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'email_number_model.dart';
-export 'email_number_model.dart';
+import 'name_cpf_tablet_model.dart';
+export 'name_cpf_tablet_model.dart';
 
-class EmailNumberWidget extends StatefulWidget {
-  const EmailNumberWidget({super.key});
+class NameCpfTabletWidget extends StatefulWidget {
+  const NameCpfTabletWidget({super.key});
 
-  static String routeName = 'EmailNumber';
-  static String routePath = '/emailNumber';
+  static String routeName = 'NameCpfTablet';
+  static String routePath = '/nameCpfTablet';
 
   @override
-  State<EmailNumberWidget> createState() => _EmailNumberWidgetState();
+  State<NameCpfTabletWidget> createState() => _NameCpfTabletWidgetState();
 }
 
-class _EmailNumberWidgetState extends State<EmailNumberWidget>
+class _NameCpfTabletWidgetState extends State<NameCpfTabletWidget>
     with TickerProviderStateMixin {
-  late EmailNumberModel _model;
+  late NameCpfTabletModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -31,13 +33,13 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => EmailNumberModel());
+    _model = createModel(context, () => NameCpfTabletModel());
 
-    _model.emailAdressTextController ??= TextEditingController();
-    _model.emailAdressFocusNode ??= FocusNode();
+    _model.nomeAdressTextController ??= TextEditingController();
+    _model.nomeAdressFocusNode ??= FocusNode();
 
-    _model.telefoneTextController ??= TextEditingController();
-    _model.telefoneFocusNode ??= FocusNode();
+    _model.cPFAdressTextController ??= TextEditingController();
+    _model.cPFAdressFocusNode ??= FocusNode();
 
     animationsMap.addAll({
       'columnOnPageLoadAnimation': AnimationInfo(
@@ -89,15 +91,14 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
         body: SafeArea(
           top: true,
           child: Container(
+            width: double.infinity,
             decoration: BoxDecoration(
               color: Color(0xFFFFF1E9),
             ),
             child: Visibility(
               visible: responsiveVisibility(
                 context: context,
-                tablet: false,
-                tabletLandscape: false,
-                desktop: false,
+                phone: false,
               ),
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
@@ -110,7 +111,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                       children: [
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              10.0, 30.0, 0.0, 30.0),
+                              0.0, 30.0, 0.0, 30.0),
                           child: FlutterFlowIconButton(
                             borderRadius: 200.0,
                             buttonSize: 40.0,
@@ -127,17 +128,15 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                         ),
                       ],
                     ),
-                    Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.network(
-                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/sabor-local-n56292/assets/abf4sk9v8elb/Captura_de_tela_2026-03-25_203346-removebg-preview.png',
-                            fit: BoxFit.fitWidth,
-                          ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 100.0, 0.0, 0.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Image.network(
+                          'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/sabor-local-n56292/assets/abf4sk9v8elb/Captura_de_tela_2026-03-25_203346-removebg-preview.png',
+                          height: MediaQuery.sizeOf(context).height * 0.2,
+                          fit: BoxFit.fitWidth,
                         ),
                       ),
                     ),
@@ -145,7 +144,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                       alignment: AlignmentDirectional(0.0, 0.0),
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 40.0, 16.0, 16.0),
+                            16.0, 100.0, 16.0, 16.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -167,7 +166,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                             .fontStyle,
                                       ),
                                       color: Colors.black,
-                                      fontSize: 25.0,
+                                      fontSize: 30.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FlutterFlowTheme.of(context)
                                           .titleMedium
@@ -184,13 +183,13 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                               child: Container(
                                 width: double.infinity,
                                 child: TextFormField(
-                                  controller: _model.emailAdressTextController,
-                                  focusNode: _model.emailAdressFocusNode,
+                                  controller: _model.nomeAdressTextController,
+                                  focusNode: _model.nomeAdressFocusNode,
                                   autofocus: true,
                                   autofillHints: [AutofillHints.email],
                                   obscureText: false,
                                   decoration: InputDecoration(
-                                    labelText: 'Email',
+                                    labelText: 'Nome completo',
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .labelMedium
                                         .override(
@@ -254,7 +253,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                     fillColor: Color(0xFFFFF1E9),
                                     contentPadding: EdgeInsets.all(24.0),
                                     prefixIcon: Icon(
-                                      Icons.email_outlined,
+                                      Icons.person,
                                       color: Color(0xFF6B6B6B),
                                     ),
                                   ),
@@ -282,7 +281,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                       ),
                                   keyboardType: TextInputType.emailAddress,
                                   validator: _model
-                                      .emailAdressTextControllerValidator
+                                      .nomeAdressTextControllerValidator
                                       .asValidator(context),
                                 ),
                               ),
@@ -293,15 +292,15 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                               child: Container(
                                 width: double.infinity,
                                 child: TextFormField(
-                                  controller: _model.telefoneTextController,
-                                  focusNode: _model.telefoneFocusNode,
+                                  controller: _model.cPFAdressTextController,
+                                  focusNode: _model.cPFAdressFocusNode,
                                   autofocus: false,
                                   autofillHints: [
                                     AutofillHints.telephoneNumber
                                   ],
                                   obscureText: false,
                                   decoration: InputDecoration(
-                                    labelText: 'Telefone',
+                                    labelText: 'CPF',
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .labelMedium
                                         .override(
@@ -365,7 +364,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                     fillColor: Color(0xFFFFF1E9),
                                     contentPadding: EdgeInsets.all(24.0),
                                     prefixIcon: Icon(
-                                      Icons.phone,
+                                      FontAwesomeIcons.addressCard,
                                       color: Color(0xFF6B6B6B),
                                       size: 24.0,
                                     ),
@@ -383,7 +382,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                                   .bodyMedium
                                                   .fontStyle,
                                         ),
-                                        color: Color(0xFF0D0D0D),
+                                        color: Colors.black,
                                         letterSpacing: 0.0,
                                         fontWeight: FlutterFlowTheme.of(context)
                                             .bodyMedium
@@ -393,7 +392,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                             .fontStyle,
                                       ),
                                   validator: _model
-                                      .telefoneTextControllerValidator
+                                      .cPFAdressTextControllerValidator
                                       .asValidator(context),
                                 ),
                               ),
@@ -435,10 +434,10 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                     0.0, 0.0, 0.0, 16.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    if ((_model.emailAdressTextController
+                                    if ((_model.nomeAdressTextController
                                                     .text ==
                                                 '') &&
-                                        (_model.telefoneTextController
+                                        (_model.cPFAdressTextController
                                                     .text ==
                                                 '')) {
                                       await showDialog(
@@ -446,7 +445,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                         builder: (alertDialogContext) {
                                           return AlertDialog(
                                             title: Text(
-                                                'Preencha todos os campos'),
+                                                'Preencha todos os campos '),
                                             actions: [
                                               TextButton(
                                                 onPressed: () => Navigator.pop(
@@ -459,19 +458,62 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                       );
                                       return;
                                     } else {
-                                      FFAppState().email =
-                                          _model.emailAdressTextController.text;
-                                      FFAppState().telefone =
-                                          _model.telefoneTextController.text;
+                                      if (functions.validarCPF(_model
+                                          .cPFAdressTextController.text)) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'CPF válido',
+                                              style: TextStyle(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
+                                            ),
+                                            duration:
+                                                Duration(milliseconds: 4000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondary,
+                                          ),
+                                        );
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'CPF inválido',
+                                              style: TextStyle(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
+                                            ),
+                                            duration:
+                                                Duration(milliseconds: 4000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondary,
+                                          ),
+                                        );
+                                        return;
+                                      }
+
+                                      FFAppState().name =
+                                          _model.nomeAdressTextController.text;
+                                      FFAppState().CPF =
+                                          _model.cPFAdressTextController.text;
                                       safeSetState(() {});
 
-                                      context.pushNamed(SenhaWidget.routeName);
+                                      context.pushNamed(
+                                          EmailNumberWidget.routeName);
                                     }
                                   },
                                   text: 'Próximo',
                                   options: FFButtonOptions(
                                     width:
-                                        MediaQuery.sizeOf(context).width * 0.9,
+                                        MediaQuery.sizeOf(context).width * 0.98,
                                     height: 52.0,
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),

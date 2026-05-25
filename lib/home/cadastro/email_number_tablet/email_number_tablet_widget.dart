@@ -7,22 +7,23 @@ import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'email_number_model.dart';
-export 'email_number_model.dart';
+import 'email_number_tablet_model.dart';
+export 'email_number_tablet_model.dart';
 
-class EmailNumberWidget extends StatefulWidget {
-  const EmailNumberWidget({super.key});
+class EmailNumberTabletWidget extends StatefulWidget {
+  const EmailNumberTabletWidget({super.key});
 
-  static String routeName = 'EmailNumber';
-  static String routePath = '/emailNumber';
+  static String routeName = 'EmailNumberTablet';
+  static String routePath = '/emailNumberTablet';
 
   @override
-  State<EmailNumberWidget> createState() => _EmailNumberWidgetState();
+  State<EmailNumberTabletWidget> createState() =>
+      _EmailNumberTabletWidgetState();
 }
 
-class _EmailNumberWidgetState extends State<EmailNumberWidget>
+class _EmailNumberTabletWidgetState extends State<EmailNumberTabletWidget>
     with TickerProviderStateMixin {
-  late EmailNumberModel _model;
+  late EmailNumberTabletModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -31,7 +32,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => EmailNumberModel());
+    _model = createModel(context, () => EmailNumberTabletModel());
 
     _model.emailAdressTextController ??= TextEditingController();
     _model.emailAdressFocusNode ??= FocusNode();
@@ -95,9 +96,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
             child: Visibility(
               visible: responsiveVisibility(
                 context: context,
-                tablet: false,
-                tabletLandscape: false,
-                desktop: false,
+                phone: false,
               ),
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
@@ -131,11 +130,12 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                       alignment: AlignmentDirectional(0.0, 0.0),
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 80.0, 0.0, 0.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.network(
                             'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/sabor-local-n56292/assets/abf4sk9v8elb/Captura_de_tela_2026-03-25_203346-removebg-preview.png',
+                            height: MediaQuery.sizeOf(context).height * 0.2,
                             fit: BoxFit.fitWidth,
                           ),
                         ),
@@ -145,7 +145,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                       alignment: AlignmentDirectional(0.0, 0.0),
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 40.0, 16.0, 16.0),
+                            16.0, 200.0, 16.0, 16.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -432,7 +432,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                               alignment: AlignmentDirectional(0.0, 0.0),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 16.0),
+                                    0.0, 70.0, 0.0, 0.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
                                     if ((_model.emailAdressTextController
@@ -471,7 +471,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                   text: 'Próximo',
                                   options: FFButtonOptions(
                                     width:
-                                        MediaQuery.sizeOf(context).width * 0.9,
+                                        MediaQuery.sizeOf(context).width * 0.98,
                                     height: 52.0,
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),

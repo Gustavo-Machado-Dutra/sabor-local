@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -5,24 +6,27 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'email_number_model.dart';
-export 'email_number_model.dart';
+import 'package:provider/provider.dart';
+import 'cod_verificacaotablet_model.dart';
+export 'cod_verificacaotablet_model.dart';
 
-class EmailNumberWidget extends StatefulWidget {
-  const EmailNumberWidget({super.key});
+class CodVerificacaotabletWidget extends StatefulWidget {
+  const CodVerificacaotabletWidget({super.key});
 
-  static String routeName = 'EmailNumber';
-  static String routePath = '/emailNumber';
+  static String routeName = 'CodVerificacaotablet';
+  static String routePath = '/codVerificacaotablet';
 
   @override
-  State<EmailNumberWidget> createState() => _EmailNumberWidgetState();
+  State<CodVerificacaotabletWidget> createState() =>
+      _CodVerificacaotabletWidgetState();
 }
 
-class _EmailNumberWidgetState extends State<EmailNumberWidget>
+class _CodVerificacaotabletWidgetState extends State<CodVerificacaotabletWidget>
     with TickerProviderStateMixin {
-  late EmailNumberModel _model;
+  late CodVerificacaotabletModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -31,13 +35,55 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => EmailNumberModel());
+    _model = createModel(context, () => CodVerificacaotabletModel());
 
-    _model.emailAdressTextController ??= TextEditingController();
-    _model.emailAdressFocusNode ??= FocusNode();
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await Future.delayed(
+        Duration(
+          milliseconds: 1000,
+        ),
+      );
+      _model.apiResultmq8 = await EnviarEmailCall.call(
+        email: FFAppState().email,
+      );
 
-    _model.telefoneTextController ??= TextEditingController();
-    _model.telefoneFocusNode ??= FocusNode();
+      if ((_model.apiResultmq8?.succeeded ?? true)) {
+        await showDialog(
+          context: context,
+          builder: (alertDialogContext) {
+            return AlertDialog(
+              title: Text('código enviado'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(alertDialogContext),
+                  child: Text('Ok'),
+                ),
+              ],
+            );
+          },
+        );
+      } else {
+        await showDialog(
+          context: context,
+          builder: (alertDialogContext) {
+            return AlertDialog(
+              title: Text('ERRO'),
+              content: Text('Cógio não enviado'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(alertDialogContext),
+                  child: Text('Ok'),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    });
+
+    _model.codigoAdressTextController ??= TextEditingController();
+    _model.codigoAdressFocusNode ??= FocusNode();
 
     animationsMap.addAll({
       'columnOnPageLoadAnimation': AnimationInfo(
@@ -78,6 +124,8 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -85,7 +133,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color(0xFFF4F0EE),
+        backgroundColor: Color(0xFFFFF1E9),
         body: SafeArea(
           top: true,
           child: Container(
@@ -95,9 +143,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
             child: Visibility(
               visible: responsiveVisibility(
                 context: context,
-                tablet: false,
-                tabletLandscape: false,
-                desktop: false,
+                phone: false,
               ),
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
@@ -110,7 +156,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                       children: [
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              10.0, 30.0, 0.0, 30.0),
+                              0.0, 30.0, 0.0, 40.0),
                           child: FlutterFlowIconButton(
                             borderRadius: 200.0,
                             buttonSize: 40.0,
@@ -127,17 +173,15 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                         ),
                       ],
                     ),
-                    Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.network(
-                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/sabor-local-n56292/assets/abf4sk9v8elb/Captura_de_tela_2026-03-25_203346-removebg-preview.png',
-                            fit: BoxFit.fitWidth,
-                          ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Image.network(
+                          'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/sabor-local-n56292/assets/abf4sk9v8elb/Captura_de_tela_2026-03-25_203346-removebg-preview.png',
+                          height: MediaQuery.sizeOf(context).height * 0.2,
+                          fit: BoxFit.fitWidth,
                         ),
                       ),
                     ),
@@ -145,16 +189,16 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                       alignment: AlignmentDirectional(0.0, 0.0),
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 40.0, 16.0, 16.0),
+                            16.0, 200.0, 16.0, 16.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  5.0, 30.0, 0.0, 30.0),
+                                  5.0, 30.0, 0.0, 15.0),
                               child: Text(
-                                'Crie sua Conta',
+                                'Código de verificação',
                                 style: FlutterFlowTheme.of(context)
                                     .titleMedium
                                     .override(
@@ -167,7 +211,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                             .fontStyle,
                                       ),
                                       color: Colors.black,
-                                      fontSize: 25.0,
+                                      fontSize: 30.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FlutterFlowTheme.of(context)
                                           .titleMedium
@@ -180,17 +224,44 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                             ),
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
+                                  5.0, 0.0, 0.0, 30.0),
+                              child: Text(
+                                'Digite o código enviado em seu e-mail',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      font: GoogleFonts.inter(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
+                                      color: Colors.black,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 16.0),
                               child: Container(
                                 width: double.infinity,
                                 child: TextFormField(
-                                  controller: _model.emailAdressTextController,
-                                  focusNode: _model.emailAdressFocusNode,
+                                  controller: _model.codigoAdressTextController,
+                                  focusNode: _model.codigoAdressFocusNode,
                                   autofocus: true,
                                   autofillHints: [AutofillHints.email],
                                   obscureText: false,
                                   decoration: InputDecoration(
-                                    labelText: 'Email',
+                                    labelText: 'Código',
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .labelMedium
                                         .override(
@@ -282,118 +353,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                       ),
                                   keyboardType: TextInputType.emailAddress,
                                   validator: _model
-                                      .emailAdressTextControllerValidator
-                                      .asValidator(context),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 16.0),
-                              child: Container(
-                                width: double.infinity,
-                                child: TextFormField(
-                                  controller: _model.telefoneTextController,
-                                  focusNode: _model.telefoneFocusNode,
-                                  autofocus: false,
-                                  autofillHints: [
-                                    AutofillHints.telephoneNumber
-                                  ],
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    labelText: 'Telefone',
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium
-                                        .override(
-                                          font: GoogleFonts.inter(
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelMedium
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelMedium
-                                                    .fontStyle,
-                                          ),
-                                          color: Colors.black,
-                                          letterSpacing: 0.0,
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium
-                                                  .fontStyle,
-                                        ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius:
-                                          BorderRadius.circular(200.0),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Color(0xFFF56E0F),
-                                        width: 1.0,
-                                      ),
-                                      borderRadius:
-                                          BorderRadius.circular(200.0),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius:
-                                          BorderRadius.circular(200.0),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius:
-                                          BorderRadius.circular(200.0),
-                                    ),
-                                    filled: true,
-                                    fillColor: Color(0xFFFFF1E9),
-                                    contentPadding: EdgeInsets.all(24.0),
-                                    prefixIcon: Icon(
-                                      Icons.phone,
-                                      color: Color(0xFF6B6B6B),
-                                      size: 24.0,
-                                    ),
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        font: GoogleFonts.inter(
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontStyle,
-                                        ),
-                                        color: Color(0xFF0D0D0D),
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
-                                      ),
-                                  validator: _model
-                                      .telefoneTextControllerValidator
+                                      .codigoAdressTextControllerValidator
                                       .asValidator(context),
                                 ),
                               ),
@@ -432,21 +392,27 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                               alignment: AlignmentDirectional(0.0, 0.0),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 16.0),
+                                    0.0, 70.0, 0.0, 16.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    if ((_model.emailAdressTextController
-                                                    .text ==
-                                                '') &&
-                                        (_model.telefoneTextController
-                                                    .text ==
-                                                '')) {
+                                    _model.apiResultValidarOTP =
+                                        await ValidarOTPCall.call(
+                                      email: FFAppState().email,
+                                      codigoDigitado: _model
+                                          .codigoAdressTextController.text,
+                                    );
+
+                                    if ((_model
+                                            .apiResultValidarOTP?.succeeded ??
+                                        true)) {
+                                      context
+                                          .pushNamed(EnderecoWidget.routeName);
+                                    } else {
                                       await showDialog(
                                         context: context,
                                         builder: (alertDialogContext) {
                                           return AlertDialog(
-                                            title: Text(
-                                                'Preencha todos os campos'),
+                                            title: Text('Código Inválido'),
                                             actions: [
                                               TextButton(
                                                 onPressed: () => Navigator.pop(
@@ -457,21 +423,14 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                           );
                                         },
                                       );
-                                      return;
-                                    } else {
-                                      FFAppState().email =
-                                          _model.emailAdressTextController.text;
-                                      FFAppState().telefone =
-                                          _model.telefoneTextController.text;
-                                      safeSetState(() {});
-
-                                      context.pushNamed(SenhaWidget.routeName);
                                     }
+
+                                    safeSetState(() {});
                                   },
                                   text: 'Próximo',
                                   options: FFButtonOptions(
                                     width:
-                                        MediaQuery.sizeOf(context).width * 0.9,
+                                        MediaQuery.sizeOf(context).width * 0.98,
                                     height: 52.0,
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
@@ -510,6 +469,97 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
                                     borderRadius: BorderRadius.circular(200.0),
                                   ),
                                 ),
+                              ),
+                            ),
+                            Align(
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      _model.apiResultenvmail =
+                                          await EnviarEmailCall.call(
+                                        email: FFAppState().email,
+                                      );
+
+                                      if ((_model.apiResultenvmail?.succeeded ??
+                                          true)) {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text('código enviado'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('Ok'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      } else {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text('ERRO'),
+                                              content:
+                                                  Text('Cógio não enviado'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('Ok'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      }
+
+                                      safeSetState(() {});
+                                    },
+                                    child: Text(
+                                      'Reenviar código',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            font: GoogleFonts.inter(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
+                                            color: Color(0xFFF56E0F),
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                            decoration:
+                                                TextDecoration.underline,
+                                          ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],

@@ -107,7 +107,7 @@ double? calcularValorTotalCarrinho(List<CatagolodigitalStruct>? itens) {
   final lista = itens ?? const <CatagolodigitalStruct>[];
   double total = 0;
   for (final item in lista) {
-    total += item.preco;
+    total += item.preco * item.quantidade;
   }
   return total;
 }
