@@ -1,9 +1,9 @@
-import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -285,11 +285,7 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
                     .carrinhoVazio(FFAppState().carrinhoLocal.toList())!)
                   Builder(
                     builder: (context) {
-                      final item = functions
-                              .agruparItensCarrinho(
-                                  FFAppState().carrinhoLocal.toList())
-                              ?.toList() ??
-                          [];
+                      final item = FFAppState().carrinhoLocal.toList();
 
                       return ListView.separated(
                         padding: EdgeInsets.zero,
@@ -378,7 +374,7 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                           Text(
-                                            'Qtd: ${itemItem.quantidade.toString()}',
+                                            itemItem.quantidade.toString(),
                                             maxLines: 1,
                                             style: FlutterFlowTheme.of(context)
                                                 .bodySmall
@@ -504,8 +500,7 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
                                       ),
                                       onPressed: () async {
                                         FFAppState()
-                                            .removeProdutoFromCarrinhoLocalById(
-                                                itemItem.id);
+                                            .removeFromCarrinhoLocal(itemItem);
                                         safeSetState(() {});
                                       },
                                     ),
@@ -656,7 +651,9 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
                           ),
                         );
                       } else {
-                        if (loggedIn) {
+                        _model.usuarioCarrinhoSincronizado =
+                            await actions.sincronizarUsuarioLogadoXano();
+                        if (_model.usuarioCarrinhoSincronizado == true) {
                           FFAppState().valor_pagamento =
                               functions.calcularValorTotalCarrinho(
                                   FFAppState().carrinhoLocal.toList())!;

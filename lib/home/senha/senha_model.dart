@@ -1,4 +1,3 @@
-import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'senha_widget.dart' show SenhaWidget;
@@ -18,8 +17,8 @@ class SenhaModel extends FlutterFlowModel<SenhaWidget> {
   late bool confirmarSenhaAdressVisibility;
   String? Function(BuildContext, String?)?
       confirmarSenhaAdressTextControllerValidator;
-  // Stores action output result for [Backend Call - API (Signup and retrieve an authentication token)] action in Button widget.
-  ApiCallResponse? apiResultCadastro;
+  // Stores action output result for [Custom Action - CadastrarUsuarioXano] action in Button widget.
+  bool? cadastroXanoSalvo;
 
   @override
   void initState(BuildContext context) {

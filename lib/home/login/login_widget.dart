@@ -1,10 +1,8 @@
-import '/auth/custom_auth/auth_util.dart';
-import '/backend/api_requests/api_calls.dart';
-import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -432,65 +430,28 @@ class _LoginWidgetState extends State<LoginWidget>
                                   0.0, 0.0, 0.0, 16.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  Function() _navigate = () {};
-                                  _model.apiResultiLogin = await AuthenticationGroup
-                                      .loginAndRetrieveAnAuthenticationTokenCall
-                                      .call(
-                                    email: _model
-                                        .emailAddressLoginTextController.text,
-                                    password: _model
-                                        .senhaAdressLoginTextController.text,
+                                  _model.loginXanoSalvo =
+                                      await actions.loginXanoSalvarUsuario(
+                                    _model.emailAddressLoginTextController.text,
+                                    _model.senhaAdressLoginTextController.text,
                                   );
-
-                                  if ((_model.apiResultiLogin?.succeeded ??
-                                      true)) {
-                                    GoRouter.of(context).prepareAuthEvent();
-                                    await authManager.signIn(
-                                      authenticationToken: AuthenticationGroup
-                                          .loginAndRetrieveAnAuthenticationTokenCall
-                                          .token(
-                                        (_model.apiResultiLogin?.jsonBody ??
-                                            ''),
-                                      ),
-                                      userData: UserStruct(
-                                        name: AuthenticationGroup
-                                            .loginAndRetrieveAnAuthenticationTokenCall
-                                            .name(
-                                          (_model.apiResultiLogin?.jsonBody ??
-                                              ''),
-                                        ),
-                                        email: AuthenticationGroup
-                                            .loginAndRetrieveAnAuthenticationTokenCall
-                                            .email(
-                                          (_model.apiResultiLogin?.jsonBody ??
-                                              ''),
-                                        ),
-                                      ),
-                                    );
-                                    _navigate = () => context.goNamedAuth(
-                                        CatalogodigitalWidget.routeName,
-                                        context.mounted);
+                                  if (_model.loginXanoSalvo == true) {
+                                    if (Navigator.of(context).canPop()) {
+                                      context.pop();
+                                    }
+                                    context.pushNamed(
+                                        CatalogodigitalWidget.routeName);
                                   } else {
-                                    await showDialog(
-                                      context: context,
-                                      builder: (alertDialogContext) {
-                                        return AlertDialog(
-                                          title: Text('Erro'),
-                                          content:
-                                              Text('informações inválidas'),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext),
-                                              child: Text('Ok'),
-                                            ),
-                                          ],
-                                        );
-                                      },
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Informacoes invalidas.',
+                                          style: TextStyle(),
+                                        ),
+                                        duration: Duration(milliseconds: 4000),
+                                      ),
                                     );
                                   }
-
-                                  _navigate();
 
                                   safeSetState(() {});
                                 },

@@ -426,8 +426,11 @@ class _VerProdutoWidgetState extends State<VerProdutoWidget> {
                               size: 24.0,
                             ),
                             onPressed: () async {
-                              _model.quantidade = (_model.quantidade ?? 1) + 1;
-                              safeSetState(() {});
+                              if (functions
+                                  .slQuantidadeMaiorQueUm(_model.quantidade)!) {
+                                _model.quantidade = _model.quantidade! + 1;
+                                safeSetState(() {});
+                              }
                             },
                           ),
                         ),
@@ -439,12 +442,13 @@ class _VerProdutoWidgetState extends State<VerProdutoWidget> {
                         EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        final produtoCarrinho =
-                            CatagolodigitalStruct.fromSerializableMap(
-                          widget.catalogoID!.toSerializableMap(),
-                        );
-                        produtoCarrinho.quantidade = _model.quantidade ?? 1;
-                        FFAppState().addToCarrinhoLocal(produtoCarrinho);
+                        FFAppState().carrinhoLocal = functions
+                            .adicionarProdutoCarrinhoLocal(
+                                FFAppState().carrinhoLocal.toList(),
+                                widget.catalogoID,
+                                _model.quantidade)!
+                            .toList()
+                            .cast<CatagolodigitalStruct>();
                         safeSetState(() {});
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(

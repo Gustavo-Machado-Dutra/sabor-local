@@ -1,4 +1,3 @@
-import '/auth/custom_auth/auth_util.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -763,6 +762,10 @@ class _CatalogodigitalWidgetState extends State<CatalogodigitalWidget> {
                                               itemItem,
                                               ParamType.DataStruct,
                                             ),
+                                            'preco': serializeParam(
+                                              itemItem.preco,
+                                              ParamType.double,
+                                            ),
                                           }.withoutNulls,
                                         );
                                       },
@@ -942,12 +945,14 @@ class _CatalogodigitalWidgetState extends State<CatalogodigitalWidget> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
-                                  GoRouter.of(context).prepareAuthEvent();
-                                  await authManager.signOut();
-                                  GoRouter.of(context).clearRedirectLocation();
+                                  _model.logoutSaborLocalOk =
+                                      await actions.logoutSaborLocal();
+                                  if (Navigator.of(context).canPop()) {
+                                    context.pop();
+                                  }
+                                  context.pushNamed(LoginWidget.routeName);
 
-                                  context.pushNamedAuth(
-                                      LoginWidget.routeName, context.mounted);
+                                  safeSetState(() {});
                                 },
                                 child: Text(
                                   'Retornar Para Login',

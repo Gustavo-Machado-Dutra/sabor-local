@@ -18,6 +18,9 @@ Map<String, dynamic>? _slMap(dynamic value) {
   if (value is Map) {
     return value.map((key, value) => MapEntry(key.toString(), value));
   }
+  if (value is List && value.isNotEmpty) {
+    return _slMap(value.first);
+  }
   return null;
 }
 
@@ -28,8 +31,10 @@ int _slReadInt(Map<String, dynamic>? data, List<String> keys) {
     if (value is int) return value;
     if (value is num) return value.toInt();
     if (value is String) {
-      final parsed = int.tryParse(value);
-      if (parsed != null) return parsed;
+      final parsedInt = int.tryParse(value);
+      if (parsedInt != null) return parsedInt;
+      final parsedDouble = double.tryParse(value);
+      if (parsedDouble != null) return parsedDouble.toInt();
     }
   }
   return 0;
@@ -72,7 +77,22 @@ Future<bool> sincronizarUsuarioLogadoXano() async {
 
     final decoded = jsonDecode(response.body);
     final root = _slMap(decoded);
-    final user = _slMap(root?['user']) ?? root;
+    final data = _slMap(root?['data']);
+    final result = _slMap(root?['result']);
+    final user = _slMap(root?['user']) ??
+        _slMap(root?['usuario']) ??
+        _slMap(root?['record']) ??
+        _slMap(root?['me']) ??
+        _slMap(data?['user']) ??
+        _slMap(data?['usuario']) ??
+        _slMap(data?['record']) ??
+        _slMap(data?['me']) ??
+        data ??
+        _slMap(result?['user']) ??
+        _slMap(result?['usuario']) ??
+        _slMap(result?['record']) ??
+        result ??
+        root;
 
     final idUsuario = _slReadInt(user, [
       'id',
@@ -87,8 +107,6 @@ Future<bool> sincronizarUsuarioLogadoXano() async {
       return FFAppState().id_usuario > 0;
     }
 
-    FFAppState().id_usuario = idUsuario;
-
     final nome = _slReadString(user, ['name', 'nome', 'Name']);
     final email = _slReadString(user, ['email', 'Email']);
     final cpf = _slReadString(user, ['CPF', 'cpf', 'cpfCnpj', 'cpf_cnpj']);
@@ -99,10 +117,13 @@ Future<bool> sincronizarUsuarioLogadoXano() async {
       'whatsapp',
     ]);
 
-    if (nome.isNotEmpty) FFAppState().name = nome;
-    if (email.isNotEmpty) FFAppState().email = email;
-    if (cpf.isNotEmpty) FFAppState().CPF = cpf;
-    if (telefone.isNotEmpty) FFAppState().telefone = telefone;
+    FFAppState().update(() {
+      FFAppState().id_usuario = idUsuario;
+      if (nome.isNotEmpty) FFAppState().name = nome;
+      if (email.isNotEmpty) FFAppState().email = email;
+      if (cpf.isNotEmpty) FFAppState().CPF = cpf;
+      if (telefone.isNotEmpty) FFAppState().telefone = telefone;
+    });
 
     debugPrint('SaborLocal pagamento: usuario Xano sincronizado $idUsuario.');
     return true;

@@ -21,6 +21,18 @@ class FFAppState extends ChangeNotifier {
   Future initializePersistedState() async {
     secureStorage = FlutterSecureStorage();
     await _safeInitAsync(() async {
+      _email = await secureStorage.getString('ff_email') ?? _email;
+    });
+    await _safeInitAsync(() async {
+      _name = await secureStorage.getString('ff_name') ?? _name;
+    });
+    await _safeInitAsync(() async {
+      _CPF = await secureStorage.getString('ff_CPF') ?? _CPF;
+    });
+    await _safeInitAsync(() async {
+      _telefone = await secureStorage.getString('ff_telefone') ?? _telefone;
+    });
+    await _safeInitAsync(() async {
       _carrinhodecompras = (await secureStorage
                   .getStringList('ff_carrinhodecompras'))
               ?.map((x) {
@@ -116,28 +128,52 @@ class FFAppState extends ChangeNotifier {
 
   late FlutterSecureStorage secureStorage;
 
+  /// Email do usuario autenticado no Xano.
   String _email = '';
   String get email => _email;
   set email(String value) {
     _email = value;
+    secureStorage.setString('ff_email', value);
   }
 
+  void deleteEmail() {
+    secureStorage.delete(key: 'ff_email');
+  }
+
+  /// Nome do usuario autenticado no Xano.
   String _name = '';
   String get name => _name;
   set name(String value) {
     _name = value;
+    secureStorage.setString('ff_name', value);
   }
 
+  void deleteName() {
+    secureStorage.delete(key: 'ff_name');
+  }
+
+  /// CPF do usuario autenticado no Xano.
   String _CPF = '';
   String get CPF => _CPF;
   set CPF(String value) {
     _CPF = value;
+    secureStorage.setString('ff_CPF', value);
   }
 
+  void deleteCPF() {
+    secureStorage.delete(key: 'ff_CPF');
+  }
+
+  /// Telefone do usuario autenticado no Xano.
   String _telefone = '';
   String get telefone => _telefone;
   set telefone(String value) {
     _telefone = value;
+    secureStorage.setString('ff_telefone', value);
+  }
+
+  void deleteTelefone() {
+    secureStorage.delete(key: 'ff_telefone');
   }
 
   String _senha = '';
@@ -211,31 +247,13 @@ class FFAppState extends ChangeNotifier {
   }
 
   void addToCarrinhoLocal(CatagolodigitalStruct value) {
-    final existingIndex =
-        carrinhoLocal.indexWhere((item) => item.id == value.id);
-    final quantidadeAdicionar = value.quantidade <= 0 ? 1 : value.quantidade;
-
-    if (existingIndex >= 0) {
-      carrinhoLocal[existingIndex].incrementQuantidade(quantidadeAdicionar);
-    } else {
-      final item = CatagolodigitalStruct.fromSerializableMap(
-        value.toSerializableMap(),
-      );
-      item.quantidade = quantidadeAdicionar;
-      carrinhoLocal.add(item);
-    }
+    carrinhoLocal.add(value);
     secureStorage.setStringList(
         'ff_carrinhoLocal', _carrinhoLocal.map((x) => x.serialize()).toList());
   }
 
   void removeFromCarrinhoLocal(CatagolodigitalStruct value) {
     carrinhoLocal.remove(value);
-    secureStorage.setStringList(
-        'ff_carrinhoLocal', _carrinhoLocal.map((x) => x.serialize()).toList());
-  }
-
-  void removeProdutoFromCarrinhoLocalById(int produtoId) {
-    carrinhoLocal.removeWhere((item) => item.id == produtoId);
     secureStorage.setStringList(
         'ff_carrinhoLocal', _carrinhoLocal.map((x) => x.serialize()).toList());
   }

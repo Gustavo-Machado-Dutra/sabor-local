@@ -33,6 +33,8 @@ class CatalogodigitalModel extends FlutterFlowModel<CatalogodigitalWidget> {
   TextEditingController? buscarprodutosTextController;
   String? Function(BuildContext, String?)?
       buscarprodutosTextControllerValidator;
+  // Stores action output result for [Custom Action - LogoutSaborLocal] action in Text widget.
+  bool? logoutSaborLocalOk;
 
   @override
   void initState(BuildContext context) {}

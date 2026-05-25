@@ -7,12 +7,18 @@ import 'package:flutter/material.dart';
 class PagamentoModel extends FlutterFlowModel<PagamentoWidget> {
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Backend Call - API (criar_pagamento_asaas_fluxo_corrigido_xano)] action in Button widget.
-  ApiCallResponse? pagamentopixCorrigido;
-  // Stores action output result for [Backend Call - API (criar_pagamento_asaas_fluxo_corrigido_xano)] action in Button widget.
-  ApiCallResponse? pagamentoboletoCorrigido;
-  // Stores action output result for [Backend Call - API (criar_pagamento_asaas_fluxo_corrigido_xano)] action in Button widget.
-  ApiCallResponse? pagamentocreditcardCorrigido;
+  // Stores action output result for [Custom Action - SincronizarUsuarioLogadoXano] action in PayPixButton widget.
+  bool? pagamentoPixCriadoUsuarioSincronizado;
+  // Stores action output result for [Backend Call - API (criar_pagamento_asaas_xano)] action in PayPixButton widget.
+  ApiCallResponse? pagamentoPixCriado;
+  // Stores action output result for [Custom Action - SincronizarUsuarioLogadoXano] action in PayBoletoButton widget.
+  bool? pagamentoBoletoCriadoUsuarioSincronizado;
+  // Stores action output result for [Backend Call - API (criar_pagamento_asaas_xano)] action in PayBoletoButton widget.
+  ApiCallResponse? pagamentoBoletoCriado;
+  // Stores action output result for [Custom Action - SincronizarUsuarioLogadoXano] action in PayCardButton widget.
+  bool? pagamentoCartaoCriadoUsuarioSincronizado;
+  // Stores action output result for [Backend Call - API (criar_pagamento_asaas_xano)] action in PayCardButton widget.
+  ApiCallResponse? pagamentoCartaoCriado;
 
   @override
   void initState(BuildContext context) {}

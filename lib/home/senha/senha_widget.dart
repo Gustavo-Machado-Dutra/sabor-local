@@ -1,9 +1,9 @@
-import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -438,96 +438,32 @@ class _SenhaWidgetState extends State<SenhaWidget>
                                   0.0, 0.0, 0.0, 16.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  var _shouldSetState = false;
-                                  if ((_model.senhaAdressTextController
-                                                  .text ==
-                                              '') &&
-                                      (_model.confirmarSenhaAdressTextController
-                                                  .text ==
-                                              '')) {
-                                    await showDialog(
-                                      context: context,
-                                      builder: (alertDialogContext) {
-                                        return AlertDialog(
-                                          title:
-                                              Text('Preencha todos os campos'),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext),
-                                              child: Text('Ok'),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
-                                    if (_shouldSetState) safeSetState(() {});
-                                    return;
+                                  _model.cadastroXanoSalvo =
+                                      await actions.cadastrarUsuarioXano(
+                                    FFAppState().name,
+                                    FFAppState().email,
+                                    FFAppState().CPF,
+                                    FFAppState().telefone,
+                                    _model.senhaAdressTextController.text,
+                                    _model.confirmarSenhaAdressTextController
+                                        .text,
+                                  );
+                                  if (_model.cadastroXanoSalvo == true) {
+                                    context.pushNamed(
+                                        CodVerificacaoWidget.routeName);
                                   } else {
-                                    if (_model.senhaAdressTextController.text ==
-                                        _model
-                                            .confirmarSenhaAdressTextController
-                                            .text) {
-                                      _model.apiResultCadastro =
-                                          await AuthenticationGroup
-                                              .signupAndRetrieveAnAuthenticationTokenCall
-                                              .call(
-                                        name: FFAppState().name,
-                                        password: FFAppState().senha,
-                                        email: FFAppState().email,
-                                        cpf: FFAppState().CPF,
-                                        telefone: FFAppState().telefone,
-                                      );
-
-                                      _shouldSetState = true;
-                                      if ((_model
-                                              .apiResultCadastro?.succeeded ??
-                                          true)) {
-                                        context.pushNamed(
-                                            CodVerificacaoWidget.routeName);
-                                      } else {
-                                        await showDialog(
-                                          context: context,
-                                          builder: (alertDialogContext) {
-                                            return AlertDialog(
-                                              title: Text('erro'),
-                                              content: Text('cadastro user'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext),
-                                                  child: Text('Ok'),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                      }
-                                    } else {
-                                      await showDialog(
-                                        context: context,
-                                        builder: (alertDialogContext) {
-                                          return AlertDialog(
-                                            title: Text('Senha inválida'),
-                                            content: Text(
-                                                'Confirme sua senha corretamente'),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext),
-                                                child: Text('Ok'),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                      if (_shouldSetState) safeSetState(() {});
-                                      return;
-                                    }
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Nao foi possivel criar sua conta. Verifique os dados e tente novamente.',
+                                          style: TextStyle(),
+                                        ),
+                                        duration: Duration(milliseconds: 4000),
+                                      ),
+                                    );
                                   }
 
-                                  if (_shouldSetState) safeSetState(() {});
+                                  safeSetState(() {});
                                 },
                                 text: 'Próximo',
                                 options: FFButtonOptions(

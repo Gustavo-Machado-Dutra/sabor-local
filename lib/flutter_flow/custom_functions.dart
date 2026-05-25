@@ -107,34 +107,9 @@ double? calcularValorTotalCarrinho(List<CatagolodigitalStruct>? itens) {
   final lista = itens ?? const <CatagolodigitalStruct>[];
   double total = 0;
   for (final item in lista) {
-    total += item.preco * item.quantidade;
+    total += item.preco;
   }
   return total;
-}
-
-/// Agrupa produtos repetidos do carrinho pelo ID e soma as quantidades.
-List<CatagolodigitalStruct>? agruparItensCarrinho(
-  List<CatagolodigitalStruct>? itens,
-) {
-  final lista = itens ?? const <CatagolodigitalStruct>[];
-  final agrupados = <int, CatagolodigitalStruct>{};
-
-  for (final item in lista) {
-    final quantidade = item.quantidade <= 0 ? 1 : item.quantidade;
-    final existente = agrupados[item.id];
-
-    if (existente == null) {
-      final copia = CatagolodigitalStruct.fromSerializableMap(
-        item.toSerializableMap(),
-      );
-      copia.quantidade = quantidade;
-      agrupados[item.id] = copia;
-    } else {
-      existente.incrementQuantidade(quantidade);
-    }
-  }
-
-  return agrupados.values.toList();
 }
 
 /// Extrai o ID do pedido da resposta JSON do Xano.
@@ -229,4 +204,29 @@ bool? dadosPagamentoValidos(
 bool? pixQrCodeEhUrl(String? valor) {
   final texto = (valor ?? '').trim().toLowerCase();
   return texto.startsWith('http://') || texto.startsWith('https://');
+}
+
+List<CatagolodigitalStruct>? adicionarProdutoCarrinhoLocal(
+  List<CatagolodigitalStruct>? carrinho,
+  CatagolodigitalStruct? produto,
+  int? quantidade,
+) {
+  final lista = carrinho?.toList() ?? [];
+
+  if (produto == null) {
+    return lista;
+  }
+
+  final quantidadeAdicionar = (quantidade ?? 1) <= 0 ? 1 : quantidade!;
+
+  final index = lista.indexWhere((item) => item.id == produto.id);
+
+  if (index >= 0) {
+    lista[index].quantidade = lista[index].quantidade + quantidadeAdicionar;
+  } else {
+    produto.quantidade = quantidadeAdicionar;
+    lista.add(produto);
+  }
+
+  return lista;
 }

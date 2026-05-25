@@ -16,6 +16,8 @@ class CarrinhoModel extends FlutterFlowModel<CarrinhoWidget> {
   TextEditingController? cartObservationFieldTextController;
   String? Function(BuildContext, String?)?
       cartObservationFieldTextControllerValidator;
+  // Stores action output result for [Custom Action - SincronizarUsuarioLogadoXano] action in CheckoutButton widget.
+  bool? usuarioCarrinhoSincronizado;
   // Stores action output result for [Backend Call - API (mandarpedidos)] action in CheckoutButton widget.
   ApiCallResponse? pedidoCriadoPagamento;
 
