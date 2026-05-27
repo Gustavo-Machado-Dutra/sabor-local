@@ -1,4 +1,5 @@
 import '/backend/schema/structs/index.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
@@ -66,121 +67,229 @@ class _CatalogodigitalWidgetState extends State<CatalogodigitalWidget> {
         backgroundColor: Color(0xFFDF7D54),
         drawer: Drawer(
           elevation: 16.0,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  width: 371.7,
-                  height: 187.6,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFE1E0E0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Color(0xFFF2DDD3),
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: 371.7,
+                    height: 187.6,
+                    decoration: BoxDecoration(
+                      color: Color(0xFFF2DDD3),
+                    ),
+                    child: Align(
+                      alignment: AlignmentDirectional(0.0, 0.0),
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image.network(
+                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/sabor-local-n56292/assets/abf4sk9v8elb/Captura_de_tela_2026-03-25_203346-removebg-preview.png',
+                            width: 260.0,
+                            fit: BoxFit.fitWidth,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                  child: Padding(
+                  Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                    child: Container(
-                      width: 45.0,
-                      height: 45.0,
-                      clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                      ),
-                      child: Image.network(
-                        'https://picsum.photos/seed/958/600',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                  child: Text(
-                    'Danilo Chaves',
-                    style: FlutterFlowTheme.of(context).bodyLarge.override(
-                          font: GoogleFonts.inter(
-                            fontWeight: FontWeight.w900,
-                            fontStyle: FlutterFlowTheme.of(context)
-                                .bodyLarge
-                                .fontStyle,
-                          ),
-                          fontSize: 30.0,
-                          letterSpacing: 0.0,
-                          fontWeight: FontWeight.w900,
-                          fontStyle:
-                              FlutterFlowTheme.of(context).bodyLarge.fontStyle,
-                        ),
-                  ),
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(80.0, 0.0, 0.0, 0.0),
-                      child: Text(
-                        'email123@gmail.com',
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              font: GoogleFonts.inter(
-                                fontWeight: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .fontWeight,
-                                fontStyle: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .fontStyle,
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        Navigator.pop(context);
+
+                        context.pushNamed(CatalogodigitalWidget.routeName);
+                      },
+                      child: Container(
+                        height: 50.0,
+                        decoration: BoxDecoration(),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  20.0, 0.0, 0.0, 0.0),
+                              child: Icon(
+                                Icons.home,
+                                color: Colors.black,
+                                size: 24.0,
                               ),
-                              letterSpacing: 0.0,
-                              fontWeight: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .fontWeight,
-                              fontStyle: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .fontStyle,
                             ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  15.0, 0.0, 0.0, 0.0),
+                              child: Text(
+                                'Catálogo ',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyLarge
+                                    .override(
+                                      font: GoogleFonts.inter(
+                                        fontWeight: FontWeight.w900,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .fontStyle,
+                                      ),
+                                      color: Colors.black,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w900,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .fontStyle,
+                                    ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  132.0, 0.0, 0.0, 0.0),
+                              child: Icon(
+                                Icons.arrow_forward_ios,
+                                color: Colors.black,
+                                size: 24.0,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
-                        child: Text(
-                          'Adicionar conta',
-                          style:
-                              FlutterFlowTheme.of(context).bodyLarge.override(
+                  ),
+                  InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      Navigator.pop(context);
+
+                      context.pushNamed(CarrinhoWidget.routeName);
+                    },
+                    child: Container(
+                      height: 50.0,
+                      decoration: BoxDecoration(),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                20.0, 0.0, 0.0, 0.0),
+                            child: Icon(
+                              Icons.shopping_cart,
+                              color: Colors.black,
+                              size: 24.0,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                15.0, 0.0, 0.0, 0.0),
+                            child: Text(
+                              'Carrinho',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyLarge
+                                  .override(
                                     font: GoogleFonts.inter(
                                       fontWeight: FontWeight.w900,
                                       fontStyle: FlutterFlowTheme.of(context)
                                           .bodyLarge
                                           .fontStyle,
                                     ),
+                                    color: Colors.black,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w900,
                                     fontStyle: FlutterFlowTheme.of(context)
                                         .bodyLarge
                                         .fontStyle,
                                   ),
-                        ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                138.0, 0.0, 0.0, 0.0),
+                            child: Icon(
+                              Icons.arrow_forward_ios,
+                              color: Colors.black,
+                              size: 24.0,
+                            ),
+                          ),
+                        ],
                       ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            130.0, 0.0, 0.0, 0.0),
-                        child: Icon(
-                          Icons.arrow_forward_ios,
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          size: 24.0,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-              ],
+                  InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      Navigator.pop(context);
+                      await actions.logoutSaborLocal();
+
+                      context.pushNamed(TelaDeAberturaWidget.routeName);
+                    },
+                    child: Container(
+                      height: 50.0,
+                      decoration: BoxDecoration(),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                20.0, 0.0, 0.0, 0.0),
+                            child: Icon(
+                              Icons.logout_rounded,
+                              color: Colors.black,
+                              size: 24.0,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                15.0, 0.0, 0.0, 0.0),
+                            child: Text(
+                              'Logout',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyLarge
+                                  .override(
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w900,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .fontStyle,
+                                    ),
+                                    color: Colors.black,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w900,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyLarge
+                                        .fontStyle,
+                                  ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                153.0, 0.0, 0.0, 0.0),
+                            child: Icon(
+                              Icons.arrow_forward_ios,
+                              color: Colors.black,
+                              size: 24.0,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -216,6 +325,25 @@ class _CatalogodigitalWidgetState extends State<CatalogodigitalWidget> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  FlutterFlowIconButton(
+                                    borderRadius: 8.0,
+                                    buttonSize: 40.0,
+                                    fillColor:
+                                        FlutterFlowTheme.of(context).tertiary,
+                                    icon: Icon(
+                                      Icons.menu,
+                                      color: FlutterFlowTheme.of(context).info,
+                                      size: 24.0,
+                                    ),
+                                    onPressed: () async {
+                                      scaffoldKey.currentState!.openDrawer();
+                                    },
+                                  ),
+                                ],
+                              ),
                               TextFormField(
                                 controller: _model.buscarprodutosTextController,
                                 focusNode: _model.buscarprodutosFocusNode,

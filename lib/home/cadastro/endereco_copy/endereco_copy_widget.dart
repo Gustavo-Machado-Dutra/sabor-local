@@ -1,6 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -112,28 +111,6 @@ class _EnderecoCopyWidgetState extends State<EnderecoCopyWidget>
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 30.0, 0.0, 30.0),
-                          child: FlutterFlowIconButton(
-                            borderRadius: 200.0,
-                            buttonSize: 40.0,
-                            fillColor: Color(0xFFD9D9D9),
-                            icon: Icon(
-                              Icons.arrow_back,
-                              color: Colors.black,
-                              size: 24.0,
-                            ),
-                            onPressed: () async {
-                              context.safePop();
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
                     Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
@@ -150,7 +127,7 @@ class _EnderecoCopyWidgetState extends State<EnderecoCopyWidget>
                       alignment: AlignmentDirectional(0.0, 0.0),
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 70.0, 16.0, 16.0),
+                            16.0, 0.0, 16.0, 16.0),
                         child: SingleChildScrollView(
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
@@ -175,7 +152,7 @@ class _EnderecoCopyWidgetState extends State<EnderecoCopyWidget>
                                                   .fontStyle,
                                         ),
                                         color: Colors.black,
-                                        fontSize: 30.0,
+                                        fontSize: 29.0,
                                         letterSpacing: 0.0,
                                         fontWeight: FlutterFlowTheme.of(context)
                                             .titleMedium
@@ -941,81 +918,61 @@ class _EnderecoCopyWidgetState extends State<EnderecoCopyWidget>
                               ),
                               Align(
                                 alignment: AlignmentDirectional(0.0, 0.0),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 70.0, 0.0, 0.0),
-                                  child: FFButtonWidget(
-                                    onPressed: () async {
-                                      _model.apiResulEndereco =
-                                          await CadastrarEnderecoCall.call(
-                                        logradouro: _model
-                                            .logradouroAdressTextController
-                                            .text,
-                                        numero: _model
-                                            .numeroAdressTextController.text,
-                                        complemento: _model
-                                            .complementoAdressTextController
-                                            .text,
-                                        bairro: _model
-                                            .bairroAdressTextController.text,
-                                        referencia: _model
-                                            .referenciaAdressTextController
-                                            .text,
-                                        padrao: true,
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    _model.apiResulEndereco =
+                                        await CadastrarEnderecoCall.call(
+                                      logradouro: _model
+                                          .logradouroAdressTextController.text,
+                                      numero: _model
+                                          .numeroAdressTextController.text,
+                                      complemento: _model
+                                          .complementoAdressTextController.text,
+                                      bairro: _model
+                                          .bairroAdressTextController.text,
+                                      referencia: _model
+                                          .referenciaAdressTextController.text,
+                                      padrao: true,
+                                    );
+
+                                    if ((_model.apiResulEndereco?.succeeded ??
+                                        true)) {
+                                      context.pushNamed(
+                                          CatalogodigitalWidget.routeName);
+                                    } else {
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: Text('ERRO'),
+                                            content: Text(
+                                                'informações de endereço inválidas'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: Text('Ok'),
+                                              ),
+                                            ],
+                                          );
+                                        },
                                       );
+                                    }
 
-                                      if ((_model.apiResulEndereco?.succeeded ??
-                                          true)) {
-                                        context.pushNamed(
-                                            CatalogodigitalWidget.routeName);
-                                      } else {
-                                        await showDialog(
-                                          context: context,
-                                          builder: (alertDialogContext) {
-                                            return AlertDialog(
-                                              title: Text('ERRO'),
-                                              content: Text(
-                                                  'informações de endereço inválidas'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext),
-                                                  child: Text('Ok'),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                      }
-
-                                      safeSetState(() {});
-                                    },
-                                    text: 'Próximo',
-                                    options: FFButtonOptions(
-                                      width: MediaQuery.sizeOf(context).width *
-                                          0.98,
-                                      height: 40.0,
-                                      padding: EdgeInsets.all(20.0),
-                                      iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 0.0, 0.0),
-                                      color: Color(0xFFF56E0F),
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .override(
-                                            font: GoogleFonts.interTight(
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .fontStyle,
-                                            ),
-                                            color: Colors.white,
-                                            letterSpacing: 0.0,
+                                    safeSetState(() {});
+                                  },
+                                  text: 'Próximo',
+                                  options: FFButtonOptions(
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 0.98,
+                                    padding: EdgeInsets.all(24.0),
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: Color(0xFFF56E0F),
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          font: GoogleFonts.interTight(
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
                                                     .titleSmall
@@ -1025,14 +982,23 @@ class _EnderecoCopyWidgetState extends State<EnderecoCopyWidget>
                                                     .titleSmall
                                                     .fontStyle,
                                           ),
-                                      elevation: 3.0,
-                                      borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius:
-                                          BorderRadius.circular(200.0),
+                                          color: Colors.white,
+                                          letterSpacing: 0.0,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .fontStyle,
+                                        ),
+                                    elevation: 3.0,
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1.0,
                                     ),
+                                    borderRadius: BorderRadius.circular(200.0),
                                   ),
                                 ),
                               ),

@@ -152,29 +152,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: Categoria1Widget.routeName,
-          path: Categoria1Widget.routePath,
-          builder: (context, params) => Categoria1Widget(),
-        ),
-        FFRoute(
           name: EnderecoCopyWidget.routeName,
           path: EnderecoCopyWidget.routePath,
           builder: (context, params) => EnderecoCopyWidget(),
-        ),
-        FFRoute(
-          name: Categoria2Widget.routeName,
-          path: Categoria2Widget.routePath,
-          builder: (context, params) => Categoria2Widget(),
-        ),
-        FFRoute(
-          name: Categoria3Widget.routeName,
-          path: Categoria3Widget.routePath,
-          builder: (context, params) => Categoria3Widget(),
-        ),
-        FFRoute(
-          name: Categoria4Widget.routeName,
-          path: Categoria4Widget.routePath,
-          builder: (context, params) => Categoria4Widget(),
         ),
         FFRoute(
           name: CarrinhoWidget.routeName,
@@ -213,9 +193,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => PagamentoPendenteWidget(),
         ),
         FFRoute(
-          name: TelaDeAberturaCopyWidget.routeName,
-          path: TelaDeAberturaCopyWidget.routePath,
-          builder: (context, params) => TelaDeAberturaCopyWidget(),
+          name: TelaDeAberturaTabletWidget.routeName,
+          path: TelaDeAberturaTabletWidget.routePath,
+          builder: (context, params) => TelaDeAberturaTabletWidget(),
         ),
         FFRoute(
           name: CodVerificacaotabletWidget.routeName,
@@ -236,11 +216,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: SucessoTabletWidget.routeName,
           path: SucessoTabletWidget.routePath,
           builder: (context, params) => SucessoTabletWidget(),
-        ),
-        FFRoute(
-          name: SucessologinTabletWidget.routeName,
-          path: SucessologinTabletWidget.routePath,
-          builder: (context, params) => SucessologinTabletWidget(),
         ),
         FFRoute(
           name: LoginTabletWidget.routeName,
@@ -272,10 +247,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               : CatalogodigitalTabletWidget(),
         ),
         FFRoute(
-          name: VerProdutoTabletWidget.routeName,
-          path: VerProdutoTabletWidget.routePath,
+          name: SucessoLoginnTabletWidget.routeName,
+          path: SucessoLoginnTabletWidget.routePath,
+          builder: (context, params) => SucessoLoginnTabletWidget(),
+        ),
+        FFRoute(
+          name: VerProdutotabletWidget.routeName,
+          path: VerProdutotabletWidget.routePath,
           requireAuth: true,
-          builder: (context, params) => VerProdutoTabletWidget(
+          builder: (context, params) => VerProdutotabletWidget(
             catalogoID: params.getParam(
               'catalogoID',
               ParamType.DataStruct,

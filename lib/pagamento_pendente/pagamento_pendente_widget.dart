@@ -66,6 +66,7 @@ class _PagamentoPendenteWidgetState extends State<PagamentoPendenteWidget> {
                     fontStyle:
                         FlutterFlowTheme.of(context).titleLarge.fontStyle,
                   ),
+                  color: Color(0xFF1C1D1E),
                   fontSize: 22.0,
                   letterSpacing: 0.0,
                   fontWeight: FontWeight.w600,

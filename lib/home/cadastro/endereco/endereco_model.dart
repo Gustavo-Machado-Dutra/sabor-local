@@ -1,5 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
-import '/components/volta_widget.dart';
+import '/component/enderecotablet/enderecotablet_widget.dart';
+import '/component/volta/volta_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'endereco_widget.dart' show EnderecoWidget;
@@ -41,10 +42,13 @@ class EnderecoModel extends FlutterFlowModel<EnderecoWidget> {
   TextEditingController? referenciaAdressTextController;
   String? Function(BuildContext, String?)?
       referenciaAdressTextControllerValidator;
+  // Model for enderecotablet component.
+  late EnderecotabletModel enderecotabletModel;
 
   @override
   void initState(BuildContext context) {
     voltaModel = createModel(context, () => VoltaModel());
+    enderecotabletModel = createModel(context, () => EnderecotabletModel());
   }
 
   @override
@@ -67,5 +71,7 @@ class EnderecoModel extends FlutterFlowModel<EnderecoWidget> {
 
     referenciaAdressFocusNode?.dispose();
     referenciaAdressTextController?.dispose();
+
+    enderecotabletModel.dispose();
   }
 }

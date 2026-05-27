@@ -1,4 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
+import '/component/codverificacaotablet/codverificacaotablet_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'cod_verificacao_widget.dart' show CodVerificacaoWidget;
@@ -17,13 +18,20 @@ class CodVerificacaoModel extends FlutterFlowModel<CodVerificacaoWidget> {
   ApiCallResponse? apiResultValidarOTP;
   // Stores action output result for [Backend Call - API (EnviarEmail)] action in Text widget.
   ApiCallResponse? apiResultenvmail;
+  // Model for codverificacaotablet component.
+  late CodverificacaotabletModel codverificacaotabletModel;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    codverificacaotabletModel =
+        createModel(context, () => CodverificacaotabletModel());
+  }
 
   @override
   void dispose() {
     codigoAdressFocusNode?.dispose();
     codigoAdressTextController?.dispose();
+
+    codverificacaotabletModel.dispose();
   }
 }

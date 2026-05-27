@@ -1,3 +1,4 @@
+import '/component/namecpftablet/namecpftablet_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'name_cpf_widget.dart' show NameCpfWidget;
@@ -14,9 +15,13 @@ class NameCpfModel extends FlutterFlowModel<NameCpfWidget> {
   FocusNode? cPFAdressFocusNode;
   TextEditingController? cPFAdressTextController;
   String? Function(BuildContext, String?)? cPFAdressTextControllerValidator;
+  // Model for namecpftablet component.
+  late NamecpftabletModel namecpftabletModel;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    namecpftabletModel = createModel(context, () => NamecpftabletModel());
+  }
 
   @override
   void dispose() {
@@ -25,5 +30,7 @@ class NameCpfModel extends FlutterFlowModel<NameCpfWidget> {
 
     cPFAdressFocusNode?.dispose();
     cPFAdressTextController?.dispose();
+
+    namecpftabletModel.dispose();
   }
 }

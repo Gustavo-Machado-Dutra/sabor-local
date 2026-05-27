@@ -1,3 +1,4 @@
+import '/component/logintablet/logintablet_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'login_widget.dart' show LoginWidget;
@@ -19,10 +20,13 @@ class LoginModel extends FlutterFlowModel<LoginWidget> {
       senhaAdressLoginTextControllerValidator;
   // Stores action output result for [Custom Action - LoginXanoSalvarUsuario] action in Button widget.
   bool? loginXanoSalvo;
+  // Model for logintablet component.
+  late LogintabletModel logintabletModel;
 
   @override
   void initState(BuildContext context) {
     senhaAdressLoginVisibility = false;
+    logintabletModel = createModel(context, () => LogintabletModel());
   }
 
   @override
@@ -32,5 +36,7 @@ class LoginModel extends FlutterFlowModel<LoginWidget> {
 
     senhaAdressLoginFocusNode?.dispose();
     senhaAdressLoginTextController?.dispose();
+
+    logintabletModel.dispose();
   }
 }

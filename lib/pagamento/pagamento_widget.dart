@@ -102,25 +102,36 @@ class _PagamentoWidgetState extends State<PagamentoWidget> {
                               FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                         ),
                   ),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Total do pedido',
-                            style: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  font: GoogleFonts.inter(
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Total do pedido',
+                              style: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .fontStyle,
+                                    ),
+                                    letterSpacing: 0.0,
                                     fontWeight: FlutterFlowTheme.of(context)
                                         .labelMedium
                                         .fontWeight,
@@ -128,22 +139,22 @@ class _PagamentoWidgetState extends State<PagamentoWidget> {
                                         .labelMedium
                                         .fontStyle,
                                   ),
-                                  letterSpacing: 0.0,
-                                  fontWeight: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .fontWeight,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .fontStyle,
-                                ),
-                          ),
-                          Text(
-                            functions.formatarPrecoCarrinho(
-                                FFAppState().valor_pagamento)!,
-                            style: FlutterFlowTheme.of(context)
-                                .titleLarge
-                                .override(
-                                  font: GoogleFonts.interTight(
+                            ),
+                            Text(
+                              functions.formatarPrecoCarrinho(
+                                  FFAppState().valor_pagamento)!,
+                              style: FlutterFlowTheme.of(context)
+                                  .titleLarge
+                                  .override(
+                                    font: GoogleFonts.interTight(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .titleLarge
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleLarge
+                                          .fontStyle,
+                                    ),
+                                    letterSpacing: 0.0,
                                     fontWeight: FlutterFlowTheme.of(context)
                                         .titleLarge
                                         .fontWeight,
@@ -151,30 +162,13 @@ class _PagamentoWidgetState extends State<PagamentoWidget> {
                                         .titleLarge
                                         .fontStyle,
                                   ),
-                                  letterSpacing: 0.0,
-                                  fontWeight: FlutterFlowTheme.of(context)
-                                      .titleLarge
-                                      .fontWeight,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .titleLarge
-                                      .fontStyle,
-                                ),
-                          ),
-                          Text(
-                            'Status: Aguardando pagamento',
-                            style:
-                                FlutterFlowTheme.of(context).bodySmall.override(
-                                      font: GoogleFonts.inter(
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .bodySmall
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodySmall
-                                            .fontStyle,
-                                      ),
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      letterSpacing: 0.0,
+                            ),
+                            Text(
+                              'Status: Aguardando pagamento',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodySmall
+                                  .override(
+                                    font: GoogleFonts.inter(
                                       fontWeight: FlutterFlowTheme.of(context)
                                           .bodySmall
                                           .fontWeight,
@@ -182,14 +176,25 @@ class _PagamentoWidgetState extends State<PagamentoWidget> {
                                           .bodySmall
                                           .fontStyle,
                                     ),
-                          ),
-                        ].divide(SizedBox(height: 8.0)),
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodySmall
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodySmall
+                                        .fontStyle,
+                                  ),
+                            ),
+                          ].divide(SizedBox(height: 8.0)),
+                        ),
                       ),
                     ),
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(18.0, 14.0, 18.0, 14.0),
+                        EdgeInsetsDirectional.fromSTEB(18.0, 100.0, 18.0, 14.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         _model.pagamentoPixCriadoUsuarioSincronizado =
@@ -353,7 +358,7 @@ class _PagamentoWidgetState extends State<PagamentoWidget> {
                         iconPadding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconColor: Colors.white,
-                        color: FlutterFlowTheme.of(context).primary,
+                        color: FlutterFlowTheme.of(context).tertiary,
                         textStyle: TextStyle(
                           color: Colors.white,
                         ),
@@ -527,7 +532,7 @@ class _PagamentoWidgetState extends State<PagamentoWidget> {
                         iconPadding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconColor: Colors.white,
-                        color: FlutterFlowTheme.of(context).primary,
+                        color: FlutterFlowTheme.of(context).tertiary,
                         textStyle: TextStyle(
                           color: Colors.white,
                         ),
@@ -715,7 +720,7 @@ class _PagamentoWidgetState extends State<PagamentoWidget> {
                         iconPadding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconColor: Colors.white,
-                        color: FlutterFlowTheme.of(context).primary,
+                        color: FlutterFlowTheme.of(context).tertiary,
                         textStyle: TextStyle(
                           color: Colors.white,
                         ),
@@ -723,31 +728,35 @@ class _PagamentoWidgetState extends State<PagamentoWidget> {
                       ),
                     ),
                   ),
-                  FFButtonWidget(
-                    onPressed: () async {
-                      context.pushNamed(CarrinhoWidget.routeName);
-                    },
-                    text: 'Voltar ao carrinho',
-                    icon: Icon(
-                      Icons.arrow_back,
-                      size: 20.0,
-                    ),
-                    options: FFButtonOptions(
-                      width: double.infinity,
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      iconColor: FlutterFlowTheme.of(context).primary,
-                      color: Colors.transparent,
-                      textStyle: TextStyle(
-                        color: FlutterFlowTheme.of(context).primary,
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 100.0, 0.0, 0.0),
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        context.pushNamed(CarrinhoWidget.routeName);
+                      },
+                      text: 'Voltar ao carrinho',
+                      icon: Icon(
+                        Icons.arrow_back,
+                        size: 20.0,
                       ),
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).primary,
-                        width: 1.0,
+                      options: FFButtonOptions(
+                        width: double.infinity,
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        iconPadding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        iconColor: FlutterFlowTheme.of(context).tertiary,
+                        color: Color(0xF2F6F6F6),
+                        textStyle: TextStyle(
+                          color: FlutterFlowTheme.of(context).tertiary,
+                        ),
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).tertiary,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
-                      borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
                 ].divide(SizedBox(height: 16.0)),

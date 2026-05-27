@@ -176,7 +176,7 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.home_outlined,
+              Icons.tablet_android_rounded,
               size: 24.0,
             ),
             label: 'Home',

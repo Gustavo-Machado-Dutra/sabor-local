@@ -1,5 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
-import '/components/volta_widget.dart';
+import '/component/enderecotablet/enderecotablet_widget.dart';
+import '/component/volta/volta_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -69,24 +70,17 @@ class _EnderecoWidgetState extends State<EnderecoWidget> {
           top: true,
           child: Stack(
             children: [
-              if (responsiveVisibility(
-                context: context,
-                tablet: false,
-                tabletLandscape: false,
-                desktop: false,
-              ))
-                Align(
-                  alignment: AlignmentDirectional(-1.0, -1.0),
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
-                    child: wrapWithModel(
-                      model: _model.voltaModel,
-                      updateCallback: () => safeSetState(() {}),
-                      child: VoltaWidget(),
-                    ),
+              Align(
+                alignment: AlignmentDirectional(-1.0, -1.0),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                  child: wrapWithModel(
+                    model: _model.voltaModel,
+                    updateCallback: () => safeSetState(() {}),
+                    child: VoltaWidget(),
                   ),
                 ),
+              ),
               if (responsiveVisibility(
                 context: context,
                 tablet: false,
@@ -186,6 +180,7 @@ class _EnderecoWidgetState extends State<EnderecoWidget> {
                                         .headlineLarge
                                         .fontStyle,
                                   ),
+                                  color: Color(0xFF1F2022),
                                   letterSpacing: 0.0,
                                   fontWeight: FlutterFlowTheme.of(context)
                                       .headlineLarge
@@ -505,7 +500,17 @@ class _EnderecoWidgetState extends State<EnderecoWidget> {
 
                                 if ((_model.apiResulEndereco?.succeeded ??
                                     true)) {
-                                  context.pushNamed(SucessoWidget.routeName);
+                                  context.pushNamed(
+                                    LoginWidget.routeName,
+                                    extra: <String, dynamic>{
+                                      '__transition_info__': TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType:
+                                            PageTransitionType.topToBottom,
+                                        duration: Duration(milliseconds: 3000),
+                                      ),
+                                    },
+                                  );
                                 } else {
                                   await showDialog(
                                     context: context,
@@ -1174,6 +1179,11 @@ class _EnderecoWidgetState extends State<EnderecoWidget> {
                     ),
                   ),
                 ),
+              wrapWithModel(
+                model: _model.enderecotabletModel,
+                updateCallback: () => safeSetState(() {}),
+                child: EnderecotabletWidget(),
+              ),
             ],
           ),
         ),

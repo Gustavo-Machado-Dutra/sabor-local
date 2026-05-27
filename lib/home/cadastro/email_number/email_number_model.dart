@@ -1,3 +1,4 @@
+import '/component/emailnumbertablet/emailnumbertablet_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'email_number_widget.dart' show EmailNumberWidget;
@@ -14,9 +15,14 @@ class EmailNumberModel extends FlutterFlowModel<EmailNumberWidget> {
   FocusNode? telefoneFocusNode;
   TextEditingController? telefoneTextController;
   String? Function(BuildContext, String?)? telefoneTextControllerValidator;
+  // Model for emailnumbertablet component.
+  late EmailnumbertabletModel emailnumbertabletModel;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    emailnumbertabletModel =
+        createModel(context, () => EmailnumbertabletModel());
+  }
 
   @override
   void dispose() {
@@ -25,5 +31,7 @@ class EmailNumberModel extends FlutterFlowModel<EmailNumberWidget> {
 
     telefoneFocusNode?.dispose();
     telefoneTextController?.dispose();
+
+    emailnumbertabletModel.dispose();
   }
 }

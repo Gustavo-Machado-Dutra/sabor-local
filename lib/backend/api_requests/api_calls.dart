@@ -720,6 +720,62 @@ class CatalogodigitalCall {
           .toList();
 }
 
+class CadastraclienteeCall {
+  static Future<ApiCallResponse> call({
+    String? name = '',
+    String? email = '',
+    String? password = '',
+    String? celular = '',
+    String? cpf = '',
+  }) async {
+    final ffApiRequestBody = '''
+{"name":"${escapeStringForJson(name)}",
+"email":"${escapeStringForJson(email)}",
+"password":"${escapeStringForJson(password)}",
+"celular":"${escapeStringForJson(celular)}",
+"cpf":"${escapeStringForJson(cpf)}"}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'cadastraclientee',
+      apiUrl: 'https://x8ki-letl-twmt.n7.xano.io/api:-sZQZmVa/cadastra_cliente',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static String? username(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.user.name''',
+      ));
+  static String? useremail(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.user.email''',
+      ));
+  static String? clientename(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$.cliente.name''',
+      ));
+  static String? clientecelular(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$.cliente.celular''',
+      ));
+  static String? clientecpf(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$.cliente.cpf''',
+      ));
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

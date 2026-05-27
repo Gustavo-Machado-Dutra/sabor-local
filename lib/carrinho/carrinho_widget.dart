@@ -55,7 +55,7 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color(0xFFF4F0EE),
+        backgroundColor: Color(0xFFFDE5D9),
         appBar: PreferredSize(
           preferredSize:
               Size.fromHeight(MediaQuery.sizeOf(context).height * 0.09),
@@ -70,7 +70,10 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
-                  context.safePop();
+                  if (Navigator.of(context).canPop()) {
+                    context.pop();
+                  }
+                  context.pushNamed(CatalogodigitalWidget.routeName);
                 },
                 child: Icon(
                   Icons.chevron_left_rounded,

@@ -1,3 +1,4 @@
+import '/component/senhatablet/senhatablet_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'senha_widget.dart' show SenhaWidget;
@@ -19,11 +20,14 @@ class SenhaModel extends FlutterFlowModel<SenhaWidget> {
       confirmarSenhaAdressTextControllerValidator;
   // Stores action output result for [Custom Action - CadastrarUsuarioXano] action in Button widget.
   bool? cadastroXanoSalvo;
+  // Model for senhatablet component.
+  late SenhatabletModel senhatabletModel;
 
   @override
   void initState(BuildContext context) {
     senhaAdressVisibility = false;
     confirmarSenhaAdressVisibility = false;
+    senhatabletModel = createModel(context, () => SenhatabletModel());
   }
 
   @override
@@ -33,5 +37,7 @@ class SenhaModel extends FlutterFlowModel<SenhaWidget> {
 
     confirmarSenhaAdressFocusNode?.dispose();
     confirmarSenhaAdressTextController?.dispose();
+
+    senhatabletModel.dispose();
   }
 }
