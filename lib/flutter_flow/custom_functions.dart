@@ -230,3 +230,30 @@ List<CatagolodigitalStruct>? adicionarProdutoCarrinhoLocal(
 
   return lista;
 }
+
+/// Ajusta a quantidade de um produto no carrinho local.
+List<CatagolodigitalStruct>? ajustarQuantidadeCarrinhoLocal(
+  List<CatagolodigitalStruct>? carrinho,
+  CatagolodigitalStruct? produto,
+  int? delta,
+) {
+  final lista = carrinho?.toList() ?? [];
+
+  if (produto == null || delta == null || delta == 0) {
+    return lista;
+  }
+
+  final index = lista.indexWhere((item) => item.id == produto.id);
+  if (index < 0) {
+    return lista;
+  }
+
+  final novaQuantidade = lista[index].quantidade + delta;
+  if (novaQuantidade <= 0) {
+    lista.removeAt(index);
+  } else {
+    lista[index].quantidade = novaQuantidade;
+  }
+
+  return lista;
+}

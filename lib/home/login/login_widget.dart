@@ -8,6 +8,7 @@ import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'login_model.dart';
 export 'login_model.dart';
 
@@ -79,6 +80,8 @@ class _LoginWidgetState extends State<LoginWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -457,8 +460,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                             builder: (alertDialogContext) {
                                               return AlertDialog(
                                                 title: Text('ERRO'),
-                                                content: Text(
-                                                    'Informações inválidas'),
+                                                content: Text(FFAppState()
+                                                    .loginMensagemErro),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () =>

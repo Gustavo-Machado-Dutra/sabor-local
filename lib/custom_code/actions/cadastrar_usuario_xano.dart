@@ -123,6 +123,97 @@ Future<Map<String, dynamic>?> _slCadastroLogin(
   return _slCadastroMap(jsonDecode(response.body));
 }
 
+Future<Map<String, dynamic>?> _slCadastroFetchClienteByUserId(
+    int userId) async {
+  if (userId <= 0) return null;
+
+  var page = 1;
+  while (page <= 10) {
+    final response = await http.get(
+      Uri.parse(
+        'https://x8ki-letl-twmt.n7.xano.io/api:YkYaWxLt/cliente?page=$page',
+      ),
+    );
+    debugPrint(
+      'SaborLocal cadastro: cliente page $page status ${response.statusCode}.',
+    );
+    if (response.statusCode < 200 || response.statusCode >= 300) {
+      return null;
+    }
+
+    final decoded = jsonDecode(response.body);
+    final root = _slCadastroMap(decoded);
+    final items = decoded is List ? decoded : root?['items'];
+    if (items is List) {
+      for (final item in items) {
+        final cliente = _slCadastroMap(item);
+        if (_slCadastroInt(cliente, ['user_id', 'usuario_id', 'id_usuario']) ==
+            userId) {
+          return cliente;
+        }
+      }
+    }
+
+    final nextPage = root?['nextPage'];
+    if (nextPage == null || nextPage.toString().isEmpty) break;
+    page = int.tryParse(nextPage.toString()) ?? (page + 1);
+  }
+
+  return null;
+}
+
+Future<void> _slCadastroPersistirContato(
+  int userId,
+  String nome,
+  String cpf,
+  String telefone,
+) async {
+  if (userId <= 0 || cpf.isEmpty || telefone.isEmpty) return;
+
+  try {
+    final userResponse = await http.patch(
+      Uri.parse('https://x8ki-letl-twmt.n7.xano.io/api:YkYaWxLt/user/$userId'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'CPF': cpf,
+        'telefone': telefone,
+      }),
+    );
+    debugPrint(
+      'SaborLocal cadastro: atualizar contato user status ${userResponse.statusCode}.',
+    );
+
+    final cliente = await _slCadastroFetchClienteByUserId(userId);
+    final clienteId = _slCadastroInt(cliente, ['id', 'cliente_id']);
+    final body = jsonEncode({
+      'name': nome,
+      'celular': telefone,
+      'cpf': cpf,
+      'status_cliente_id': 1,
+      'user_id': userId,
+    });
+
+    final clienteResponse = clienteId > 0
+        ? await http.patch(
+            Uri.parse(
+              'https://x8ki-letl-twmt.n7.xano.io/api:YkYaWxLt/cliente/$clienteId',
+            ),
+            headers: {'Content-Type': 'application/json'},
+            body: body,
+          )
+        : await http.post(
+            Uri.parse('https://x8ki-letl-twmt.n7.xano.io/api:YkYaWxLt/cliente'),
+            headers: {'Content-Type': 'application/json'},
+            body: body,
+          );
+    debugPrint(
+      'SaborLocal cadastro: salvar contato cliente status ${clienteResponse.statusCode}.',
+    );
+  } catch (error) {
+    debugPrint('SaborLocal cadastro: falha ao persistir contato.');
+  }
+}
+
 Future<bool> cadastrarUsuarioXano(
   String nome,
   String email,
@@ -239,7 +330,15 @@ Future<bool> cadastrarUsuarioXano(
               ])
             : cadastroTelefone;
 
+    await _slCadastroPersistirContato(
+      idUsuario,
+      nomeUsuario,
+      cpfUsuario,
+      telefoneUsuario,
+    );
+
     FFAppState().update(() {
+      FFAppState().authTokenXano = token;
       FFAppState().id_usuario = idUsuario;
       FFAppState().email = emailUsuario;
       FFAppState().name = nomeUsuario;

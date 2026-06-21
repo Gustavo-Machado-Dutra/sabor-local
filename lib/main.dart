@@ -137,8 +137,8 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'Catalogodigital': CatalogodigitalWidget(),
-      'carrinho': CarrinhoWidget(),
       'CatalogodigitalTablet': CatalogodigitalTabletWidget(),
+      'carrinho': CarrinhoWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -168,7 +168,7 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.shopping_cart_rounded,
+              Icons.tablet_android_rounded,
               size: 24.0,
             ),
             label: 'Home',
@@ -176,7 +176,7 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.tablet_android_rounded,
+              Icons.shopping_cart_rounded,
               size: 24.0,
             ),
             label: 'Home',

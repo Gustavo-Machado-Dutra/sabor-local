@@ -5,7 +5,6 @@ export '/home/cadastro/endereco/endereco_widget.dart' show EnderecoWidget;
 export '/home/cadastro/sucesso/sucesso_widget.dart' show SucessoWidget;
 export '/home/cadastro/cod_verificacao/cod_verificacao_widget.dart'
     show CodVerificacaoWidget;
-export '/home/login/login_widget.dart' show LoginWidget;
 export '/home/cadastro/email_number/email_number_widget.dart'
     show EmailNumberWidget;
 export '/home/name_cpf/name_cpf_widget.dart' show NameCpfWidget;
@@ -15,15 +14,11 @@ export '/catalogodigital/catalogodigital_widget.dart'
 export '/ver_produto/ver_produto_widget.dart' show VerProdutoWidget;
 export '/home/cadastro/endereco_copy/endereco_copy_widget.dart'
     show EnderecoCopyWidget;
-export '/carrinho/carrinho_widget.dart' show CarrinhoWidget;
 export '/home/cadastro/sucessologin/sucessologin_widget.dart'
     show SucessologinWidget;
 export '/cardapio/cardapio_widget.dart' show CardapioWidget;
 export '/sucesso_pagamento/sucesso_pagamento_widget.dart'
     show SucessoPagamentoWidget;
-export '/pagamento/pagamento_widget.dart' show PagamentoWidget;
-export '/pagamento_pendente/pagamento_pendente_widget.dart'
-    show PagamentoPendenteWidget;
 export '/tablet/tela_de_abertura_tablet/tela_de_abertura_tablet_widget.dart'
     show TelaDeAberturaTabletWidget;
 export '/tablet/cod_verificacaotablet/cod_verificacaotablet_widget.dart'
@@ -46,3 +41,8 @@ export '/tablet/sucesso_loginn_tablet/sucesso_loginn_tablet_widget.dart'
     show SucessoLoginnTabletWidget;
 export '/tablet/ver_produtotablet/ver_produtotablet_widget.dart'
     show VerProdutotabletWidget;
+export '/carrinho/carrinho_widget.dart' show CarrinhoWidget;
+export '/home/login/login_widget.dart' show LoginWidget;
+export '/pagamento/pagamento_widget.dart' show PagamentoWidget;
+export '/pagamento_pendente/pagamento_pendente_widget.dart'
+    show PagamentoPendenteWidget;

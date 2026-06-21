@@ -51,11 +51,11 @@ class _PagamentoWidgetState extends State<PagamentoWidget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color(0xFFF9F1ED),
+        backgroundColor: Color(0xFFFFEBE0),
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: EdgeInsetsDirectional.fromSTEB(20.0, 50.0, 20.0, 0.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -63,7 +63,7 @@ class _PagamentoWidgetState extends State<PagamentoWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Escolha a forma de pagamento',
+                    'Finalize seu pagamento',
                     style: FlutterFlowTheme.of(context).headlineSmall.override(
                           font: GoogleFonts.interTight(
                             fontWeight: FlutterFlowTheme.of(context)
@@ -73,6 +73,7 @@ class _PagamentoWidgetState extends State<PagamentoWidget> {
                                 .headlineSmall
                                 .fontStyle,
                           ),
+                          color: Color(0xFF0F172A),
                           letterSpacing: 0.0,
                           fontWeight: FlutterFlowTheme.of(context)
                               .headlineSmall
@@ -83,7 +84,7 @@ class _PagamentoWidgetState extends State<PagamentoWidget> {
                         ),
                   ),
                   Text(
-                    'O pedido sera mantido como aguardando pagamento ate a confirmacao.',
+                    'Escolha uma opcao segura para concluir o pedido. A confirmacao sera atualizada automaticamente apos o pagamento.',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           font: GoogleFonts.inter(
                             fontWeight: FlutterFlowTheme.of(context)
@@ -93,7 +94,7 @@ class _PagamentoWidgetState extends State<PagamentoWidget> {
                                 .bodyMedium
                                 .fontStyle,
                           ),
-                          color: FlutterFlowTheme.of(context).secondaryText,
+                          color: Color(0xFF64748B),
                           letterSpacing: 0.0,
                           fontWeight: FlutterFlowTheme.of(context)
                               .bodyMedium
@@ -102,17 +103,25 @@ class _PagamentoWidgetState extends State<PagamentoWidget> {
                               FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                         ),
                   ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                  Material(
+                    color: Colors.transparent,
+                    elevation: 10.0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        borderRadius: BorderRadius.circular(8.0),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12.0),
+                        border: Border.all(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          width: 1.0,
+                        ),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.all(16.0),
+                        padding: EdgeInsets.all(20.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -131,6 +140,7 @@ class _PagamentoWidgetState extends State<PagamentoWidget> {
                                           .labelMedium
                                           .fontStyle,
                                     ),
+                                    color: Color(0xFF64748B),
                                     letterSpacing: 0.0,
                                     fontWeight: FlutterFlowTheme.of(context)
                                         .labelMedium
@@ -154,6 +164,7 @@ class _PagamentoWidgetState extends State<PagamentoWidget> {
                                           .titleLarge
                                           .fontStyle,
                                     ),
+                                    color: Color(0xFF0F172A),
                                     letterSpacing: 0.0,
                                     fontWeight: FlutterFlowTheme.of(context)
                                         .titleLarge
@@ -164,7 +175,7 @@ class _PagamentoWidgetState extends State<PagamentoWidget> {
                                   ),
                             ),
                             Text(
-                              'Status: Aguardando pagamento',
+                              'Pedido reservado enquanto aguardamos a confirmacao.',
                               style: FlutterFlowTheme.of(context)
                                   .bodySmall
                                   .override(
@@ -176,8 +187,7 @@ class _PagamentoWidgetState extends State<PagamentoWidget> {
                                           .bodySmall
                                           .fontStyle,
                                     ),
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
+                                    color: Color(0xFF64748B),
                                     letterSpacing: 0.0,
                                     fontWeight: FlutterFlowTheme.of(context)
                                         .bodySmall
@@ -187,14 +197,14 @@ class _PagamentoWidgetState extends State<PagamentoWidget> {
                                         .fontStyle,
                                   ),
                             ),
-                          ].divide(SizedBox(height: 8.0)),
+                          ].divide(SizedBox(height: 10.0)),
                         ),
                       ),
                     ),
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(18.0, 100.0, 18.0, 14.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 14.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         _model.pagamentoPixCriadoUsuarioSincronizado =
@@ -225,6 +235,7 @@ class _PagamentoWidgetState extends State<PagamentoWidget> {
                                   await CheckoutXanoGroup
                                       .criarPagamentoAsaasXanoCall
                                       .call(
+                                bearerAuth: FFAppState().authTokenXano,
                                 formaPagamento: 'PIX',
                                 idUsuario: FFAppState().id_usuario,
                                 idPedido: FFAppState().id_pedido_atual,
@@ -346,29 +357,30 @@ class _PagamentoWidgetState extends State<PagamentoWidget> {
 
                         safeSetState(() {});
                       },
-                      text: 'Pagar com Pix',
+                      text: 'Pix',
                       icon: Icon(
                         Icons.qr_code,
                         size: 20.0,
                       ),
                       options: FFButtonOptions(
                         width: double.infinity,
+                        height: 56.0,
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconPadding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconColor: Colors.white,
-                        color: FlutterFlowTheme.of(context).tertiary,
+                        color: Color(0xFFDF7D54),
                         textStyle: TextStyle(
                           color: Colors.white,
                         ),
-                        borderRadius: BorderRadius.circular(8.0),
+                        elevation: 10.0,
+                        borderRadius: BorderRadius.circular(12.0),
                       ),
                     ),
                   ),
                   Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(18.0, 14.0, 18.0, 14.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         _model.pagamentoBoletoCriadoUsuarioSincronizado =
@@ -399,6 +411,7 @@ class _PagamentoWidgetState extends State<PagamentoWidget> {
                                   await CheckoutXanoGroup
                                       .criarPagamentoAsaasXanoCall
                                       .call(
+                                bearerAuth: FFAppState().authTokenXano,
                                 formaPagamento: 'BOLETO',
                                 idUsuario: FFAppState().id_usuario,
                                 idPedido: FFAppState().id_pedido_atual,
@@ -520,29 +533,31 @@ class _PagamentoWidgetState extends State<PagamentoWidget> {
 
                         safeSetState(() {});
                       },
-                      text: 'Pagar com boleto',
+                      text: 'Boleto bancario',
                       icon: Icon(
                         Icons.receipt_long,
                         size: 20.0,
                       ),
                       options: FFButtonOptions(
                         width: double.infinity,
+                        height: 56.0,
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconPadding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconColor: Colors.white,
-                        color: FlutterFlowTheme.of(context).tertiary,
+                        color: Color(0xFF2563EB),
                         textStyle: TextStyle(
                           color: Colors.white,
                         ),
-                        borderRadius: BorderRadius.circular(8.0),
+                        elevation: 10.0,
+                        borderRadius: BorderRadius.circular(12.0),
                       ),
                     ),
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(18.0, 14.0, 18.0, 14.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         _model.pagamentoCartaoCriadoUsuarioSincronizado =
@@ -573,6 +588,7 @@ class _PagamentoWidgetState extends State<PagamentoWidget> {
                                   await CheckoutXanoGroup
                                       .criarPagamentoAsaasXanoCall
                                       .call(
+                                bearerAuth: FFAppState().authTokenXano,
                                 formaPagamento: 'CREDIT_CARD',
                                 idUsuario: FFAppState().id_usuario,
                                 idPedido: FFAppState().id_pedido_atual,
@@ -708,58 +724,57 @@ class _PagamentoWidgetState extends State<PagamentoWidget> {
 
                         safeSetState(() {});
                       },
-                      text: 'Pagar com cartao',
+                      text: 'Cartao de credito',
                       icon: Icon(
                         Icons.credit_card,
                         size: 20.0,
                       ),
                       options: FFButtonOptions(
                         width: double.infinity,
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        height: 56.0,
+                        padding: EdgeInsets.all(0.0),
                         iconPadding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconColor: Colors.white,
-                        color: FlutterFlowTheme.of(context).tertiary,
+                        color: Color(0xFF111827),
                         textStyle: TextStyle(
                           color: Colors.white,
                         ),
-                        borderRadius: BorderRadius.circular(8.0),
+                        elevation: 10.0,
+                        borderRadius: BorderRadius.circular(12.0),
                       ),
                     ),
                   ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 100.0, 0.0, 0.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        context.pushNamed(CarrinhoWidget.routeName);
-                      },
-                      text: 'Voltar ao carrinho',
-                      icon: Icon(
-                        Icons.arrow_back,
-                        size: 20.0,
+                  FFButtonWidget(
+                    onPressed: () async {
+                      context.pushNamed(CarrinhoWidget.routeName);
+                    },
+                    text: 'Voltar ao carrinho',
+                    icon: Icon(
+                      Icons.arrow_back,
+                      size: 20.0,
+                    ),
+                    options: FFButtonOptions(
+                      width: double.infinity,
+                      height: 52.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      iconColor: FlutterFlowTheme.of(context).tertiary,
+                      color: Color(0xFFF8FAFC),
+                      textStyle: TextStyle(
+                        color: FlutterFlowTheme.of(context).tertiary,
                       ),
-                      options: FFButtonOptions(
-                        width: double.infinity,
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        iconColor: FlutterFlowTheme.of(context).tertiary,
-                        color: Color(0xF2F6F6F6),
-                        textStyle: TextStyle(
-                          color: FlutterFlowTheme.of(context).tertiary,
-                        ),
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).tertiary,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
+                      elevation: 10.0,
+                      borderSide: BorderSide(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        width: 0.6,
                       ),
+                      borderRadius: BorderRadius.circular(12.0),
                     ),
                   ),
-                ].divide(SizedBox(height: 16.0)),
+                ].divide(SizedBox(height: 20.0)),
               ),
             ),
           ),

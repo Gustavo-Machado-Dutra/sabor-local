@@ -107,11 +107,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => CodVerificacaoWidget(),
         ),
         FFRoute(
-          name: LoginWidget.routeName,
-          path: LoginWidget.routePath,
-          builder: (context, params) => LoginWidget(),
-        ),
-        FFRoute(
           name: EmailNumberWidget.routeName,
           path: EmailNumberWidget.routePath,
           builder: (context, params) => EmailNumberWidget(),
@@ -157,14 +152,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => EnderecoCopyWidget(),
         ),
         FFRoute(
-          name: CarrinhoWidget.routeName,
-          path: CarrinhoWidget.routePath,
-          requireAuth: true,
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'carrinho')
-              : CarrinhoWidget(),
-        ),
-        FFRoute(
           name: SucessologinWidget.routeName,
           path: SucessologinWidget.routePath,
           builder: (context, params) => SucessologinWidget(),
@@ -179,18 +166,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: SucessoPagamentoWidget.routePath,
           requireAuth: true,
           builder: (context, params) => SucessoPagamentoWidget(),
-        ),
-        FFRoute(
-          name: PagamentoWidget.routeName,
-          path: PagamentoWidget.routePath,
-          requireAuth: true,
-          builder: (context, params) => PagamentoWidget(),
-        ),
-        FFRoute(
-          name: PagamentoPendenteWidget.routeName,
-          path: PagamentoPendenteWidget.routePath,
-          requireAuth: true,
-          builder: (context, params) => PagamentoPendenteWidget(),
         ),
         FFRoute(
           name: TelaDeAberturaTabletWidget.routeName,
@@ -267,6 +242,31 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.double,
             ),
           ),
+        ),
+        FFRoute(
+          name: CarrinhoWidget.routeName,
+          path: CarrinhoWidget.routePath,
+          requireAuth: true,
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'carrinho')
+              : CarrinhoWidget(),
+        ),
+        FFRoute(
+          name: LoginWidget.routeName,
+          path: LoginWidget.routePath,
+          builder: (context, params) => LoginWidget(),
+        ),
+        FFRoute(
+          name: PagamentoWidget.routeName,
+          path: PagamentoWidget.routePath,
+          requireAuth: true,
+          builder: (context, params) => PagamentoWidget(),
+        ),
+        FFRoute(
+          name: PagamentoPendenteWidget.routeName,
+          path: PagamentoPendenteWidget.routePath,
+          requireAuth: true,
+          builder: (context, params) => PagamentoPendenteWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

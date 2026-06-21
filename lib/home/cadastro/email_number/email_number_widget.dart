@@ -86,7 +86,7 @@ class _EmailNumberWidgetState extends State<EmailNumberWidget>
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color(0xFFFDE8DE),
+        backgroundColor: Color(0xFFFFF1E9),
         body: SafeArea(
           top: true,
           child: Column(

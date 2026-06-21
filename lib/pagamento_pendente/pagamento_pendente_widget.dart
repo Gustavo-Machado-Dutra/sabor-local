@@ -1,8 +1,8 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/backend/schema/structs/index.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -54,7 +54,7 @@ class _PagamentoPendenteWidgetState extends State<PagamentoPendenteWidget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color(0xFFF7E0D5),
+        backgroundColor: Color(0xFFF8FAFC),
         appBar: AppBar(
           backgroundColor: Color(0xFFF8D8CA),
           automaticallyImplyLeading: true,
@@ -82,10 +82,10 @@ class _PagamentoPendenteWidgetState extends State<PagamentoPendenteWidget> {
           child: Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Color(0xFFF4F0EE),
+              color: Color(0xFFF8FAFC),
             ),
             child: Padding(
-              padding: EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(24.0),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -96,7 +96,11 @@ class _PagamentoPendenteWidgetState extends State<PagamentoPendenteWidget> {
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(8.0),
+                        borderRadius: BorderRadius.circular(12.0),
+                        border: Border.all(
+                          color: Color(0xFFE2E8F0),
+                          width: 1.0,
+                        ),
                       ),
                       child: Padding(
                         padding: EdgeInsets.all(16.0),
@@ -230,7 +234,11 @@ class _PagamentoPendenteWidgetState extends State<PagamentoPendenteWidget> {
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(12.0),
+                          border: Border.all(
+                            color: Color(0xFFE2E8F0),
+                            width: 1.0,
+                          ),
                         ),
                         child: Padding(
                           padding: EdgeInsets.all(16.0),
@@ -391,16 +399,17 @@ class _PagamentoPendenteWidgetState extends State<PagamentoPendenteWidget> {
                                   ),
                                   options: FFButtonOptions(
                                     width: double.infinity,
+                                    height: 54.0,
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     iconPadding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     iconColor: Colors.white,
-                                    color: Color(0xFFF56E0F),
+                                    color: Color(0xFF2563EB),
                                     textStyle: TextStyle(
                                       color: Colors.white,
                                     ),
-                                    borderRadius: BorderRadius.circular(8.0),
+                                    borderRadius: BorderRadius.circular(12.0),
                                   ),
                                 ),
                               if (!(FFAppState().pixCopyPaste == ''))
@@ -450,7 +459,11 @@ class _PagamentoPendenteWidgetState extends State<PagamentoPendenteWidget> {
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(12.0),
+                          border: Border.all(
+                            color: Color(0xFFE2E8F0),
+                            width: 1.0,
+                          ),
                         ),
                         child: Padding(
                           padding: EdgeInsets.all(16.0),
@@ -570,7 +583,11 @@ class _PagamentoPendenteWidgetState extends State<PagamentoPendenteWidget> {
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(12.0),
+                          border: Border.all(
+                            color: Color(0xFFE2E8F0),
+                            width: 1.0,
+                          ),
                         ),
                         child: Padding(
                           padding: EdgeInsets.all(16.0),
@@ -669,7 +686,7 @@ class _PagamentoPendenteWidgetState extends State<PagamentoPendenteWidget> {
                       ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(
-                          18.0, 14.0, 18.0, 14.0),
+                          18.0, 14.0, 18.0, 16.0),
                       child: FFButtonWidget(
                         onPressed: () async {
                           if (FFAppState().id_pagamento_asaas == '') {
@@ -687,6 +704,7 @@ class _PagamentoPendenteWidgetState extends State<PagamentoPendenteWidget> {
                                 await CheckoutXanoGroup
                                     .consultarStatusPagamentoXanoCall
                                     .call(
+                              bearerAuth: FFAppState().authTokenXano,
                               idPagamentoAsaas: FFAppState().id_pagamento_asaas,
                             );
 
@@ -698,6 +716,14 @@ class _PagamentoPendenteWidgetState extends State<PagamentoPendenteWidget> {
                                 FFAppState().status_pagamento =
                                     'Pagamento aprovado';
                                 safeSetState(() {});
+                                FFAppState().deleteCarrinhoLocal();
+                                FFAppState().carrinhoLocal = [];
+
+                                FFAppState().deleteCarrinhodecompras();
+                                FFAppState().carrinhodecompras = [];
+
+                                FFAppState().slcarrinhototal = 0.0;
+                                safeSetState(() {});
 
                                 context.pushNamed(
                                     SucessoPagamentoWidget.routeName);
@@ -708,6 +734,14 @@ class _PagamentoPendenteWidgetState extends State<PagamentoPendenteWidget> {
                                   'RECEIVED') {
                                 FFAppState().status_pagamento =
                                     'Pagamento aprovado';
+                                safeSetState(() {});
+                                FFAppState().deleteCarrinhoLocal();
+                                FFAppState().carrinhoLocal = [];
+
+                                FFAppState().deleteCarrinhodecompras();
+                                FFAppState().carrinhodecompras = [];
+
+                                FFAppState().slcarrinhototal = 0.0;
                                 safeSetState(() {});
 
                                 context.pushNamed(
@@ -802,16 +836,17 @@ class _PagamentoPendenteWidgetState extends State<PagamentoPendenteWidget> {
                         ),
                         options: FFButtonOptions(
                           width: double.infinity,
+                          height: 56.0,
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           iconColor: Colors.white,
-                          color: Color(0xFFF56E0F),
+                          color: Color(0xFF059669),
                           textStyle: TextStyle(
                             color: Colors.white,
                           ),
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(12.0),
                         ),
                       ),
                     ),
@@ -865,7 +900,7 @@ class _PagamentoPendenteWidgetState extends State<PagamentoPendenteWidget> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                  ].divide(SizedBox(height: 16.0)),
+                  ].divide(SizedBox(height: 18.0)),
                 ),
               ),
             ),

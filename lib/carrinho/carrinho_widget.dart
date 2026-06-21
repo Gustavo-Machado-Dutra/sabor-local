@@ -1,4 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -55,7 +56,7 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color(0xFFFDE5D9),
+        backgroundColor: Color(0xFFF4F0EE),
         appBar: PreferredSize(
           preferredSize:
               Size.fromHeight(MediaQuery.sizeOf(context).height * 0.09),
@@ -70,10 +71,7 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
-                  if (Navigator.of(context).canPop()) {
-                    context.pop();
-                  }
-                  context.pushNamed(CatalogodigitalWidget.routeName);
+                  context.safePop();
                 },
                 child: Icon(
                   Icons.chevron_left_rounded,
@@ -376,40 +374,114 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
                                                 ),
                                             overflow: TextOverflow.ellipsis,
                                           ),
-                                          Text(
-                                            itemItem.quantidade.toString(),
-                                            maxLines: 1,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodySmall
-                                                .override(
-                                                  font: GoogleFonts.inter(
-                                                    fontWeight:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodySmall
-                                                            .fontWeight,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodySmall
-                                                            .fontStyle,
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 4.0, 0.0, 4.0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                FlutterFlowIconButton(
+                                                  borderRadius: 8.0,
+                                                  buttonSize: 32.0,
+                                                  fillColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .tertiary,
+                                                  icon: Icon(
+                                                    Icons.remove,
+                                                    color: Color(0xFFFBEDED),
+                                                    size: 18.0,
                                                   ),
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodySmall
-                                                          .fontWeight,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodySmall
-                                                          .fontStyle,
+                                                  onPressed: () async {
+                                                    FFAppState().carrinhoLocal = functions
+                                                        .ajustarQuantidadeCarrinhoLocal(
+                                                            FFAppState()
+                                                                .carrinhoLocal
+                                                                .toList(),
+                                                            itemItem,
+                                                            -1)!
+                                                        .toList()
+                                                        .cast<
+                                                            CatagolodigitalStruct>();
+                                                    safeSetState(() {});
+                                                  },
                                                 ),
-                                            overflow: TextOverflow.ellipsis,
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          12.0, 0.0, 12.0, 0.0),
+                                                  child: Text(
+                                                    itemItem.quantidade
+                                                        .toString(),
+                                                    maxLines: 1,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodySmall
+                                                        .override(
+                                                          font:
+                                                              GoogleFonts.inter(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodySmall
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodySmall
+                                                                    .fontStyle,
+                                                          ),
+                                                          color:
+                                                              Color(0xFF1F2022),
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodySmall
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodySmall
+                                                                  .fontStyle,
+                                                        ),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                                ),
+                                                FlutterFlowIconButton(
+                                                  borderRadius: 8.0,
+                                                  buttonSize: 32.0,
+                                                  fillColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .tertiary,
+                                                  icon: Icon(
+                                                    Icons.add,
+                                                    color: Color(0xFFFBEDED),
+                                                    size: 18.0,
+                                                  ),
+                                                  onPressed: () async {
+                                                    FFAppState().carrinhoLocal = functions
+                                                        .ajustarQuantidadeCarrinhoLocal(
+                                                            FFAppState()
+                                                                .carrinhoLocal
+                                                                .toList(),
+                                                            itemItem,
+                                                            1)!
+                                                        .toList()
+                                                        .cast<
+                                                            CatagolodigitalStruct>();
+                                                    safeSetState(() {});
+                                                  },
+                                                ),
+                                              ].divide(SizedBox(width: 0.0)),
+                                            ),
                                           ),
                                           Row(
                                             mainAxisSize: MainAxisSize.max,

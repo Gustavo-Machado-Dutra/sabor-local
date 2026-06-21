@@ -443,6 +443,20 @@ class FFAppState extends ChangeNotifier {
   void deleteQuantidade() {
     secureStorage.delete(key: 'ff_quantidade');
   }
+
+  /// Mensagem de erro retornada pelo Xano no fluxo de login.
+  String _loginMensagemErro = '';
+  String get loginMensagemErro => _loginMensagemErro;
+  set loginMensagemErro(String value) {
+    _loginMensagemErro = value;
+  }
+
+  /// Token da sessao Xano usado em chamadas autenticadas.
+  String _authTokenXano = '';
+  String get authTokenXano => _authTokenXano;
+  set authTokenXano(String value) {
+    _authTokenXano = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

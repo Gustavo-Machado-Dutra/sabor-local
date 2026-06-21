@@ -53,12 +53,118 @@ String _slReadString(Map<String, dynamic>? data, List<String> keys) {
   return '';
 }
 
+Map<String, dynamic>? _slUserFrom(Map<String, dynamic>? root) {
+  if (root == null) return null;
+  final data = _slMap(root['data']);
+  final result = _slMap(root['result']);
+  return _slMap(root['user']) ??
+      _slMap(root['usuario']) ??
+      _slMap(root['record']) ??
+      _slMap(root['me']) ??
+      _slMap(data?['user']) ??
+      _slMap(data?['usuario']) ??
+      _slMap(data?['record']) ??
+      _slMap(data?['me']) ??
+      data ??
+      _slMap(result?['user']) ??
+      _slMap(result?['usuario']) ??
+      _slMap(result?['record']) ??
+      result ??
+      root;
+}
+
+Map<String, dynamic> _slMerge(
+  Map<String, dynamic>? primary,
+  Map<String, dynamic>? secondary,
+) {
+  final merged = <String, dynamic>{};
+  if (secondary != null) merged.addAll(secondary);
+  if (primary != null) {
+    for (final entry in primary.entries) {
+      final value = entry.value;
+      final isEmptyString = value is String && value.trim().isEmpty;
+      if (value != null && !isEmptyString) {
+        merged[entry.key] = value;
+      }
+    }
+  }
+  return merged;
+}
+
+bool _slAppStateReadyForPayment() {
+  return FFAppState().id_usuario > 0 &&
+      FFAppState().CPF.trim().isNotEmpty &&
+      FFAppState().telefone.trim().isNotEmpty;
+}
+
+bool _slHasContact(Map<String, dynamic>? user) {
+  final cpf = _slReadString(user, ['CPF', 'cpf', 'cpfCnpj', 'cpf_cnpj']);
+  final telefone = _slReadString(user, [
+    'telefone',
+    'phone',
+    'celular',
+    'whatsapp',
+  ]);
+  return cpf.isNotEmpty && telefone.isNotEmpty;
+}
+
+Future<Map<String, dynamic>?> _slFetchUserById(int userId) async {
+  if (userId <= 0) return null;
+  final response = await http.get(
+    Uri.parse('https://x8ki-letl-twmt.n7.xano.io/api:YkYaWxLt/user/$userId'),
+  );
+  debugPrint(
+      'SaborLocal pagamento: user/$userId status ${response.statusCode}.');
+  if (response.statusCode < 200 || response.statusCode >= 300) {
+    return null;
+  }
+  return _slUserFrom(_slMap(jsonDecode(response.body)));
+}
+
+Future<Map<String, dynamic>?> _slFetchClienteByUserId(int userId) async {
+  if (userId <= 0) return null;
+
+  var page = 1;
+  while (page <= 10) {
+    final response = await http.get(
+      Uri.parse(
+        'https://x8ki-letl-twmt.n7.xano.io/api:YkYaWxLt/cliente?page=$page',
+      ),
+    );
+    debugPrint(
+      'SaborLocal pagamento: cliente page $page status ${response.statusCode}.',
+    );
+    if (response.statusCode < 200 || response.statusCode >= 300) {
+      return null;
+    }
+
+    final decoded = jsonDecode(response.body);
+    final root = _slMap(decoded);
+    final items = decoded is List ? decoded : root?['items'];
+    if (items is List) {
+      for (final item in items) {
+        final cliente = _slMap(item);
+        if (_slReadInt(cliente, ['user_id', 'usuario_id', 'id_usuario']) ==
+            userId) {
+          return cliente;
+        }
+      }
+    }
+
+    final nextPage = root?['nextPage'];
+    if (nextPage == null || nextPage.toString().isEmpty) break;
+    page = int.tryParse(nextPage.toString()) ?? (page + 1);
+  }
+
+  return null;
+}
+
 Future<bool> sincronizarUsuarioLogadoXano() async {
   final token = currentAuthenticationToken;
 
   if (token == null || token.isEmpty) {
     debugPrint('SaborLocal pagamento: usuario sem token de autenticacao.');
-    return FFAppState().id_usuario > 0;
+    return _slAppStateReadyForPayment();
   }
 
   try {
@@ -72,27 +178,12 @@ Future<bool> sincronizarUsuarioLogadoXano() async {
     );
 
     if (response.statusCode < 200 || response.statusCode >= 300) {
-      return FFAppState().id_usuario > 0;
+      return _slAppStateReadyForPayment();
     }
 
     final decoded = jsonDecode(response.body);
     final root = _slMap(decoded);
-    final data = _slMap(root?['data']);
-    final result = _slMap(root?['result']);
-    final user = _slMap(root?['user']) ??
-        _slMap(root?['usuario']) ??
-        _slMap(root?['record']) ??
-        _slMap(root?['me']) ??
-        _slMap(data?['user']) ??
-        _slMap(data?['usuario']) ??
-        _slMap(data?['record']) ??
-        _slMap(data?['me']) ??
-        data ??
-        _slMap(result?['user']) ??
-        _slMap(result?['usuario']) ??
-        _slMap(result?['record']) ??
-        result ??
-        root;
+    var user = _slUserFrom(root);
 
     final idUsuario = _slReadInt(user, [
       'id',
@@ -104,7 +195,17 @@ Future<bool> sincronizarUsuarioLogadoXano() async {
 
     if (idUsuario <= 0) {
       debugPrint('SaborLocal pagamento: auth/me sem id de usuario valido.');
-      return FFAppState().id_usuario > 0;
+      return _slAppStateReadyForPayment();
+    }
+
+    if (!_slHasContact(user)) {
+      final userById = await _slFetchUserById(idUsuario);
+      user = _slMerge(userById, user);
+    }
+
+    if (!_slHasContact(user)) {
+      final cliente = await _slFetchClienteByUserId(idUsuario);
+      user = _slMerge(cliente, user);
     }
 
     final nome = _slReadString(user, ['name', 'nome', 'Name']);
@@ -126,9 +227,9 @@ Future<bool> sincronizarUsuarioLogadoXano() async {
     });
 
     debugPrint('SaborLocal pagamento: usuario Xano sincronizado $idUsuario.');
-    return true;
+    return _slAppStateReadyForPayment();
   } catch (error) {
     debugPrint('SaborLocal pagamento: falha ao sincronizar usuario: $error');
-    return FFAppState().id_usuario > 0;
+    return _slAppStateReadyForPayment();
   }
 }

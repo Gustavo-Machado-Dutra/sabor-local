@@ -73,6 +73,60 @@ Map<String, dynamic>? _slLoginUserFrom(Map<String, dynamic>? root) {
       root;
 }
 
+Map<String, dynamic> _slLoginMerge(
+  Map<String, dynamic>? primary,
+  Map<String, dynamic>? secondary,
+) {
+  final merged = <String, dynamic>{};
+  if (secondary != null) merged.addAll(secondary);
+  if (primary != null) {
+    for (final entry in primary.entries) {
+      final value = entry.value;
+      final isEmptyString = value is String && value.trim().isEmpty;
+      if (value != null && !isEmptyString) {
+        merged[entry.key] = value;
+      }
+    }
+  }
+  return merged;
+}
+
+bool _slLoginHasContact(Map<String, dynamic>? user) {
+  final cpf = _slLoginString(user, ['CPF', 'cpf', 'cpfCnpj', 'cpf_cnpj']);
+  final telefone = _slLoginString(user, [
+    'telefone',
+    'phone',
+    'celular',
+    'whatsapp',
+  ]);
+  return cpf.isNotEmpty && telefone.isNotEmpty;
+}
+
+const _slLoginMensagemGenerica =
+    'Usuário ou senha incorretos. Verifique suas informações e tente novamente.';
+
+void _slLoginSetMessage(String message) {
+  FFAppState().loginMensagemErro =
+      message.trim().isEmpty ? _slLoginMensagemGenerica : message.trim();
+}
+
+void _slLoginClearLocalSession() {
+  FFAppState().update(() {
+    FFAppState().id_usuario = 0;
+    FFAppState().email = '';
+    FFAppState().name = '';
+    FFAppState().CPF = '';
+    FFAppState().telefone = '';
+    FFAppState().senha = '';
+    FFAppState().cofirmarsenha = '';
+  });
+}
+
+Future<void> _slLoginClearSession() async {
+  _slLoginClearLocalSession();
+  await authManager.signOut();
+}
+
 String _slLoginTokenFrom(Map<String, dynamic>? root) {
   final keys = [
     'authToken',
@@ -122,11 +176,70 @@ Future<Map<String, dynamic>?> _slLoginFetchMe(String token) async {
   return _slLoginMap(jsonDecode(response.body));
 }
 
+Future<Map<String, dynamic>?> _slLoginFetchUserById(
+    int userId, String token) async {
+  if (userId <= 0) return null;
+  final response = await http.get(
+    Uri.parse('https://x8ki-letl-twmt.n7.xano.io/api:YkYaWxLt/user/$userId'),
+    headers: {'Authorization': 'Bearer $token'},
+  );
+  debugPrint('SaborLocal login: user/$userId status ${response.statusCode}.');
+  if (response.statusCode < 200 || response.statusCode >= 300) {
+    return null;
+  }
+  return _slLoginUserFrom(_slLoginMap(jsonDecode(response.body)));
+}
+
+Future<Map<String, dynamic>?> _slLoginFetchClienteByUserId(
+  int userId,
+  String token,
+) async {
+  if (userId <= 0) return null;
+
+  var page = 1;
+  while (page <= 10) {
+    final response = await http.get(
+      Uri.parse(
+        'https://x8ki-letl-twmt.n7.xano.io/api:YkYaWxLt/cliente?page=$page',
+      ),
+      headers: {'Authorization': 'Bearer $token'},
+    );
+    debugPrint(
+      'SaborLocal login: cliente page $page status ${response.statusCode}.',
+    );
+    if (response.statusCode < 200 || response.statusCode >= 300) {
+      return null;
+    }
+
+    final root = _slLoginMap(jsonDecode(response.body));
+    final items = root?['items'];
+    if (items is List) {
+      for (final item in items) {
+        final cliente = _slLoginMap(item);
+        if (_slLoginInt(cliente, ['user_id', 'usuario_id', 'id_usuario']) ==
+            userId) {
+          return cliente;
+        }
+      }
+    }
+
+    final nextPage = root?['nextPage'];
+    if (nextPage == null || nextPage.toString().isEmpty) break;
+    page = int.tryParse(nextPage.toString()) ?? (page + 1);
+  }
+
+  return null;
+}
+
 Future<bool> loginXanoSalvarUsuario(String email, String senha) async {
   final loginEmail = email.trim();
   final loginSenha = senha;
 
+  FFAppState().loginMensagemErro = '';
+  _slLoginClearLocalSession();
+
   if (loginEmail.isEmpty || loginSenha.isEmpty) {
+    _slLoginSetMessage(_slLoginMensagemGenerica);
     return false;
   }
 
@@ -139,14 +252,26 @@ Future<bool> loginXanoSalvarUsuario(String email, String senha) async {
 
     debugPrint('SaborLocal login: auth/login status ${response.statusCode}.');
 
+    final root = _slLoginMap(jsonDecode(response.body));
+    final backendMessage = _slLoginString(root, ['message', 'error']);
+    if (backendMessage.isNotEmpty) {
+      debugPrint('SaborLocal login: backend message: $backendMessage');
+    }
+
     if (response.statusCode < 200 || response.statusCode >= 300) {
+      _slLoginSetMessage(backendMessage);
       return false;
     }
 
-    final root = _slLoginMap(jsonDecode(response.body));
     var user = _slLoginUserFrom(root);
 
     final token = _slLoginTokenFrom(root);
+
+    if (token.isEmpty) {
+      debugPrint('SaborLocal login: resposta sem authToken valido.');
+      _slLoginSetMessage(_slLoginMensagemGenerica);
+      return false;
+    }
 
     var idUsuario = _slLoginInt(user, [
       'id',
@@ -191,7 +316,18 @@ Future<bool> loginXanoSalvarUsuario(String email, String senha) async {
 
     if (idUsuario <= 0) {
       debugPrint('SaborLocal login: resposta sem id de usuario valido.');
+      _slLoginSetMessage(_slLoginMensagemGenerica);
       return false;
+    }
+
+    if (!_slLoginHasContact(user)) {
+      final userById = await _slLoginFetchUserById(idUsuario, token);
+      user = _slLoginMerge(userById, user);
+    }
+
+    if (!_slLoginHasContact(user)) {
+      final cliente = await _slLoginFetchClienteByUserId(idUsuario, token);
+      user = _slLoginMerge(cliente, user);
     }
 
     final nome = _slLoginString(user, ['name', 'nome', 'Name']);
@@ -207,6 +343,8 @@ Future<bool> loginXanoSalvarUsuario(String email, String senha) async {
     ]);
 
     FFAppState().update(() {
+      FFAppState().loginMensagemErro = '';
+      FFAppState().authTokenXano = token;
       FFAppState().id_usuario = idUsuario;
       FFAppState().email = userEmail;
       if (nome.isNotEmpty) FFAppState().name = nome;
@@ -215,7 +353,7 @@ Future<bool> loginXanoSalvarUsuario(String email, String senha) async {
     });
 
     await authManager.signIn(
-      authenticationToken: token.isEmpty ? null : token,
+      authenticationToken: token,
       authUid: idUsuario.toString(),
       userData: UserStruct(name: nome, email: userEmail),
     );
@@ -224,6 +362,8 @@ Future<bool> loginXanoSalvarUsuario(String email, String senha) async {
     return true;
   } catch (error) {
     debugPrint('SaborLocal login: falha ao autenticar: $error');
+    _slLoginSetMessage(_slLoginMensagemGenerica);
+    _slLoginClearLocalSession();
     return false;
   }
 }

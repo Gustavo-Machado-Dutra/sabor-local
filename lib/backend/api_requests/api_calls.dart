@@ -144,85 +144,6 @@ class SignupAndRetrieveAnAuthenticationTokenCall {
 
 /// End Authentication Group Code
 
-/// Start CheckoutXano Group Code
-
-class CheckoutXanoGroup {
-  static String getBaseUrl() =>
-      'https://x8ki-letl-twmt.n7.xano.io/api:YkYaWxLt';
-  static Map<String, String> headers = {
-    'Content-Type': 'application/json',
-  };
-  static CriarPagamentoAsaasXanoCall criarPagamentoAsaasXanoCall =
-      CriarPagamentoAsaasXanoCall();
-  static ConsultarStatusPagamentoXanoCall consultarStatusPagamentoXanoCall =
-      ConsultarStatusPagamentoXanoCall();
-}
-
-class CriarPagamentoAsaasXanoCall {
-  Future<ApiCallResponse> call({
-    int? idUsuario,
-    int? idPedido,
-    String? nome = '',
-    String? email = '',
-    String? cpfCnpj = '',
-    String? telefone = '',
-    double? valorTotal,
-    String? formaPagamento = '',
-  }) async {
-    final baseUrl = CheckoutXanoGroup.getBaseUrl();
-
-    final ffApiRequestBody = '''
-{"id_usuario":${idUsuario},"id_pedido":${idPedido},"nome":"${nome}","email":"${email}","cpfCnpj":"${cpfCnpj}","telefone":"${telefone}","valor_total":${valorTotal},"forma_pagamento":"${formaPagamento}"}''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'criar_pagamento_asaas_xano',
-      apiUrl: '${baseUrl}/checkout/criar-pagamento',
-      callType: ApiCallType.POST,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      params: {},
-      body: ffApiRequestBody,
-      bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      isStreamingApi: false,
-      alwaysAllowBody: false,
-    );
-  }
-}
-
-class ConsultarStatusPagamentoXanoCall {
-  Future<ApiCallResponse> call({
-    String? idPagamentoAsaas = '',
-  }) async {
-    final baseUrl = CheckoutXanoGroup.getBaseUrl();
-
-    final ffApiRequestBody = '''
-{"id_pagamento_asaas":"${idPagamentoAsaas}"}''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'consultar_status_pagamento_xano',
-      apiUrl: '${baseUrl}/checkout/status-pagamento',
-      callType: ApiCallType.POST,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      params: {},
-      body: ffApiRequestBody,
-      bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      isStreamingApi: false,
-      alwaysAllowBody: false,
-    );
-  }
-}
-
-/// End CheckoutXano Group Code
-
 /// Start CheckoutXanoFluxoCorrigido Group Code
 
 class CheckoutXanoFluxoCorrigidoGroup {
@@ -272,6 +193,89 @@ class CriarPagamentoAsaasFluxoCorrigidoXanoCall {
 }
 
 /// End CheckoutXanoFluxoCorrigido Group Code
+
+/// Start CheckoutXano Group Code
+
+class CheckoutXanoGroup {
+  static String getBaseUrl() =>
+      'https://x8ki-letl-twmt.n7.xano.io/api:YkYaWxLt';
+  static Map<String, String> headers = {
+    'Content-Type': 'application/json',
+  };
+  static CriarPagamentoAsaasXanoCall criarPagamentoAsaasXanoCall =
+      CriarPagamentoAsaasXanoCall();
+  static ConsultarStatusPagamentoXanoCall consultarStatusPagamentoXanoCall =
+      ConsultarStatusPagamentoXanoCall();
+}
+
+class CriarPagamentoAsaasXanoCall {
+  Future<ApiCallResponse> call({
+    String? bearerAuth = '',
+    int? idUsuario,
+    int? idPedido,
+    String? nome = '',
+    String? email = '',
+    String? cpfCnpj = '',
+    String? telefone = '',
+    double? valorTotal,
+    String? formaPagamento = '',
+  }) async {
+    final baseUrl = CheckoutXanoGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{"id_usuario":${idUsuario},"id_pedido":${idPedido},"nome":"${nome}","email":"${email}","cpfCnpj":"${cpfCnpj}","telefone":"${telefone}","valor_total":${valorTotal},"forma_pagamento":"${formaPagamento}"}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'criar_pagamento_asaas_xano',
+      apiUrl: '${baseUrl}/checkout/criar-pagamento',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${bearerAuth}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ConsultarStatusPagamentoXanoCall {
+  Future<ApiCallResponse> call({
+    String? bearerAuth = '',
+    String? idPagamentoAsaas = '',
+  }) async {
+    final baseUrl = CheckoutXanoGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{"id_pagamento_asaas":"${idPagamentoAsaas}"}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'consultar_status_pagamento_xano',
+      apiUrl: '${baseUrl}/checkout/status-pagamento',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${bearerAuth}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+/// End CheckoutXano Group Code
 
 class BuscarCepCall {
   static Future<ApiCallResponse> call({
